@@ -10,22 +10,17 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
       "@types/*": ["./asset/types/*"],
       "@components/*": ["./asset/components/*"],
       "@svg/*": ["./asset/svg/*"]
-    },
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "exclude": ["node_modules", "babel.config.js"]
 }
