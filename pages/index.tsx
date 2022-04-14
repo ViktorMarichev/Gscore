@@ -3,8 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import PrimaryButton from "@components/PrimaryButton";
 import SecondaryButton from "@components/SecondaryButton";
+import InputField from "@components/InputField";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 const UIKitWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -20,8 +22,23 @@ const UiKitColumn = styled.div`
   box-sizing: border-box;
   margin-left: 5px;
 `;
-
+interface IFormInputs {
+  firstName: string;
+}
 const Home: NextPage = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInputs>({
+    defaultValues: {
+      firstName: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+    alert("send " + JSON.stringify(data));
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -35,6 +52,43 @@ const Home: NextPage = () => {
         </UiKitColumn>
         <UiKitColumn>
           <SecondaryButton title="Default" loading={false} disabled={false} />
+        </UiKitColumn>
+        <UiKitColumn>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="firstName"
+              control={control}
+              rules={{
+                required: true,
+                minLength: 5,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => {
+                return (
+                  <InputField
+                    name="firstName"
+                    disabled={false}
+                    placeholder="Placeholder"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    errors={errors}
+                    success={errors.firstName === undefined}
+                    errorRender={() => {
+                      switch (errors.firstName!.type) {
+                        case "required":
+                          return "This field is required";
+                        case "minLength":
+                          return "Too short";
+                        default:
+                          return "some error";
+                      }
+                    }}
+                    value={value}
+                    error="Some error"
+                  />
+                );
+              }}
+            />
+          </form>
         </UiKitColumn>
       </UIKitWrapper>
     </div>
