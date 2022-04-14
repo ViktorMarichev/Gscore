@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import PrimaryButton from "@components/PrimaryButton";
 import SecondaryButton from "@components/SecondaryButton";
 import InputField from "@components/InputField";
+import CheckBox from "@components/CheckBox";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
@@ -35,6 +37,7 @@ const Home: NextPage = () => {
       firstName: "",
     },
   });
+  const [checked, setChecked] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     alert("send " + JSON.stringify(data));
@@ -89,6 +92,14 @@ const Home: NextPage = () => {
               }}
             />
           </form>
+        </UiKitColumn>
+        <UiKitColumn>
+          <CheckBox
+            checked={checked}
+            disabled={false}
+            tabindex={1}
+            onClick={() => setChecked((prev) => !prev)}
+          />
         </UiKitColumn>
       </UIKitWrapper>
     </div>
