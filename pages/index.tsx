@@ -6,13 +6,15 @@ import PrimaryButton from "@components/PrimaryButton";
 import SecondaryButton from "@components/SecondaryButton";
 import InputField from "@components/InputField";
 import CheckBox from "@components/CheckBox";
+import Tabs from "@components/Tabs";
+import TabItem from "@components/TabItem";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 const UIKitWrapper = styled.div`
   display: flex;
   width: 100%;
-  background-color: gray;
+  background-color: #181818;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
@@ -38,9 +40,12 @@ const Home: NextPage = () => {
     },
   });
   const [checked, setChecked] = useState<boolean>(false);
-
+  const [activeTab, setActiveTab] = useState<string>("Profile");
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     alert("send " + JSON.stringify(data));
+  };
+  const clickTabHandler = (title: string) => {
+    setActiveTab(title);
   };
   return (
     <div className={styles.container}>
@@ -100,6 +105,25 @@ const Home: NextPage = () => {
             tabindex={1}
             onClick={() => setChecked((prev) => !prev)}
           />
+        </UiKitColumn>
+        <UiKitColumn>
+          <Tabs>
+            <TabItem
+              onClick={clickTabHandler}
+              title="Profile"
+              activeTab={activeTab}
+            />
+            <TabItem
+              onClick={clickTabHandler}
+              title="Subscriptions"
+              activeTab={activeTab}
+            />
+            <TabItem
+              onClick={clickTabHandler}
+              title="Change password"
+              activeTab={activeTab}
+            />
+          </Tabs>
         </UiKitColumn>
       </UIKitWrapper>
     </div>
