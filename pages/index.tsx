@@ -2,10 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import PrimaryButton from "@components/PrimaryButton";
+import SecondaryButton from "@components/SecondaryButton";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 const UIKitWrapper = styled.div`
   display: flex;
+  width: 100%;
+  background-color: gray;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
@@ -14,6 +17,8 @@ const UIKitWrapper = styled.div`
 `;
 const UiKitColumn = styled.div`
   width: auto;
+  box-sizing: border-box;
+  margin-left: 5px;
 `;
 
 const Home: NextPage = () => {
@@ -27,6 +32,9 @@ const Home: NextPage = () => {
       <UIKitWrapper>
         <UiKitColumn>
           <PrimaryButton title="Default" loading={false} disabled={false} />
+        </UiKitColumn>
+        <UiKitColumn>
+          <SecondaryButton title="Default" loading={false} disabled={false} />
         </UiKitColumn>
       </UIKitWrapper>
     </div>
