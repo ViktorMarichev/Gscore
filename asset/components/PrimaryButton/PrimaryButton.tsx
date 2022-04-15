@@ -27,6 +27,9 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   background: #fc5842;
   padding: 20px 24px 20px 24px;

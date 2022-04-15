@@ -33,6 +33,9 @@ const Title = styled.div`
   color: #fc5842;
 `;
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   background: #ffffff;
   padding: 20px 24px 20px 24px;
