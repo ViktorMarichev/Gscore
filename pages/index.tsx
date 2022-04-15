@@ -7,9 +7,11 @@ import SecondaryButton from "@components/SecondaryButton";
 import InputField from "@components/InputField";
 import CheckBox from "@components/CheckBox";
 import Tabs from "@components/Tabs";
+import Stages from "@components/Stages";
 import TabItem from "@components/TabItem";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
+import StageItem from "@components/StageItem";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 const UIKitWrapper = styled.div`
   display: flex;
@@ -41,6 +43,7 @@ const Home: NextPage = () => {
   });
   const [checked, setChecked] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("Profile");
+  const [stages, setStages] = useState(["Create account", "Log in"]);
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     alert("send " + JSON.stringify(data));
   };
@@ -124,6 +127,13 @@ const Home: NextPage = () => {
               activeTab={activeTab}
             />
           </Tabs>
+        </UiKitColumn>
+        <UiKitColumn>
+          <Stages>
+            <StageItem title="Create account" stages={stages} />
+            <StageItem title="Log in" stages={stages} />
+            <StageItem title="Checkout" stages={stages} />
+          </Stages>
         </UiKitColumn>
       </UIKitWrapper>
     </div>

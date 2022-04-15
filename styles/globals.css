@@ -12,6 +12,13 @@
   font-weight: 700;
   font-style: normal;
 }
+@font-face {
+  font-family: "THICCCBOI-semiBold";
+  src: url("../asset/fonts/THICCCBOI-SemiBold.ttf");
+  src: url("../asset/fonts/THICCCBOI-SemiBold.woff2");
+  font-weight: 600;
+  font-style: normal;
+}
 
 html,
 body {
