@@ -9,9 +9,11 @@ import CheckBox from "@components/CheckBox";
 import Tabs from "@components/Tabs";
 import Stages from "@components/Stages";
 import TabItem from "@components/TabItem";
+import HeaderContainer from "@components/HeaderContainer";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import StageItem from "@components/StageItem";
+import CardsSliderContainer from "@components/CardsSliderContainer";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 const UIKitWrapper = styled.div`
   display: flex;
@@ -135,6 +137,12 @@ const Home: NextPage = () => {
             <StageItem title="Checkout" stages={stages} />
           </Stages>
         </UiKitColumn>
+      </UIKitWrapper>
+      <UIKitWrapper>
+        <HeaderContainer />
+      </UIKitWrapper>
+      <UIKitWrapper>
+        <CardsSliderContainer />
       </UIKitWrapper>
     </div>
   );
