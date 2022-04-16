@@ -98,7 +98,7 @@ const Field = styled.input`
   border-radius: 6px;
   outline: none;
   padding: 15px 43px 15px 13px;
-  font-family: "THICCCBOI-medium";
+  font-family: "THICCCBOI-regular";
   font-size: 16px;
   &:hover,
   &:active {
@@ -107,7 +107,7 @@ const Field = styled.input`
   }
   &::placeholder {
     color: #969696;
-    font-family: "THICCCBOI-medium";
+    font-family: "THICCCBOI-regular";
     font-size: 16px;
   }
 `;
