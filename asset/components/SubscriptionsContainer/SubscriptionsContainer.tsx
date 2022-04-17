@@ -89,7 +89,14 @@ const SubscriptionsContainer: React.FC = () => {
   return (
     <Wrapper>
       <CardsSlider subscribes={subscribes} />
-      <CodeViewList></CodeViewList>
+      <CodeViewList>
+        <CodeView
+          checked={false}
+          ChangeChacked={() => {
+            console.log("change checked");
+          }}
+        />
+      </CodeViewList>
     </Wrapper>
   );
 };

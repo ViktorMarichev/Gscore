@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Subscribe from "asset/types/subscribe";
 import SecondaryButton from "@components/SecondaryButton";
+import StatusLabel from "@components/StatusLabel";
 //subscribe->Code
 
 type CardProps = {
@@ -79,23 +80,8 @@ const CardTitle = styled.div`
   width: 80%;
   color: #ffffff;
 `;
-const SubscribeStatus = styled.div`
+const SubscribeStatus = styled(StatusLabel)`
   width: 20%;
-  font-family: "THICCCBOI-bold";
-  font-style: normal;
-  font-size: 22px;
-  color: ${({ status }: { status: string }) => {
-    switch (status) {
-      case "ACTIVE":
-        return "#05c168";
-      case "INACTIVE":
-        return "#FF5A65;";
-      case "HOLD":
-        return "#FF9E2C";
-      default:
-        return "#05c168";
-    }
-  }};
 `;
 const SubscribeDetails = styled.div`
   display: flex;

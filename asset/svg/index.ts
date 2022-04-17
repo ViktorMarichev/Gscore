@@ -3,6 +3,7 @@ export { default as ArrowRight } from "./ArrowRight";
 export { default as ArrowButton } from "./ArrowButton";
 export { default as Check } from "./Check";
 export { default as Close } from "./Close";
+export { default as Copy } from "./Copy";
 export { default as Loader } from "./Loader";
 export { default as Logo } from "./Logo";
 export { default as LogOut } from "./LogOut";
