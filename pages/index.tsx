@@ -13,7 +13,7 @@ import HeaderContainer from "@components/HeaderContainer";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import StageItem from "@components/StageItem";
-import CardsSliderContainer from "@components/CardsSliderContainer";
+import SubscriptionsContainer from "@components/SubscriptionsContainer";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 const UIKitWrapper = styled.div`
   display: flex;
@@ -142,7 +142,7 @@ const Home: NextPage = () => {
         <HeaderContainer />
       </UIKitWrapper>
       <UIKitWrapper>
-        <CardsSliderContainer />
+        <SubscriptionsContainer />
       </UIKitWrapper>
     </div>
   );

@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import CardsSlider from "./components/CardsSlider";
 import Subscribe from "asset/types/subscribe";
+import CodeView from "./components/CodeView";
 
-const CardsSliderContainer: React.FC = () => {
+const SubscriptionsContainer: React.FC = () => {
   const subscribes: Array<Subscribe> = [
     {
       id: 80,
@@ -83,9 +84,22 @@ const CardsSliderContainer: React.FC = () => {
         },
       ],
     } as Subscribe,
-    
   ];
 
-  return <CardsSlider subscribes={subscribes} />;
+  return (
+    <Wrapper>
+      <CardsSlider subscribes={subscribes} />
+      <CodeViewList></CodeViewList>
+    </Wrapper>
+  );
 };
-export default CardsSliderContainer;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+const CodeViewList = styled.div`
+  width: 100%;
+`;
+
+export default SubscriptionsContainer;
