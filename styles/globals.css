@@ -23,6 +23,12 @@
   font-family: "THICCCBOI-regular";
   src: url("../asset/fonts/THICCCBOI-Regular.ttf");
   src: url("../asset/fonts/THICCCBOI-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter-medium";
+  src: url("../asset/fonts/Inter-Medium.ttf");
   font-weight: 500;
   font-style: normal;
 }

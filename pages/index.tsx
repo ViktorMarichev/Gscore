@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import PrimaryButton from "@components/PrimaryButton";
 import SecondaryButton from "@components/SecondaryButton";
 import InputField from "@components/InputField";
@@ -14,6 +13,8 @@ import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import StageItem from "@components/StageItem";
 import SubscriptionsContainer from "@components/SubscriptionsContainer";
+import Container from "@components/Container";
+import Footer from "@components/Footer";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 const UIKitWrapper = styled.div`
   display: flex;
@@ -142,7 +143,12 @@ const Home: NextPage = () => {
         <HeaderContainer />
       </UIKitWrapper>
       <UIKitWrapper>
-        <SubscriptionsContainer />
+        <Container>
+          <SubscriptionsContainer />
+        </Container>
+      </UIKitWrapper>
+      <UIKitWrapper>
+        <Footer />
       </UIKitWrapper>
     </div>
   );
