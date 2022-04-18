@@ -51,6 +51,21 @@ const Wrapper = styled.div`
   border-radius: 12px;
   width: 100%;
   padding: 24px 0px 31px 0px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+  }
+  @media (max-width: 960px) {
+    padding: 32px 20px 32px 20px;
+    grid-template-columns: 48px 1fr 2fr;
+    grid-template-rows: auto auto 1fr auto 1fr;
+    grid-template-areas:
+      "checkbox status button"
+      "codelabel codelabel ."
+      "codeinput codeinput codeinput"
+      "domainlabel domainlabel ."
+      "domaininput domaininput domaininput";
+  }
 `;
 const Label = styled.div`
   font-family: "THICCCBOI-bold";
@@ -60,9 +75,15 @@ const Label = styled.div`
 `;
 const LicenseCodeLabel = styled(Label)`
   grid-area: codelabel;
+  @media (max-width: 960px) {
+    margin-top: 8px;
+  }
 `;
 const DomainLabel = styled(Label)`
   grid-area: domainlabel;
+  @media (max-width: 960px) {
+    margin-top: 24px;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -88,12 +109,19 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 56px;
-  padding-right: 56px;
+  padding-left: calc(0px + (56 - 0) * ((100vw - 375px) / (1440 - 375)));
+  padding-right: calc(0px + (56 - 0) * ((100vw - 375px) / (1440 - 375)));
+  @media (max-width: 960px) {
+    justify-content: flex-end;
+  }
 `;
 const CodeInputWrapper = styled(ContentWrapper)`
   grid-area: codeinput;
   margin-right: 28px;
+
+  @media (max-width: 960px) {
+    margin-right: 0px;
+  }
 `;
 const DomainInputWrapper = styled(ContentWrapper)`
   grid-area: domaininput;
@@ -101,9 +129,18 @@ const DomainInputWrapper = styled(ContentWrapper)`
 const StatusWrapper = styled(ContentWrapper)`
   height: 100%;
   grid-area: status;
+  @media (max-width: 960px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const StatusLabel = styled(Label)`
   grid-area: statuslabel;
+
+  @media (max-width: 960px) {
+    display: none;
+  }
 `;
 const Input = styled.input`
   border: none;
