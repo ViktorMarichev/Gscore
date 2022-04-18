@@ -7,7 +7,7 @@ type paramsType = {
 export const apiInstance = (params: paramsType = {}) => {
   const token = params.token;
   const config = {
-    baseURL: "https://gscore-back.herokuapp.com",
+    baseURL: "https://gscore-back.herokuapp.com/api",
     headers: { "Content-Type": "application/json" },
     timeout: 1000,
   } as AxiosRequestConfig;
