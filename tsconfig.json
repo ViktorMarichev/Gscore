@@ -16,9 +16,9 @@
     "incremental": true,
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
-      "@types/*": ["./asset/types/*"],
       "@components/*": ["./asset/components/*"],
-      "@svg/*": ["./asset/svg/*"]
+      "@svg/*": ["./asset/svg/*"],
+      "@api/*": ["./asset/redux/api/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
