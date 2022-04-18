@@ -9,7 +9,7 @@ module.exports = {
         alias: {
           "@components": "./asset/components",
           "@svg": "./asset/svg",
-          "@types": "./asset/types",
+          "@api": "./asset/redux/api",
         },
       },
     ],
