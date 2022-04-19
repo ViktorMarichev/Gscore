@@ -67,6 +67,20 @@ const Home: NextPage = () => {
       setProducts(products);
     }
   };
+  const buyProduct = () => {
+    Products.buyProduct({
+      priceId: 2,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsImVtYWlsIjoiZmluZ2VyQG1haWwucnUiLCJpYXQiOjE2NTAwMDc5Nzd9.U-QbAJ47N7cvp5rNLC9ggpFRKz-9NEiGvA_iDcHddhA",
+    })
+      .then((response: AxiosResponse) => {
+        alert(JSON.stringify(response.data));
+      })
+      .catch((error: AxiosError) => {
+        if (error.response) alert(JSON.stringify(error.response?.data));
+        else alert(error);
+      });
+  };
   const createUser = () => {
     User.createAccount({
       email: "finger@mail.ru",
@@ -109,6 +123,15 @@ const Home: NextPage = () => {
             loading={false}
             disabled={false}
             tabindex={2}
+          />
+        </UiKitColumn>
+        <UiKitColumn>
+          <PrimaryButton
+            onClick={buyProduct}
+            title="Buy product"
+            loading={false}
+            disabled={false}
+            tabindex={1}
           />
         </UiKitColumn>
         <UiKitColumn>
