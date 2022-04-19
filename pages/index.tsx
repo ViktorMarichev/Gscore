@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
+import { AxiosError, AxiosResponse } from "axios";
 import Head from "next/head";
 import PrimaryButton from "@components/PrimaryButton";
 import SecondaryButton from "@components/SecondaryButton";
@@ -17,6 +18,7 @@ import Container from "@components/Container";
 import Footer from "@components/Footer";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Products } from "@api/products";
+import { User } from "@api/user";
 import { useAppDispatch, useAppSelector } from "asset/redux/store";
 import Product from "../asset/types/product";
 const UIKitWrapper = styled.div`
@@ -65,6 +67,21 @@ const Home: NextPage = () => {
       setProducts(products);
     }
   };
+  const createUser = () => {
+    User.createAccount({
+      email: "finger@mail.ru",
+      username: "mouke",
+      password: "stinks1234",
+    })
+      .then((res: AxiosResponse) => {
+        alert(res.data);
+      })
+      .catch((error: AxiosError) => {
+        if (error.response) {
+          alert(error.response.data.message);
+        }
+      });
+  };
   const clickTabHandler = (title: string) => {
     setActiveTab(title);
   };
@@ -87,9 +104,7 @@ const Home: NextPage = () => {
         </UiKitColumn>
         <UiKitColumn>
           <SecondaryButton
-            onClick={() => {
-              alert("action too");
-            }}
+            onClick={createUser}
             title="Default"
             loading={false}
             disabled={false}

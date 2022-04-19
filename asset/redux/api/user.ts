@@ -13,6 +13,11 @@ type UpdatePersonalDataParams = {
   username: string;
   token: string;
 };
+type CreateAccountParams = {
+  email: string;
+  username: string;
+  password: string;
+};
 export const User = {
   login: function (params: UserParams = {}) {
     const { email, password } = params;
@@ -36,6 +41,15 @@ export const User = {
     return api.patch("/users", {
       email,
       username,
+    });
+  },
+  createAccount: function (params: CreateAccountParams) {
+    const { email, username, password } = params;
+    const api = apiInstance();
+    return api.post("users/sign-up", {
+      email,
+      username,
+      password,
     });
   },
 };
