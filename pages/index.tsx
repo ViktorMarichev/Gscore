@@ -82,6 +82,22 @@ const Home: NextPage = () => {
         else alert(error);
       });
   };
+  const upgradeSubscribe = () => {
+    Subscribes.upgradeSubscribe({
+      productId: 1,
+      subscribeId: 80,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsImVtYWlsIjoiZmluZ2VyQG1haWwucnUiLCJpYXQiOjE2NTAwMDc5Nzd9.U-QbAJ47N7cvp5rNLC9ggpFRKz-9NEiGvA_iDcHddhA",
+    })
+      .then((response: AxiosResponse) => {
+        alert(JSON.stringify(response.data));
+      })
+      .catch((error: AxiosError) => {
+        if (error.response) alert(JSON.stringify(error.response?.data));
+        else alert(error);
+      });
+  };
+
   const createUser = () => {
     User.createAccount({
       email: "finger@mail.ru",
@@ -150,6 +166,7 @@ const Home: NextPage = () => {
             tabindex={1}
           />
         </UiKitColumn>
+
         <UiKitColumn>
           <SecondaryButton
             onClick={getSubscries}
@@ -157,6 +174,15 @@ const Home: NextPage = () => {
             loading={false}
             disabled={false}
             tabindex={2}
+          />
+        </UiKitColumn>
+        <UiKitColumn>
+          <PrimaryButton
+            onClick={upgradeSubscribe}
+            title="Upgrade subscribe"
+            loading={false}
+            disabled={false}
+            tabindex={1}
           />
         </UiKitColumn>
         <UiKitColumn>
