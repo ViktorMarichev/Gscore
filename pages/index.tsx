@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import PrimaryButton from "@components/PrimaryButton";
 import SecondaryButton from "@components/SecondaryButton";
@@ -16,6 +16,9 @@ import SubscriptionsContainer from "@components/SubscriptionsContainer";
 import Container from "@components/Container";
 import Footer from "@components/Footer";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { Products } from "@api/products";
+import { useAppDispatch, useAppSelector } from "asset/redux/store";
+import Product from "../asset/types/product";
 const UIKitWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -44,11 +47,23 @@ const Home: NextPage = () => {
       firstName: "",
     },
   });
+  const [products, setProducts] = useState<Array<Product>>([]);
   const [checked, setChecked] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("Profile");
   const [stages, setStages] = useState(["Create account", "Log in"]);
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     alert("send " + JSON.stringify(data));
+  };
+  useEffect(() => {
+    if (products.length != 0) {
+      alert(JSON.stringify(products));
+    }
+  }, [products]);
+  const getProducts = async () => {
+    const { data: products } = await Products.getProducts();
+    if (!products.message) {
+      setProducts(products);
+    }
   };
   const clickTabHandler = (title: string) => {
     setActiveTab(title);
@@ -63,9 +78,7 @@ const Home: NextPage = () => {
       <UIKitWrapper>
         <UiKitColumn>
           <PrimaryButton
-            onClick={() => {
-              alert("action");
-            }}
+            onClick={getProducts}
             title="Get products"
             loading={false}
             disabled={false}

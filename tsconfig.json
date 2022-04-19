@@ -18,7 +18,7 @@
     "paths": {
       "@components/*": ["./asset/components/*"],
       "@svg/*": ["./asset/svg/*"],
-      "@api": ["./asset/redux/api"]
+      "@api/*": ["./asset/redux/api/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
