@@ -5,15 +5,23 @@ type SecondaryButtonProps = {
   title: string;
   loading?: boolean;
   disabled?: boolean;
+  onClick: () => void;
+  tabindex?: number;
 };
 
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   title,
   loading,
   disabled,
+  tabindex,
+  onClick,
 }) => {
   return (
-    <Wrapper disabled={disabled != undefined ? disabled : false}>
+    <Wrapper
+      disabled={disabled != undefined ? disabled : false}
+      onClick={onClick}
+      tabindex={tabindex}
+    >
       {disabled ? <ButtonCover /> : null}
       {loading ? (
         <LoadingWrapper>
@@ -32,7 +40,14 @@ const Title = styled.div`
   line-height: 18px;
   color: #fc5842;
 `;
-const Wrapper = styled.div`
+type WrapperProps = {
+  disabled?: boolean;
+  tabindex?: number;
+};
+
+const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
+  tabIndex: tabindex,
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +63,7 @@ const Wrapper = styled.div`
   -ms-user-select: none;
   user-select: none;
   min-width: 105px;
-  pointer-events: ${({ disabled }: { disabled: boolean }) => {
+  pointer-events: ${({ disabled }: WrapperProps) => {
     return disabled ? "none" : "auto";
   }};
   cursor: default;

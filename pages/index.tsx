@@ -62,10 +62,21 @@ const Home: NextPage = () => {
       </Head>
       <UIKitWrapper>
         <UiKitColumn>
-          <PrimaryButton title="Default" loading={false} disabled={false} />
+          <PrimaryButton
+            onClick={() => {
+              alert("action");
+            }}
+            title="g"
+            loading={false}
+            disabled={false}
+            tabindex={1}
+          />
         </UiKitColumn>
         <UiKitColumn>
-          <SecondaryButton title="Default" loading={false} disabled={false} />
+          <SecondaryButton onClick={()=>{
+
+            alert('action too')
+          }} title="Default" loading={false} disabled={false} tabindex={2}/>
         </UiKitColumn>
         <UiKitColumn>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,7 +119,7 @@ const Home: NextPage = () => {
           <CheckBox
             checked={checked}
             disabled={false}
-            tabindex={1}
+            tabindex={3}
             onClick={() => setChecked((prev) => !prev)}
           />
         </UiKitColumn>
