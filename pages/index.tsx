@@ -66,17 +66,22 @@ const Home: NextPage = () => {
             onClick={() => {
               alert("action");
             }}
-            title="g"
+            title="Get products"
             loading={false}
             disabled={false}
             tabindex={1}
           />
         </UiKitColumn>
         <UiKitColumn>
-          <SecondaryButton onClick={()=>{
-
-            alert('action too')
-          }} title="Default" loading={false} disabled={false} tabindex={2}/>
+          <SecondaryButton
+            onClick={() => {
+              alert("action too");
+            }}
+            title="Default"
+            loading={false}
+            disabled={false}
+            tabindex={2}
+          />
         </UiKitColumn>
         <UiKitColumn>
           <form onSubmit={handleSubmit(onSubmit)}>
