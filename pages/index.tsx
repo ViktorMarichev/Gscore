@@ -20,7 +20,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Products } from "@api/products";
 import { User } from "@api/user";
 import { Subscribes } from "@api/subscribes";
-import { Codes } from "@api/Codes";
+import { Codes } from "@api/codes";
 import { useAppDispatch, useAppSelector } from "asset/redux/store";
 import Product from "../asset/types/product";
 const UIKitWrapper = styled.div`
@@ -145,6 +145,21 @@ const Home: NextPage = () => {
         }
       });
   };
+  const activateCode = () => {
+    Codes.activate({
+      code: "24d2bd9f-44fd-4a5b-88ae-8ab9a13a0be2",
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsImVtYWlsIjoiZmluZ2VyQG1haWwucnUiLCJpYXQiOjE2NTAwMDc5Nzd9.U-QbAJ47N7cvp5rNLC9ggpFRKz-9NEiGvA_iDcHddhA",
+    })
+      .then((res: AxiosResponse) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((error: AxiosError) => {
+        if (error.response) {
+          alert(error.response.data.message);
+        }
+      });
+  };
   const clickTabHandler = (title: string) => {
     setActiveTab(title);
   };
@@ -209,6 +224,15 @@ const Home: NextPage = () => {
             loading={false}
             disabled={false}
             tabindex={2}
+          />
+        </UiKitColumn>
+        <UiKitColumn>
+          <PrimaryButton
+            onClick={activateCode}
+            title="Activate code"
+            loading={false}
+            disabled={false}
+            tabindex={1}
           />
         </UiKitColumn>
         <UiKitColumn>

@@ -5,13 +5,12 @@ type paramsType = {
   token?: string | undefined;
 };
 export const apiInstance = (params: paramsType = {}) => {
-  const token = params.token;
+  const { token } = params;
   const config = {
     baseURL: "https://gscore-back.herokuapp.com/api",
     headers: { "Content-Type": "application/json" },
     timeout: 1000,
   } as AxiosRequestConfig;
-
   if (token) {
     config.headers!.Authorization = `Bearer ${token}`;
   }

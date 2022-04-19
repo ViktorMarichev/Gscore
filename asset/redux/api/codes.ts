@@ -5,6 +5,10 @@ type ReleaseHoldParams = {
   subscribeId: number;
   token: string;
 };
+type ActivateCodeParams = {
+  code: string;
+  token: string;
+};
 
 export const Codes = {
   releaseHold: function (params: ReleaseHoldParams) {
@@ -14,5 +18,10 @@ export const Codes = {
       codesIds,
       subscribeId,
     });
+  },
+  activate: function (params: ActivateCodeParams) {
+    const { token, code } = params;
+    const api = apiInstance({ token });
+    return api.post("/code/activate", { token, code });
   },
 };
