@@ -20,6 +20,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Products } from "@api/products";
 import { User } from "@api/user";
 import { Subscribes } from "@api/subscribes";
+import { Codes } from "@api/Codes";
 import { useAppDispatch, useAppSelector } from "asset/redux/store";
 import Product from "../asset/types/product";
 const UIKitWrapper = styled.div`
@@ -128,6 +129,22 @@ const Home: NextPage = () => {
         }
       });
   };
+  const releaseHold = () => {
+    Codes.releaseHold({
+      codesIds: [392, 594, 595],
+      subscribeId: 80,
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTUsImVtYWlsIjoiZmluZ2VyQG1haWwucnUiLCJpYXQiOjE2NTAwMDc5Nzd9.U-QbAJ47N7cvp5rNLC9ggpFRKz-9NEiGvA_iDcHddhA",
+    })
+      .then((res: AxiosResponse) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((error: AxiosError) => {
+        if (error.response) {
+          alert(error.response.data.message);
+        }
+      });
+  };
   const clickTabHandler = (title: string) => {
     setActiveTab(title);
   };
@@ -183,6 +200,15 @@ const Home: NextPage = () => {
             loading={false}
             disabled={false}
             tabindex={1}
+          />
+        </UiKitColumn>
+        <UiKitColumn>
+          <SecondaryButton
+            onClick={releaseHold}
+            title="Take off hold"
+            loading={false}
+            disabled={false}
+            tabindex={2}
           />
         </UiKitColumn>
         <UiKitColumn>
