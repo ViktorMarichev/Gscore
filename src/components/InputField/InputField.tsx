@@ -10,7 +10,7 @@ type InputProps = {
   success?: boolean;
   error?: string;
   value?: string;
-  errorRender?: () => string;
+  errorRender: () => string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   name: string;
@@ -38,7 +38,7 @@ const Input: React.FC<InputProps> = ({
             <Check width={18} height={18} color={"#05C168"} />
           </SvgWrapper>
         ) : null}
-        {error && !success ? (
+        {errors[name] && !success ? (
           <SvgWrapper>
             <Close color={"#FF5A65"} />
           </SvgWrapper>
@@ -48,17 +48,13 @@ const Input: React.FC<InputProps> = ({
           success={success}
           onChange={onChange}
           onBlur={onBlur}
-          error={error}
+          error={errors[name]}
           value={value}
           disabled={disabled}
         />
       </InputWrapper>
       <Message>
-        {errorRender ? (
-          <ErrorMessage errors={errors} name={name} render={errorRender} />
-        ) : (
-          error
-        )}
+        <ErrorMessage errors={errors} name={name} render={errorRender} />
       </Message>
     </Container>
   );
@@ -76,6 +72,7 @@ const InputCover = styled.div`
   z-index: 5;
 `;
 const Field = styled.input`
+  width: 100%;
   background: #ffffff;
   color: black;
   border: ${({
