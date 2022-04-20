@@ -18,7 +18,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 }) => {
   return (
     <Wrapper
-      disabled={disabled != undefined ? disabled : false}
+      disabled={disabled}
       tabindex={tabindex}
       onClick={onClick}
     >

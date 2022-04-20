@@ -18,7 +18,7 @@ type CreateAccountParams = {
   username: string;
   password: string;
 };
-export const User = {
+export const UserEndpoints = {
   login: function (params: UserParams = {}) {
     const { email, password } = params;
     const api = apiInstance();

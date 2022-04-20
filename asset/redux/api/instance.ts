@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 // экземпляр axios
 type paramsType = {
-  token?: string | undefined;
+  token?: string;
 };
 export const apiInstance = (params: paramsType = {}) => {
   const { token } = params;
