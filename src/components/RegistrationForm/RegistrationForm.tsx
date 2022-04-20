@@ -147,7 +147,9 @@ const RegistrationForm: React.FC = () => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+`;
 const InputWrapper = styled.div`
   margin-bottom: 24px;
 `;

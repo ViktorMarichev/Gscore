@@ -5,7 +5,6 @@ import PrimaryButton from "@components/PrimaryButton";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 
 interface IFormInputs {
-  username: string;
   email: string;
   password: string;
 }
@@ -17,7 +16,6 @@ const AuthorizationForm: React.FC = () => {
     formState: { errors },
   } = useForm<IFormInputs>({
     defaultValues: {
-      username: "",
       email: "",
       password: "",
     },
@@ -28,45 +26,7 @@ const AuthorizationForm: React.FC = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Create account</Title>
-        <Hint>
-          You need to enter your name and email. We will send you a temporary
-          password by email
-        </Hint>
-        <InputWrapper>
-          <Controller
-            name="username"
-            control={control}
-            rules={{
-              required: true,
-              minLength: 5,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => {
-              return (
-                <InputField
-                  name="username"
-                  disabled={false}
-                  placeholder="Username"
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  errors={errors}
-                  success={!errors.username && value != ""}
-                  errorRender={() => {
-                    switch (errors.username!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "minLength":
-                        return "Too short";
-                      default:
-                        return "some error";
-                    }
-                  }}
-                  value={value}
-                />
-              );
-            }}
-          />
-        </InputWrapper>
+        <Title>Log in</Title>
         <InputWrapper>
           <Controller
             name="email"
@@ -136,18 +96,16 @@ const AuthorizationForm: React.FC = () => {
           />
         </InputWrapper>
         <ButtonWrapper>
-          <PrimaryButton title="Send password" />
+          <PrimaryButton title="Log in" />
         </ButtonWrapper>
-        <NoticeBox>
-          <Notice>Have an account?</Notice>
-          <Ref>Go to the next step</Ref>
-        </NoticeBox>
       </form>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+`;
 const InputWrapper = styled.div`
   margin-bottom: 24px;
 `;
@@ -160,7 +118,7 @@ const Title = styled.div`
   font-size: 44px;
   line-height: 54px;
   color: #ffffff;
-  padding-bottom: 16px;
+  padding-bottom: 32px;
   margin-top: 64px;
 `;
 const Hint = styled.div`
