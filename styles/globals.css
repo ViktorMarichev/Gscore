@@ -32,13 +32,21 @@
   font-weight: 500;
   font-style: normal;
 }
+@font-face {
+  font-family: "DMSans-bold";
+  src: url("../asset/fonts/DMSans-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
 
 html,
 body {
   padding: 0;
   margin: 0;
+  background: #181818;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  height: 100vh;
 }
 
 a {

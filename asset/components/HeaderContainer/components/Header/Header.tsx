@@ -53,6 +53,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 32px 86.69px 32px 86.69px;
 `;
 const LogoWrapper = styled.div``;
 const HeaderEnd = styled.div`
@@ -84,7 +85,7 @@ const MenuContainer = styled.div`
   position: absolute;
 
   bottom: -175px;
-  left: -22px;
+  left: -55px;
 `;
 
 const CurrentPage = styled(Username)``;
