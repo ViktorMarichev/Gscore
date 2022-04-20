@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Check from "@svg/Check";
 import Close from "@svg/Close";
-import { FieldError } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 type InputProps = {
   disabled: boolean;

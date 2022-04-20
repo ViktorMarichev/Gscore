@@ -6,7 +6,6 @@ import SecondaryButton from "@components/SecondaryButton";
 import InputField from "@components/InputField";
 import CheckBox from "@components/CheckBox";
 import Tabs from "@components/Tabs";
-import Stages from "@components/Stages";
 import TabItem from "@components/TabItem";
 import HeaderContainer from "@components/HeaderContainer";
 import styles from "../../styles/Home.module.css";
@@ -132,11 +131,11 @@ const Home: NextPage = () => {
           </Tabs>
         </UiKitColumn>
         <UiKitColumn>
-          <Stages>
+          <div>
             <StageItem title="Create account" stages={stages} />
             <StageItem title="Log in" stages={stages} />
             <StageItem title="Checkout" stages={stages} />
-          </Stages>
+          </div>
         </UiKitColumn>
       </UIKitWrapper>
       <UIKitWrapper>
