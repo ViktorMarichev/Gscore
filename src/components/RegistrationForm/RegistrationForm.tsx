@@ -10,7 +10,7 @@ interface IFormInputs {
   password: string;
 }
 
-const AuthorizationForm: React.FC = () => {
+const RegistrationForm: React.FC = () => {
   const {
     control,
     handleSubmit,
@@ -185,4 +185,4 @@ const Ref = styled(Notice)`
   color: #fc5842;
   margin-left: 8px;
 `;
-export default AuthorizationForm;
+export default RegistrationForm;
