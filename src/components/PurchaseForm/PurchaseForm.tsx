@@ -9,8 +9,19 @@ const PurchaseForm: React.FC = () => {
     <Wrapper>
       <Title>Checkout</Title>
       <ProductDetails>
-        <DetailsTitles></DetailsTitles>
+        <DetailsTitles>
+          <PackageNameTitle>Package name</PackageNameTitle>
+          <PackageNameTitle>Price</PackageNameTitle>
+        </DetailsTitles>
+        <DetailsPackage>
+          <PackageInfo>Single Site license</PackageInfo>
+          <PackageInfo>$77</PackageInfo>
+        </DetailsPackage>
       </ProductDetails>
+      <TotalCostWrapper>
+        <TotalCostTitle>Total</TotalCostTitle>
+        <TotalCost>$77</TotalCost>
+      </TotalCostWrapper>
       <ButtonWrapper>
         <PrimaryButton title="Log in" />
       </ButtonWrapper>
@@ -45,6 +56,9 @@ const DetailsTitles = styled.div`
   border-bottom: 1px solid #969696;
   padding: 42px 72px 32px 32px;
 `;
+const DetailsPackage = styled(DetailsTitles)`
+  border: 0;
+`;
 const DetailsTitle = styled.div`
   font-family: "THICCCBOI-bold";
   font-style: normal;
@@ -52,5 +66,26 @@ const DetailsTitle = styled.div`
   line-height: 34px;
   color: #ffffff;
 `;
+const PackageInfo = styled.div`
+  font-family: "THICCCBOI-regular";
+  font-style: normal;
+  font-size: 24px;
+  line-height: 38px;
+  color: #ffffff;
+`;
+const PackageNameTitle = styled(DetailsTitle)``;
+const TotalCostWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+`;
+const TotalCostTitle = styled.div`
+  font-family: "THICCCBOI-bold";
+  font-size: 28px;
+  line-height: 40px;
+  color: #ffffff;
+`;
+const TotalCost = styled(TotalCostTitle)``;
 
 export default PurchaseForm;
