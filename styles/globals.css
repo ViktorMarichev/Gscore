@@ -1,35 +1,41 @@
 @font-face {
   font-family: "THICCCBOI-medium";
-  src: url("../asset/fonts/THICCCBOI-Medium.ttf");
-  src: url("../asset/fonts/THICCCBOI-Medium.woff2");
+  src: url("../src/fonts/THICCCBOI-Medium.ttf");
+  src: url("../src/fonts/THICCCBOI-Medium.woff2");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "THICCCBOI-bold";
-  src: url("../asset/fonts/THICCCBOI-Bold.ttf");
-  src: url("../asset/fonts/THICCCBOI-ExtraBold.woff2");
+  src: url("../src/fonts/THICCCBOI-Bold.ttf");
+  src: url("../src/fonts/THICCCBOI-ExtraBold.woff2");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "THICCCBOI-semiBold";
-  src: url("../asset/fonts/THICCCBOI-SemiBold.ttf");
-  src: url("../asset/fonts/THICCCBOI-SemiBold.woff2");
+  src: url("../src/fonts/THICCCBOI-SemiBold.ttf");
+  src: url("../src/fonts/THICCCBOI-SemiBold.woff2");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "THICCCBOI-regular";
-  src: url("../asset/fonts/THICCCBOI-Regular.ttf");
-  src: url("../asset/fonts/THICCCBOI-Regular.woff2");
+  src: url("../src/fonts/THICCCBOI-Regular.ttf");
+  src: url("../src/fonts/THICCCBOI-Regular.woff2");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Inter-medium";
-  src: url("../asset/fonts/Inter-Medium.ttf");
+  src: url("../src/fonts/Inter-Medium.ttf");
   font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DMSans-bold";
+  src: url("../src/fonts/DMSans-Bold.ttf");
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -37,8 +43,14 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background: #181818;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  height: 100vh;
+}
+main {
+  min-height: 100vh;
+  width: 100%;
 }
 
 a {

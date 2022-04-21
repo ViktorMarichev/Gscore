@@ -24,7 +24,7 @@ const Menu: React.FC = () => {
 const Wrapper = styled.div`
   background: #272727;
   border-radius: 12px;
-  max-width: 188px;
+  width: 188px;
   padding: 4px 24px 4px 24px;
 `;
 const Item = styled.div`

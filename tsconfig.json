@@ -16,11 +16,11 @@
     "incremental": true,
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
-      "@types/*": ["./asset/types/*"],
-      "@components/*": ["./asset/components/*"],
-      "@svg/*": ["./asset/svg/*"]
+      "@types/*": ["./src/types/*"],
+      "@components/*": ["./src/components/*"],
+      "@svg/*": ["./src/svg/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.tsx"],
   "exclude": ["node_modules", "babel.config.js"]
 }
