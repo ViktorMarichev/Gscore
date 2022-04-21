@@ -6,6 +6,7 @@ import MainLayout from "@components/MainLayout";
 import Container from "@components/Container";
 import styled from "styled-components";
 import ProductView from "@components/ProductView/ProductView";
+import from ''
 const ProductsPage: NextPage = () => {
 
   return (
@@ -55,6 +56,14 @@ const ProductsPage: NextPage = () => {
     </>
   );
 };
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`https://.../data`)
+  const data = await res.json()
+
+  // Pass data to the page via props
+  return { props: { data } }
+}
 const Wrapper = styled.div`
   padding: 16px 0px 42px 0px;
 `;
