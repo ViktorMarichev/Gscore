@@ -10,6 +10,7 @@ module.exports = {
           "@components": "./src/components",
           "@svg": "./src/svg",
           "@types": "./src/types",
+          "@api": "./src/redux/api",
         },
       },
     ],

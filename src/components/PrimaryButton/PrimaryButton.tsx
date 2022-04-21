@@ -5,15 +5,23 @@ type PrimaryButtonProps = {
   title: string;
   loading?: boolean;
   disabled?: boolean;
+  tabindex?: number;
+  onClick: () => void;
 };
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   title,
   loading,
   disabled,
+  tabindex,
+  onClick,
 }) => {
   return (
-    <Wrapper disabled={disabled != undefined ? disabled : false}>
+    <Wrapper
+      disabled={disabled}
+      tabindex={tabindex}
+      onClick={onClick}
+    >
       {disabled ? <ButtonCover /> : null}
       {loading ? (
         <LoadingWrapper>
@@ -25,8 +33,14 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     </Wrapper>
   );
 };
+type WrapperProps = {
+  disabled?: boolean;
+  tabindex?: number;
+};
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
+  tabIndex: tabindex,
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,7 +56,7 @@ const Wrapper = styled.div`
   -ms-user-select: none;
   user-select: none;
   min-width: 105px;
-  pointer-events: ${({ disabled }: { disabled: boolean }) => {
+  pointer-events: ${({ disabled }: WrapperProps) => {
     return disabled ? "none" : "auto";
   }};
   cursor: default;

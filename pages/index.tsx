@@ -7,6 +7,7 @@ import Container from "@components/Container";
 import styled from "styled-components";
 import ProductView from "@components/ProductView/ProductView";
 const ProductsPage: NextPage = () => {
+
   return (
     <>
       <Head>
