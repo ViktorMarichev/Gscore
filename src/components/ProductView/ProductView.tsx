@@ -1,22 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import Checked from "@svg/Check";
+import { useRouter } from "next/router";
 type ProductViewProps = {
-  style: "dark" | "light";
+  isActive: boolean;
   price: number;
   name: string;
   sitesCount: number;
+  id: number;
 };
 
-const FeatureItem: React.FC<{ style: "light" | "dark"; text: string }> = ({
-  style,
+const FeatureItem: React.FC<{ isActive: boolean; text: string }> = ({
+  isActive,
   text,
 }) => {
   return (
     <FeatureItemWrapper>
       <CheckCircle>
         <Checked
-          color={style === "light" ? " #fc5842" : "#272727"}
+          color={isActive ? " #fc5842" : "#272727"}
           viewBox={"0 0 26 26"}
           transform="translate(4 6)"
           preserveAspectRatio="xMidYMid meet"
@@ -28,17 +30,19 @@ const FeatureItem: React.FC<{ style: "light" | "dark"; text: string }> = ({
 };
 
 const ProductView: React.FC<ProductViewProps> = ({
-  style,
+  id,
+  isActive,
   price,
   name,
   sitesCount,
 }) => {
+  const router = useRouter();
   return (
-    <Wrapper style={style}>
+    <Wrapper $isActive={isActive}>
       <Head>
         <Price>${price}</Price>
         <Name>{name}</Name>
-        <Description style={style}>
+        <Description $isActive={isActive}>
           Get the advanced WordPress plugin that optimizes content with GSC
           keywords at one low annual price
         </Description>
@@ -51,13 +55,28 @@ const ProductView: React.FC<ProductViewProps> = ({
                 ? `All features for ${sitesCount} sites`
                 : "Single site license"
             }
-            style={style}
+            isActive={isActive}
           />
-          <FeatureItem text="Special introductory pricing" style={style} />
-          <FeatureItem text="Unlimited Pages and Keywords" style={style} />
-          <FeatureItem text="Billed annually" style={style} />
+          <FeatureItem
+            text="Special introductory pricing"
+            isActive={isActive}
+          />
+          <FeatureItem
+            text="Unlimited Pages and Keywords"
+            isActive={isActive}
+          />
+          <FeatureItem text="Billed annually" isActive={isActive} />
         </FeatureList>
-        <Button style={style}>Get Gscore</Button>
+        <Button
+          onClick={() =>
+            router.push("/subscribing/[id]", "/subscribing/" + id, {
+              shallow: true,
+            })
+          }
+          $isActive={isActive}
+        >
+          Get Gscore
+        </Button>
       </Bottom>
     </Wrapper>
   );
@@ -71,16 +90,16 @@ const CheckCircle = styled.div`
 `;
 const Wrapper = styled.div`
   position: relative;
-  top: ${({ style }: { style: "dark" | "light" }) => {
-    return style === "light" ? "-49.8px" : "0px";
+  top: ${({ $isActive }: { $isActive: boolean }) => {
+    return $isActive ? "-49.8px" : "0px";
   }};
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 42px;
   max-width: 404px;
-  background: ${({ style }: { style: "dark" | "light" }) => {
-    return style === "light" ? " #fc5842" : "#272727";
+  background: ${({ $isActive }: { $isActive: boolean }) => {
+    return $isActive ? " #fc5842" : "#272727";
   }};
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
@@ -96,8 +115,8 @@ const Description = styled.div`
   font-size: 18px;
   padding-top: 8px;
   text-align: center;
-  color: ${({ style }: { style: "dark" | "light" }) => {
-    return style === "light" ? " #FFFFFF" : "#c7c7c7";
+  color: ${({ $isActive }: { $isActive: boolean }) => {
+    return $isActive ? " #FFFFFF" : "#c7c7c7";
   }};
 `;
 const Price = styled.div`
@@ -152,8 +171,8 @@ const Button = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 18px;
   margin-top: 13px;
-  color: ${({ style }: { style: "dark" | "light" }) => {
-    return style === "light" ? " #FC5842" : "#181818";
+  color: ${({ $isActive }: { $isActive: boolean }) => {
+    return $isActive ? " #FC5842" : "#181818";
   }};
   &:active {
     transform: scale(0.98);
