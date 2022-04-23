@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import Container from "@components/Container";
-import Logo from "@svg/Logo";
-import Facebook from "@svg/Facebook";
-import LinkedIn from "@svg/LinkedIn";
-import Twitter from "@svg/Twitter";
+import Container from "src/components/Container";
+import Logo from "src/svg/Logo";
+import Facebook from "src/svg/Facebook";
+import LinkedIn from "src/svg/LinkedIn";
+import Twitter from "src/svg/Twitter";
 
 const Footer: React.FC = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "@svg/Logo";
-import ArrowButton from "@svg/ArrowButton";
+import Logo from "src/svg/Logo";
+import ArrowButton from "src/svg/ArrowButton";
 import Menu from "./components/Menu";
 
 type HeaderProps = {

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Check from "@svg/Check";
-import Close from "@svg/Close";
+import Check from "src/svg/Check";
+import Close from "src/svg/Close";
 import { ErrorMessage } from "@hookform/error-message";
 type InputProps = {
   disabled: boolean;

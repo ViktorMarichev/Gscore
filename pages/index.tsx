@@ -2,12 +2,10 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import MainLayout from "@components/MainLayout";
-import Container from "@components/Container";
+import MainLayout from "src/components/MainLayout";
+import Container from "src/components/Container";
 import styled from "styled-components";
-import ProductView from "@components/ProductView/ProductView";
-import from ''
-const ProductsPage: NextPage = () => {
+import ProductView from "src/components/ProductView";
 
   return (
     <>

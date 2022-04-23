@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import InputField from "@components/InputField";
-import PrimaryButton from "@components/PrimaryButton";
+import InputField from "src/components/InputField";
+import PrimaryButton from "src/components/PrimaryButton";
+import { UserEndpoints } from "src/redux/api/user";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 
 interface IFormInputs {

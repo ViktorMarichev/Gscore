@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import InputField from "@components/InputField";
-import PrimaryButton from "@components/PrimaryButton";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import InputField from "src/components/InputField";
+import PrimaryButton from "src/components/PrimaryButton";
 
 const PurchaseForm: React.FC = () => {
   return (

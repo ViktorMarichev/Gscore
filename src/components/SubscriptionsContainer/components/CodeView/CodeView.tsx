@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import CheckBox from "@components/CheckBox";
-import Copy from "@svg/Copy";
-import SecondaryButton from "@components/SecondaryButton";
-import StatusLabelComponent from "@components/StatusLabel";
+import CheckBox from "src/components/CheckBox";
+import Copy from "src/svg/Copy";
+import SecondaryButton from "src/components/SecondaryButton";
+import StatusLabelComponent from "src/components/StatusLabel";
 type CodeViewProps = {
   checked: boolean;
   ChangeChacked: () => void;
