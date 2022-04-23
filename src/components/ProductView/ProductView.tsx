@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Checked from "@svg/Check";
+import { useRouter } from "next/router";
 type ProductViewProps = {
   style: "dark" | "light";
   price: number;
   name: string;
   sitesCount: number;
+  id: number;
 };
 
 const FeatureItem: React.FC<{ style: "light" | "dark"; text: string }> = ({
@@ -28,11 +30,13 @@ const FeatureItem: React.FC<{ style: "light" | "dark"; text: string }> = ({
 };
 
 const ProductView: React.FC<ProductViewProps> = ({
+  id,
   style,
   price,
   name,
   sitesCount,
 }) => {
+  const router = useRouter();
   return (
     <Wrapper style={style}>
       <Head>
@@ -57,7 +61,16 @@ const ProductView: React.FC<ProductViewProps> = ({
           <FeatureItem text="Unlimited Pages and Keywords" style={style} />
           <FeatureItem text="Billed annually" style={style} />
         </FeatureList>
-        <Button style={style}>Get Gscore</Button>
+        <Button
+          onClick={() =>
+            router.push("/subscribing/[id]", "/subscribing/" + id, {
+              shallow: true,
+            })
+          }
+          style={style}
+        >
+          Get Gscore
+        </Button>
       </Bottom>
     </Wrapper>
   );

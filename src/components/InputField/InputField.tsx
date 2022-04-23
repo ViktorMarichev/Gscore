@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Check from "@svg/Check";
 import Close from "@svg/Close";
 import { ErrorMessage } from "@hookform/error-message";
+import {ErrorOption} from 'react-hook-form'
 type InputProps = {
   disabled: boolean;
   placeholder: string;
   success?: boolean;
   error?: string;
   value?: string;
-  errorRender: () => string;
+  errorRender: (error:ErrorOption) => string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   name: string;

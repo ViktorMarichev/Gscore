@@ -1,5 +1,5 @@
 import { createSlice, CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-
+import { HYDRATE } from "next-redux-wrapper";
 type UserState = {
   id: null | number;
   email: null | string;
@@ -12,10 +12,12 @@ type loginAction = {
 const login: CaseReducer<UserState, PayloadAction<loginAction>> = (
   state,
   action
-) => (state = action.payload.user);
+) => ({
+  ...action.payload.user,
+});
 
 const UserSlice = createSlice({
-  name: "userSlice",
+  name: "user",
   initialState: {
     id: null,
     email: null,
@@ -25,5 +27,15 @@ const UserSlice = createSlice({
   reducers: {
     login,
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      console.log("HYDRATE", action.payload.user);
+      return {
+        ...state,
+        ...action.payload.user,
+      };
+    },
+  },
 });
+export const actions = UserSlice.actions;
 export default UserSlice.reducer;
