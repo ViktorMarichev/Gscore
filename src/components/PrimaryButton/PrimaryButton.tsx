@@ -17,11 +17,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onClick,
 }) => {
   return (
-    <Wrapper
-      disabled={disabled}
-      tabindex={tabindex}
-      onClick={onClick}
-    >
+    <Wrapper disabled={disabled} tabindex={tabindex} onClick={onClick}>
       {disabled ? <ButtonCover /> : null}
       {loading ? (
         <LoadingWrapper>

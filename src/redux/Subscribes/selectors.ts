@@ -4,17 +4,20 @@ import { createSelector } from "@reduxjs/toolkit";
 const _ = require("lodash");
 
 const getSubscribes = (state: RootState) => {
-  return state.subscribes;
+  return state.subscribes.subscribes;
 };
 const getCodes = (state: RootState, subscribeId: number) => {
-  _.filter(state.subscribes, (subscribe: Subscribe) => {
-    if (subscribe.id === subscribeId) return subscribe.codes;
+  return _.filter(state.subscribes.subscribes, (subscribe: Subscribe) => {
+    return subscribe.id === subscribeId;
   });
 };
 
-const getCodesBySubscribeID = createSelector(getCodes, (codes) => {
-  return codes;
-});
+const getCodesBySubscribeID = createSelector(
+  getCodes,
+  (subscribe: Subscribe) => {
+    return subscribe.codes;
+  }
+);
 
 export default {
   getSubscribes,
