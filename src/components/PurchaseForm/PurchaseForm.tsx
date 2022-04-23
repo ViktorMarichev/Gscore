@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";
+import { ProductsSelectors } from "src/redux/Products";
+import { useAppDispatch, useAppSelector } from "src/redux/store";
+import { useRouter } from "next/router";
+import Product from "src/types/product";
 
-const PurchaseForm: React.FC = () => {
+const PurchaseForm: React.FC<{ productId: number }> = ({ productId }) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const product: Product = useAppSelector(
+    (state) => ProductsSelectors.getProductById(state, productId)[0]
+  );
+  useEffect(() => {
+    if (!product) {
+      router.replace("/", "/", { shallow: true });
+    }
+  }, [product]);
+
+  if (!product) {
+    return (
+      <Wrapper>
+        <Title>Checkout</Title>
+        Loading...
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <Title>Checkout</Title>
@@ -13,16 +37,16 @@ const PurchaseForm: React.FC = () => {
           <PackageNameTitle>Price</PackageNameTitle>
         </DetailsTitles>
         <DetailsPackage>
-          <PackageInfo>Single Site license</PackageInfo>
-          <PackageInfo>$77</PackageInfo>
+          <PackageInfo>{product.name}</PackageInfo>
+          <PackageInfo>${product.prices[0].price}</PackageInfo>
         </DetailsPackage>
       </ProductDetails>
       <TotalCostWrapper>
         <TotalCostTitle>Total</TotalCostTitle>
-        <TotalCost>$77</TotalCost>
+        <TotalCost>${product.prices[0].price}</TotalCost>
       </TotalCostWrapper>
       <ButtonWrapper>
-        <PrimaryButton title="Log in" />
+        <PrimaryButton onClick={() => {}} title="Purchase" />
       </ButtonWrapper>
     </Wrapper>
   );
