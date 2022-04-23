@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";
+=======
+import InputField from "@components/InputField";
+import PrimaryButton from "@components/PrimaryButton";
+>>>>>>> 276ff623a8e794eb478ffd623154590070ae6b10
 import { ProductsSelectors } from "src/redux/Products";
 import { useAppDispatch, useAppSelector } from "src/redux/store";
 import { useRouter } from "next/router";
@@ -15,13 +20,21 @@ const PurchaseForm: React.FC<{ productId: number }> = ({ productId }) => {
   );
   useEffect(() => {
     if (!product) {
+<<<<<<< HEAD
       router.replace("/", "/", { shallow: true });
+=======
+      //  router.replace("/");
+>>>>>>> 276ff623a8e794eb478ffd623154590070ae6b10
     }
   }, [product]);
 
   if (!product) {
     return (
+<<<<<<< HEAD
       <Wrapper>
+=======
+      <Wrapper onClick={() => router.replace("/", "/", { shallow: true })}>
+>>>>>>> 276ff623a8e794eb478ffd623154590070ae6b10
         <Title>Checkout</Title>
         Loading...
       </Wrapper>

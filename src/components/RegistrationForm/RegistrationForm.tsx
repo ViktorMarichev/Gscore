@@ -5,7 +5,6 @@ import PrimaryButton from "src/components/PrimaryButton";
 import { UserEndpoints } from "src/redux/api/user";
 import { AxiosResponse, AxiosError } from "axios";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-
 interface IFormInputs {
   username: string;
   email: string;
