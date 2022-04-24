@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import Loader from "@svg/Loader";
+import Loader from "src/svg/Loader";
 type PrimaryButtonProps = {
   title: string;
   loading?: boolean;
@@ -17,11 +17,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onClick,
 }) => {
   return (
-    <Wrapper
-      disabled={disabled}
-      tabindex={tabindex}
-      onClick={onClick}
-    >
+    <Wrapper disabled={disabled} tabindex={tabindex} onClick={onClick}>
       {disabled ? <ButtonCover /> : null}
       {loading ? (
         <LoadingWrapper>

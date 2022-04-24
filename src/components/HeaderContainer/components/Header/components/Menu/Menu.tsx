@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Settings from "@svg/Settings";
-import LogOut from "@svg/LogOut";
+import Settings from "src/svg/Settings";
+import LogOut from "src/svg/LogOut";
 const Menu: React.FC = () => {
   return (
     <Wrapper>

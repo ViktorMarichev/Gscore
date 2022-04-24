@@ -15,12 +15,6 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
-    "paths": {
-      "@types/*": ["./src/types/*"],
-      "@components/*": ["./src/components/*"],
-      "@svg/*": ["./src/svg/*"],
-      "@api/*": ["./src/redux/api/*"]
-    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.tsx"],
   "exclude": ["node_modules", "babel.config.js"]

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Subscribe from "asset/types/subscribe";
-import SecondaryButton from "@components/SecondaryButton";
-import StatusLabel from "@components/StatusLabel";
+import Subscribe from "src/types/subscribe";
+import SecondaryButton from "src/components/SecondaryButton";
+import StatusLabel from "src/components/StatusLabel";
 //subscribe->Code
 
 type CardProps = {

@@ -1,11 +1,21 @@
+import { useEffect, useState } from "react";
 import "../styles/globals.css";
-import { Provider } from "react-redux";
+import NextNProgress from "nextjs-progressbar";
 import type { AppProps } from "next/app";
-import store from "../asset/redux/store";
-export default function MyApp({ Component, pageProps }: AppProps) {
+import { wrapper } from "../src/redux/store";
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
+    <>
+      <NextNProgress
+        color="#fdfdfd"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
       <Component {...pageProps} />
-    </Provider>
+    </>
   );
 }
+
+export default wrapper.withRedux(MyApp);
