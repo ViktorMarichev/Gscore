@@ -16,7 +16,6 @@ const HeaderContainer: React.FC = () => {
   return (
     <Header
       username={user.username!}
-      currentPage="UiKit page"
       isLogin={!!user.token}
       aMenuIsOpen={aMenuIsOpen}
       toggleMenu={() => setAmenuIsOpen((prev) => !prev)}

@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import InputField from "@components/InputField";
-import PrimaryButton from "@components/PrimaryButton";
-import { UserEndpoints } from "@api/user";
+import InputField from "src/components/InputField";
+import PrimaryButton from "src/components/PrimaryButton";
+import { UserEndpoints } from "src/redux/api/user";
 import { AxiosResponse, AxiosError } from "axios";
-import cookie from "js-cookie";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-
 interface IFormInputs {
   username: string;
   email: string;
   password: string;
+  skipMethod: () => void;
 }
 
 const RegistrationForm: React.FC<{ skipMethod: (stage: string) => void }> = ({
@@ -33,7 +32,6 @@ const RegistrationForm: React.FC<{ skipMethod: (stage: string) => void }> = ({
     const { email, username, password } = data;
     UserEndpoints.createAccount({ email, username, password })
       .then((res: AxiosResponse) => {
-     
         skipMethod("Log in");
       })
       .catch((error: AxiosError) => {

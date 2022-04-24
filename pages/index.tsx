@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import MainLayout from "src/components/MainLayout";
 import Container from "src/components/Container";
 import styled from "styled-components";
@@ -23,24 +22,25 @@ type ProductsPageProps = {
 
 const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.user);
-  const [loaded, setLoaded] = useState(false);
   const [products, setProductsState] = useState<Array<Product>>(serverProducts);
   /* const products = useAppSelector((state) =>
     ProductsSelectors.getProducts(state)
   );*/
-
   useEffect(() => {
     async function loadProducts() {
-      const res: AxiosResponse = await ProductsApi.getProducts();
-      const data = res.data;
-
-      setProductsState(data);
-      alert(JSON.stringify(products));
-      dispatch(setProducts({ products: data }));
+      try {
+        const res: AxiosResponse = await ProductsApi.getProducts();
+        const data = res.data;
+        setProductsState(data);
+        dispatch(setProducts({ products: data }));
+      } catch {
+        loadProducts();
+      }
     }
     if (serverProducts.length === 0) {
       loadProducts();
+    } else {
+      dispatch(setProducts({ products }));
     }
   }, []);
   if (!products) {

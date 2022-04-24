@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "@svg/Logo";
-import ArrowButton from "@svg/ArrowButton";
+import Logo from "src/svg/Logo";
+import ArrowButton from "src/svg/ArrowButton";
 import Menu from "./components/Menu";
 
 type HeaderProps = {
   username?: string;
-  currentPage?: string;
   isLogin: boolean;
   aMenuIsOpen: boolean;
   toggleMenu: () => void;
@@ -14,7 +13,6 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({
   username,
-  currentPage,
   isLogin,
   aMenuIsOpen,
   toggleMenu,
@@ -27,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({
       <HeaderEnd>
         {isLogin ? (
           <>
-            <CurrentPage>{currentPage}</CurrentPage>
+            <CurrentPage>My subscriptions</CurrentPage>
             <UserBox>
               <Username>{username}</Username>
               <ArrowWrapper onClick={toggleMenu}>

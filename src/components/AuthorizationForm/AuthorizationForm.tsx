@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import InputField from "@components/InputField";
-import PrimaryButton from "@components/PrimaryButton";
+import InputField from "src/components/InputField";
+import PrimaryButton from "src/components/PrimaryButton";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { UserEndpoints } from "@api/user";
+import { UserEndpoints } from "src/redux/api/user";
 import { login } from "src/redux/User";
 import { AxiosError, AxiosResponse } from "axios";
 import { useAppDispatch } from "src/redux/store";
-import cookie from "js-cookie";
-
 interface IFormInputs {
   email: string;
   password: string;
@@ -45,7 +43,6 @@ const AuthorizationForm: React.FC<{
             },
           })
         );
-        cookie.set("token", res.data.token);
       })
       .catch((error: AxiosError) => {
         if (error.response) {

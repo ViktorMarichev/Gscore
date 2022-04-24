@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import type { NextPage, NextPageContext } from "next";
 import styled from "styled-components";
-import Container from "@components/Container";
-import MainLayout from "@components/MainLayout";
-import StageItem from "@components/StageItem";
-import RegistrationForm from "@components/RegistrationForm";
-import AuthorizationForm from "@components/AuthorizationForm";
-import PurchaseForm from "@components/PurchaseForm";
+import Container from "src/components/Container";
+import MainLayout from "src/components/MainLayout";
+import StageItem from "src/components/StageItem";
+import RegistrationForm from "src/components/RegistrationForm";
+import AuthorizationForm from "src/components/AuthorizationForm";
+import PurchaseForm from "src/components/PurchaseForm";
 import { useRouter } from "next/router";
 import { UserSelectors } from "src/redux/User";
 import { useAppSelector } from "src/redux/store";
 import jsHttpCookie from "cookie";
 
-const Subscribing: NextPage<{ token?: string }> = ({ token }) => {
+const Subscribing: NextPage = () => {
   const user = useAppSelector((state) => UserSelectors.userData(state));
   const [stages, setStages] = useState<Array<string>>(
     user.token ? ["Create account", "Log in", "Checkout"] : ["Create account"]

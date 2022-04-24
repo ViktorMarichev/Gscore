@@ -1,12 +1,5 @@
-import {
-  configureStore,
-  combineReducers,
-  Reducer,
-  createSlice,
-  getDefaultMiddleware,
-  Store,
-} from "@reduxjs/toolkit";
-import { createWrapper, HYDRATE, MakeStore, Context } from "next-redux-wrapper";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 import {
   nextReduxCookieMiddleware,
   wrapMakeStore,
@@ -37,7 +30,6 @@ const makeStore = () => {
 };
 
 type MakeStoreType = ReturnType<typeof makeStore>;
-
 const WrapMakeStore = (makeStore: any) => wrapMakeStore(() => makeStore);
 const store = makeStore();
 export type AppStore = ReturnType<typeof makeStore>;

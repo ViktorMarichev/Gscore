@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Checked from "@svg/Check";
+import Checked from "src/svg/Check";
 import { useRouter } from "next/router";
 type ProductViewProps = {
   isActive: boolean;
