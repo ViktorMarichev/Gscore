@@ -18,7 +18,7 @@ const PurchaseForm: React.FC<{ productId: number }> = ({ productId }) => {
   const user = useAppSelector((state) => UserSelectors.userData(state));
   useEffect(() => {
     if (!product) {
-      router.replace("/", "/", { shallow: false });
+      router.replace("/", "/", { shallow: true });
     }
   }, []);
 
