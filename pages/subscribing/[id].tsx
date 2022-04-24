@@ -12,7 +12,7 @@ import { UserSelectors } from "src/redux/User";
 import { useAppSelector } from "src/redux/store";
 import jsHttpCookie from "cookie";
 
-const Subscribing: NextPage<{ token?: string }> = ({ token }) => {
+const Subscribing: NextPage = () => {
   const user = useAppSelector((state) => UserSelectors.userData(state));
   const [stages, setStages] = useState<Array<string>>(
     user.token ? ["Create account", "Log in", "Checkout"] : ["Create account"]

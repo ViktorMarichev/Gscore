@@ -11,14 +11,17 @@ const ProductsSlice = createSlice({
   initialState: { products: [] } as ProductsState,
   reducers: {
     setProducts: (state, action: { payload: ProductsState }) => {
-      console.log("productsAction", action);
       state.products = action.payload.products;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log("HYDRATE", action.payload.products);
-      return { ...action.payload.products };
+      if (action.payload.products) {
+        state.products = [
+          ...state.products,
+          ...action.payload.products.products,
+        ];
+      }
     },
   },
 });
