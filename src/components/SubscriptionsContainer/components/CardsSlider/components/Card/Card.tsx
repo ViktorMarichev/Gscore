@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Subscribe from "src/types/subscribe";
 import SecondaryButton from "src/components/SecondaryButton";
 import StatusLabel from "src/components/StatusLabel";
+import { useAppSelector } from "src/redux/store";
+import { SubscribesSelectors } from "src/redux/Subscribes";
 //subscribe->Code
 
 type CardProps = {
@@ -11,6 +13,10 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
+  const currentSubscribe = useAppSelector((state) =>
+    SubscribesSelectors.getCurrentSubscribe(state)
+  );
+
   const formatDate = (date: Date) => {
     let dd: string | number = date.getDate();
     if (dd < 10) dd = "0" + dd;
@@ -25,6 +31,9 @@ const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
   };
   return (
     <Wrapper className="keen-slider__slide">
+      {(currentSubscribe ? currentSubscribe.id : null) !== subscribe.id ? (
+        <Cover></Cover>
+      ) : null}
       <CardHeader>
         <CardTitle>Gscore</CardTitle>
         <SubscribeStatus status={subscribe.status}>
@@ -43,7 +52,7 @@ const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
           <Price>{subscribe.product.prices[0].price}</Price>
         </BodyTop>
         <BodyBottom>
-          <SecondaryButton title="View" />
+          <SecondaryButton title="View" onClick={() => {}} />
         </BodyBottom>
       </CardBody>
     </Wrapper>
@@ -51,10 +60,19 @@ const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
 };
 
 const Wrapper = styled.div`
+  position: relative;
   background: #393939;
   box-shadow: 0px 24px 65px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   min-width: 620px;
+`;
+const Cover = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.486);
+  border-radius: 12px;
 `;
 const CardHeader = styled.div`
   display: flex;

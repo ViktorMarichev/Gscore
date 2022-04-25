@@ -35,12 +35,30 @@ const CodeView: React.FC<CodeViewProps> = ({
   };
 
   const activateButtonHandler = () => {
+    Codes.activate({ code: code, token: user.token! })
+      .then((res: AxiosResponse) => {
+        dispatch(updateCodeById({ code: res.data }));
+      })
+      .catch((err: AxiosError) => {
+        if (err.response) {
+          alert(err.response.data.message);
+        } else {
+          alert(err.message);
+        }
+      });
   };
   const dispatch = useAppDispatch();
   const [domainInput, setDomainInput] = useState(origin);
   const isChecked = useAppSelector((state) =>
     CodesSelectors.checkCodeById(state, id)
   );
+  const changeChecked = () => {
+    dispatch(CheckCode({ codeId: id }));
+  };
+  useEffect(() => {
+    setDomainInput(origin);
+  }, [origin]);
+
   return (
     <Wrapper $status={status}>
       <CheckBoxWrapper>
@@ -63,9 +81,9 @@ const CodeView: React.FC<CodeViewProps> = ({
         <Input value={domainInput} />
       </DomainInputWrapper>
       {status === "INACTIVE" ? (
-      <ButtonWrapper>
+        <ButtonWrapper>
           <SecondaryButton title="Activate" onClick={activateButtonHandler} />
-      </ButtonWrapper>
+        </ButtonWrapper>
       ) : null}
 
       <StatusLabel>Status</StatusLabel>
