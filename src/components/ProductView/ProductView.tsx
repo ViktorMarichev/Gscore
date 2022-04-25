@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Checked from "src/svg/Check";
-import { useRouter } from "next/router";
 type ProductViewProps = {
   isActive: boolean;
   price: number;
   name: string;
   sitesCount: number;
+  selectProduct: () => void;
   id: number;
+  disabled?: boolean;
 };
 
 const FeatureItem: React.FC<{ isActive: boolean; text: string }> = ({
@@ -35,10 +36,12 @@ const ProductView: React.FC<ProductViewProps> = ({
   price,
   name,
   sitesCount,
+  selectProduct,
+  disabled,
 }) => {
-  const router = useRouter();
   return (
     <Wrapper $isActive={isActive}>
+      {disabled ? <Cover></Cover> : null}
       <Head>
         <Price>${price}</Price>
         <Name>{name}</Name>
@@ -67,14 +70,7 @@ const ProductView: React.FC<ProductViewProps> = ({
           />
           <FeatureItem text="Billed annually" isActive={isActive} />
         </FeatureList>
-        <Button
-          onClick={() =>
-            router.push("/subscribing/[id]", "/subscribing/" + id, {
-              shallow: true,
-            })
-          }
-          $isActive={isActive}
-        >
+        <Button onClick={selectProduct} $isActive={isActive}>
           Get Gscore
         </Button>
       </Bottom>
@@ -104,6 +100,16 @@ const Wrapper = styled.div`
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
 `;
+const Cover = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.486);
+`;
+
 const Name = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 24px;
