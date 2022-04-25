@@ -42,6 +42,7 @@ const Footer: React.FC = () => {
 const Wrapper = styled.footer`
   width: 100%;
   border-top: 1px solid #393939;
+  margin-top: 120px;
 `;
 const FooterTop = styled.div`
   width: 100%;

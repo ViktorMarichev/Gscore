@@ -1,105 +1,88 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CardsSlider from "./components/CardsSlider";
-import Subscribe from "asset/types/subscribe";
+import Subscribe from "src/types/subscribe";
 import CodeView from "./components/CodeView";
+import PrimaryButton from "src/components/PrimaryButton";
+import { SubscribesSelectors, setHold } from "src/redux/Subscribes";
+import { useAppSelector, RootState, useAppDispatch } from "src/redux/store";
+import Code from "src/types/code";
+import { CheckCode, CodesSelectors } from "src/redux/Codes";
+import { useRouter } from "next/router";
 
-const SubscriptionsContainer: React.FC = () => {
-  const subscribes: Array<Subscribe> = [
-    {
-      id: 80,
-      userId: 95,
-      productId: 1,
-      currentPeriodStart: "1650011409",
-      currentPeriodEnd: "1681547409",
-      status: "ACTIVE",
-      product: {
-        id: 1,
-        sitesCount: 1,
-        name: "One cite",
-        prices: [
-          {
-            id: 1,
-            isActive: true,
-            productId: 1,
-            price: "52",
-          },
-        ],
-      },
-      codes: [
-        {
-          id: 392,
-          code: "64332672-4563-47ef-82f3-515de4395b43",
-          origin: null,
-          status: "INACTIVE",
-          subscribeId: 80,
-          userId: 95,
-        },
-      ],
-    } as Subscribe,
-    {
-      id: 81,
-      userId: 95,
-      productId: 2,
-      currentPeriodStart: "1650013625",
-      currentPeriodEnd: "1681549625",
-      status: "ACTIVE",
-      product: {
-        id: 2,
-        sitesCount: 3,
-        name: "Three cites",
-        prices: [
-          {
-            id: 2,
-            isActive: true,
-            productId: 2,
-            price: "17",
-          },
-        ],
-      },
-      codes: [
-        {
-          id: 393,
-          code: "dc3cf61d-d363-4ec7-9754-6f9a04fd05e2",
-          origin: null,
-          status: "INACTIVE",
-          subscribeId: 81,
-          userId: 95,
-        },
-        {
-          id: 394,
-          code: "037662f6-33c2-4c2d-a9c4-e788dab0d484",
-          origin: null,
-          status: "INACTIVE",
-          subscribeId: 81,
-          userId: 95,
-        },
-        {
-          id: 395,
-          code: "24d2bd9f-44fd-4a5b-88ae-8ab9a13a0be2",
-          origin: null,
-          status: "INACTIVE",
-          subscribeId: 81,
-          userId: 95,
-        },
-      ],
-    } as Subscribe,
-  ];
+type SubscriptionsContainerProps = {
+  subscribes: Array<Subscribe>;
+};
+
+const SubscriptionsContainer: React.FC<SubscriptionsContainerProps> = ({
+  subscribes,
+}) => {
+  const currentSubscribe = useAppSelector((state: RootState) =>
+    SubscribesSelectors.getCurrentSubscribe(state)
+  );
+  const codes: Array<Code> = useAppSelector((state: RootState) => {
+    return CodesSelectors.getCodesBySubscribeId(
+      state,
+      currentSubscribe ? currentSubscribe!.id : 0
+    );
+  });
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const upgradeButtonHandler = () => {
+    router.push("/upgrade-subscribe", "/upgrade-subscribe", { shallow: true });
+  };
+  useEffect(() => {
+    if (codes.length > 0) {
+      if (codes[0].status === "HOLD") {
+        dispatch(setHold({ isWithHeld: true }));
+      } else {
+        dispatch(setHold({ isWithHeld: false }));
+      }
+    }
+  }, [codes]);
 
   return (
     <Wrapper>
+      <TopContainer>
+        <Title>My subscriptions</Title>
+        <PrimaryButton title="Upgrade" onClick={upgradeButtonHandler} />
+      </TopContainer>
       <CardsSlider subscribes={subscribes} />
       <CodeViewList>
-        <CodeView
-          checked={false}
-          ChangeChacked={() => {
-            console.log("change checked");
-          }}
-        />
+        {codes!.map((code: Code) => {
+          return (
+            <CodeViewWrapper key={code.id}>
+              <CodeView
+                id={code.id}
+                checked={false}
+                ChangeChacked={() => {
+                  dispatch(CheckCode({ codeId: code.id }));
+                }}
+                status={code.status}
+                origin={code.origin!}
+                code={code.code}
+              />
+            </CodeViewWrapper>
+          );
+        })}
       </CodeViewList>
     </Wrapper>
   );
 };
+const Title = styled.div`
+  font-family: "THICCCBOI-bold";
+  font-style: normal;
+  font-size: 54px;
+  line-height: 64px;
+  color: #ffffff;
+`;
+const TopContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 44px;
+`;
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -107,6 +90,9 @@ const Wrapper = styled.div`
 `;
 const CodeViewList = styled.div`
   width: 100%;
+`;
+const CodeViewWrapper = styled.div`
+  margin-top: 32px;
 `;
 
 export default SubscriptionsContainer;

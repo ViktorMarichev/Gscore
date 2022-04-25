@@ -7,12 +7,12 @@ import styled from "styled-components";
 import ProductView from "src/components/ProductView";
 import { Products as ProductsApi } from "src/redux/api/products";
 import ProductType from "../src/types/product";
-import { GetServerSideProps, NextPageContext } from "next";
+import { useRouter } from "next/router";
+import { NextPageContext } from "next";
 import { wrapper } from "src/redux/store";
 import { AxiosResponse } from "axios";
-import { useAppDispatch, useAppSelector } from "src/redux/store";
-import { setProducts, ProductsSelectors } from "src/redux/Products";
-import { login } from "src/redux/User";
+import { useAppDispatch} from "src/redux/store";
+import { setProducts } from "src/redux/Products";
 import Product from "src/types/product";
 
 type ProductsPageProps = {
@@ -23,9 +23,8 @@ type ProductsPageProps = {
 const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
   const dispatch = useAppDispatch();
   const [products, setProductsState] = useState<Array<Product>>(serverProducts);
-  /* const products = useAppSelector((state) =>
-    ProductsSelectors.getProducts(state)
-  );*/
+  const router = useRouter();
+
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -75,7 +74,6 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
             <Title>Get started with Gscore today!</Title>
             <Products>
               {products.map((product: ProductType, index) => {
-                console.log(product);
                 return (
                   <ProductViewWrapper key={product.id}>
                     <ProductView
@@ -84,6 +82,15 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
                       id={product.id}
                       name={product.name}
                       sitesCount={product.sitesCount}
+                      selectProduct={() =>
+                        router.push(
+                          "/subscribing/[id]",
+                          "/subscribing/" + product.id,
+                          {
+                            shallow: true,
+                          }
+                        )
+                      }
                     />
                   </ProductViewWrapper>
                 );
@@ -108,7 +115,6 @@ ProductsPage.getInitialProps = wrapper.getInitialPageProps(
     try {
       const res: AxiosResponse = await ProductsApi.getProducts();
       const data = res.data;
-      console.log("log", data);
       //  store.dispatch(setProducts({ products: data }));
       // Pass data to the page via props
       return { serverProducts: data };

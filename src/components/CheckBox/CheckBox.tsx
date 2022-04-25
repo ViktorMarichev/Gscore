@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Check from "@svg/Check";
+import Check from "src/svg/Check";
 type CheckBoxProps = {
   checked: boolean;
   onClick: () => void;

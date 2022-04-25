@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import ArrowButton from "./components/ArrowButton";
-import Subscribe from "asset/types/subscribe";
+import Subscribe from "src/types/subscribe";
+import { useAppSelector, useAppDispatch } from "src/redux/store";
+import { SubscribesSelectors, setCurrentSubscribe } from "src/redux/Subscribes";
 import Card from "./components/Card";
-
+const _ = require("lodash");
 type CardsSliderProps = {
   subscribes: Array<Subscribe>;
 };
@@ -24,7 +26,11 @@ const ResizePlugin: KeenSliderPlugin = (slider) => {
 const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
   const [loaded, setLoaded] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const dispatch = useAppDispatch();
+  const currentSlide: Subscribe = useAppSelector(
+    (state) => SubscribesSelectors.getCurrentSubscribe(state)!
+  );
+
   const slideNext = () => {
     slider.current?.next();
   };
@@ -34,11 +40,14 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
   const [refCallback, slider] = useKeenSlider(
     {
       initial: 0,
-      loop: true,
+      loop: false,
       disabled: subscribes.length <= 2 ? true : false,
       slideChanged(slider) {
-        console.log("slide changed");
-        setCurrentSlide(slider.track.details.rel);
+        dispatch(
+          setCurrentSubscribe({
+            currentSubscribe: subscribes[slider.track.details.rel],
+          })
+        );
       },
       mode: "free-snap",
       breakpoints: {
@@ -54,8 +63,13 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
         setIsDisabled(slider.options.disabled!);
       },
       slides: {
-        perView: subscribes.length <= 3 ? 2 : 3,
         spacing: 15,
+        origin: "center",
+        perView: 2.3,
+      },
+      range: {
+        min: 0,
+        max: subscribes.length - 1,
       },
 
       created: () => {
@@ -82,17 +96,25 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
         <PagesView>
           <ArrowButton
             direction="left"
-            currentSlide={currentSlide}
+            currentSlide={subscribes.findIndex(
+              (elem) => elem.id === (currentSlide ? currentSlide.id : null)
+            )}
             lastSlide={subscribes.length - 1}
             onClick={slidePrev}
           />
           <PageView>
-            <CurrentSlide>{currentSlide + 1}</CurrentSlide>
+            <CurrentSlide>
+              {subscribes.findIndex(
+                (elem) => elem.id === (currentSlide ? currentSlide.id : null)
+              ) + 1}
+            </CurrentSlide>
             <LastSlide>/{subscribes.length}</LastSlide>
           </PageView>
           <ArrowButton
             direction="right"
-            currentSlide={currentSlide}
+            currentSlide={subscribes.findIndex(
+              (elem) => elem.id === (currentSlide ? currentSlide.id : null)
+            )}
             lastSlide={subscribes.length - 1}
             onClick={slideNext}
           />
@@ -105,6 +127,7 @@ const SliderWrapper = styled.div`
   width: 100%;
 `;
 const PagesView = styled.div`
+  margin-top: 24px;
   width: 100%;
   display: flex;
 `;

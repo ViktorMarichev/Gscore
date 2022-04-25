@@ -9,10 +9,6 @@ const HeaderContainer: React.FC = () => {
   const user = useAppSelector((state) => UserSelectors.userData(state));
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(router);
-    console.log(user.token);
-  }, []);
   return (
     <Header
       username={user.username!}

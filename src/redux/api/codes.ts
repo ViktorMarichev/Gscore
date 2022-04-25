@@ -11,6 +11,11 @@ type ActivateCodeParams = {
 };
 
 export const Codes = {
+  getAll: function (params: { token: string }) {
+    const { token } = params;
+    const api = apiInstance({ token });
+    return api.get("/code/self");
+  },
   releaseHold: function (params: ReleaseHoldParams) {
     const { token, codesIds, subscribeId } = params;
     const api = apiInstance({ token });
