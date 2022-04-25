@@ -62,6 +62,44 @@ const MySubscribes: NextPage<MySubscribes> = ({
   }, []);
 
   const releaseHoldHandler = (subscribeId: number) => {
+    if (selectedCodes.length > 0) {
+      Codes.releaseHold({
+        token: user.token!,
+        codesIds: selectedCodes,
+        subscribeId,
+      })
+        .then((res: AxiosResponse) => {
+          Subscribes.getSubscribes({ token: user.token! })
+            .then((res: AxiosResponse) => {
+              Codes.getAll({ token: user.token! })
+                .then((res: AxiosResponse) => {
+                  dispatch(setCodes({ codes: res.data }));
+                })
+                .catch((err: AxiosError) => {
+                  alert(err.message);
+                  router.reload();
+                });
+            })
+            .catch((err: AxiosError) => {
+              if (err.response) {
+                alert(JSON.stringify(err.response.data.message));
+                router.reload();
+              } else {
+                alert(JSON.stringify(err.message));
+              }
+              router.reload();
+            });
+        })
+        .catch((err: AxiosError) => {
+          if (err.response) {
+            alert(JSON.stringify(err.response.data.message));
+          } else {
+            alert(JSON.stringify(err.message));
+          }
+        });
+    }
+  };
+
   if (serverSubscribes.length <= 0) {
     return (
       <Container>
@@ -162,7 +200,7 @@ export const getServerSideProps: GetServerSideProps =
             props: {
               serverSubscribes: [],
             },
-  };
+          };
         }
       }
     }
