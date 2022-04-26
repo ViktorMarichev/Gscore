@@ -1,17 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import Settings from "src/svg/Settings";
 import LogOut from "src/svg/LogOut";
+import { useAppDispatch } from "src/redux/store";
 const Menu: React.FC = () => {
   return (
     <Wrapper>
-      <Item>
+      <Link href="/settings">
+        <ItemLink>
         <ImageWrapper>
           <Settings />
         </ImageWrapper>
         <Title>Settings</Title>
-      </Item>
-      <Item>
+        </ItemLink>
+      </Link>
+
         <ImageWrapper>
           <LogOut />
         </ImageWrapper>
