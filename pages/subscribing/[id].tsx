@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { NextPage, NextPageContext } from "next";
 import styled from "styled-components";
 import Container from "src/components/Container";
@@ -10,18 +10,26 @@ import PurchaseForm from "src/components/PurchaseForm";
 import { useRouter } from "next/router";
 import { UserSelectors } from "src/redux/User";
 import { useAppSelector } from "src/redux/store";
-import jsHttpCookie from "cookie";
+import { ProductsSelectors } from "src/redux/Products";
 
 const Subscribing: NextPage = () => {
+  const router = useRouter();
   const user = useAppSelector((state) => UserSelectors.userData(state));
+  const selectedProduct = useAppSelector((state) =>
+    ProductsSelectors.getProductById(state, Number(router.query.id))
+  );
   const [stages, setStages] = useState<Array<string>>(
     user.token ? ["Create account", "Log in", "Checkout"] : ["Create account"]
   );
 
-  const router = useRouter();
   const skipHandler = (stage: string) => {
     setStages([...stages, stage]);
   };
+  useEffect(() => {
+    if (!selectedProduct) {
+      router.replace("/");
+    }
+  }, [selectedProduct]);
 
   return (
     <MainLayout>
@@ -63,6 +71,9 @@ const Stages = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 640px) {
+    align-items: flex-end;
+  }
 `;
 
 export default Subscribing;
