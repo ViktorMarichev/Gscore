@@ -81,6 +81,9 @@ const Wrapper = styled.div.attrs(({ tabindex }: ArrowButtonProps) => ({
   &:active {
     transform: scale(0.98);
   }
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
 export default ArrowButton;

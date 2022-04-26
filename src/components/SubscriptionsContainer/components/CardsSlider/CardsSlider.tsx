@@ -42,10 +42,16 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
       mode: "free-snap",
       breakpoints: {
         "(max-width: 1340px)": {
-          disabled: subscribes.length <= 2 ? false : true,
+          disabled: subscribes.length === 1 ? true : false,
           slides: {
-            perView: subscribes.length <= 2 ? 1 : 2,
+            perView: 1.5,
             spacing: 15,
+          },
+        },
+        "(max-width:640px)": {
+          slides: {
+            perView: 1.05,
+            spacing: 10,
           },
         },
       },
@@ -115,11 +121,15 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
 };
 const SliderWrapper = styled.div`
   width: 100%;
+  z-index: 5;
 `;
 const PagesView = styled.div`
   margin-top: 24px;
   width: 100%;
   display: flex;
+  @media(max-width:640px){
+    justify-content: center;
+  }
 `;
 const Slider = styled.div`
   display: flex;
