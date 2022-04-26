@@ -4,18 +4,25 @@ import Link from "next/link";
 import Settings from "src/svg/Settings";
 import LogOut from "src/svg/LogOut";
 import { useAppDispatch } from "src/redux/store";
+import { logOut } from "src/redux/User";
 const Menu: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const logOutHandler = () => {
+    dispatch(logOut({}));
+  };
+
   return (
     <Wrapper>
       <Link href="/settings">
         <ItemLink>
-        <ImageWrapper>
-          <Settings />
-        </ImageWrapper>
-        <Title>Settings</Title>
+          <ImageWrapper>
+            <Settings />
+          </ImageWrapper>
+          <Title>Settings</Title>
         </ItemLink>
       </Link>
 
+      <Item onClick={logOutHandler}>
         <ImageWrapper>
           <LogOut />
         </ImageWrapper>
