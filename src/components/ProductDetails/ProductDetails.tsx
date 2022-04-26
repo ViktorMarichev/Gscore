@@ -44,6 +44,11 @@ const DetailsTitle = styled.div`
   font-size: 24px;
   line-height: 34px;
   color: #ffffff;
+
+  @media (max-width: 640px) {
+    line-height: 10px;
+    font-size: 19px;
+  }
 `;
 const PackageInfo = styled.div`
   font-family: "THICCCBOI-regular";
@@ -51,6 +56,10 @@ const PackageInfo = styled.div`
   font-size: 24px;
   line-height: 38px;
   color: #ffffff;
+  @media (max-width: 640px) {
+    line-height: 10px;
+    font-size: 19px;
+  }
 `;
 const PackageNameTitle = styled(DetailsTitle)``;
 export default ProductDetails;

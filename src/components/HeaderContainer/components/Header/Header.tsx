@@ -100,7 +100,7 @@ const Username = styled.div`
 `;
 const MenuContainer = styled.div`
   position: absolute;
-  z-index: 5;
+  z-index: 8;
   bottom: -175px;
   left: -55px;
 `;
