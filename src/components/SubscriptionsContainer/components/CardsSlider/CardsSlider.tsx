@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
+import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import ArrowButton from "./components/ArrowButton";
 import Subscribe from "src/types/subscribe";
 import { useAppSelector, useAppDispatch } from "src/redux/store";
 import { SubscribesSelectors, setCurrentSubscribe } from "src/redux/Subscribes";
+import { ResizePlugin } from "src/sliderPlugins";
 import Card from "./components/Card";
 const _ = require("lodash");
 type CardsSliderProps = {
   subscribes: Array<Subscribe>;
 };
-const ResizePlugin: KeenSliderPlugin = (slider) => {
-  const observer = new ResizeObserver(function () {
-    slider.update();
-  });
 
-  slider.on("created", () => {
-    observer.observe(slider.container);
-  });
-  slider.on("destroyed", () => {
-    observer.unobserve(slider.container);
-  });
-};
 const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
   const [loaded, setLoaded] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);

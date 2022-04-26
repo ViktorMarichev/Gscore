@@ -24,41 +24,29 @@ const Subscribing: NextPage = () => {
   };
 
   return (
-    <Container>
-      <MainLayout>
-        <Wrapper>
-          <Stages>
-            <StageItem stages={stages} title="Create account" />
-            <StageItem stages={stages} title="Log in" />
-            <StageItem stages={stages} title="Checkout" />
-          </Stages>
-          {stages[stages.length - 1] === "Create account" ? (
-            <RegistrationForm skipMethod={skipHandler} />
-          ) : null}
-          {stages[stages.length - 1] === "Log in" ? (
-            <AuthorizationForm skipMethod={skipHandler} />
-          ) : null}
-          {stages[stages.length - 1] === "Checkout" ? (
-            <PurchaseForm productId={Number(router.query.id)} />
-          ) : null}
-        </Wrapper>
-      </MainLayout>
-    </Container>
+    <MainLayout>
+      <Wrapper>
+        <Stages>
+          <StageItem stages={stages} title="Create account" />
+          <StageItem stages={stages} title="Log in" />
+          <StageItem stages={stages} title="Checkout" />
+        </Stages>
+        {stages[stages.length - 1] === "Create account" ? (
+          <RegistrationForm skipMethod={skipHandler} />
+        ) : null}
+        {stages[stages.length - 1] === "Log in" ? (
+          <AuthorizationForm skipMethod={skipHandler} />
+        ) : null}
+        {stages[stages.length - 1] === "Checkout" ? (
+          <PurchaseForm productId={Number(router.query.id)} />
+        ) : null}
+      </Wrapper>
+    </MainLayout>
   );
 };
 
 export async function getServerSideProps({ query, req }: NextPageContext) {
   const initProps: { props: { token?: string } } = { props: {} };
-
-  /* if (req && req.headers) {
-    const headers = req.headers;
-    console.log(headers);
-    if (headers.cookie) {
-      const cookiesJSON = jsHttpCookie.parse(headers.cookie);
-
-      initProps.props.token = cookiesJSON.token;
-    }
-  }*/
 
   return initProps;
 }

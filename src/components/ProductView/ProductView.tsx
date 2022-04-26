@@ -78,7 +78,7 @@ const ProductView: React.FC<ProductViewProps> = ({
   );
 };
 const CheckCircle = styled.div`
-  border-radius: 50%;
+  border-radius: 100%;
   background-color: #ffffff;
   width: 26px;
   height: 26px;
@@ -92,13 +92,16 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 42px;
+  padding: calc(12px + (42 - 12) * ((100vw - 375px) / (1440 - 375)));
   max-width: 404px;
   background: ${({ $isActive }: { $isActive: boolean }) => {
     return $isActive ? " #fc5842" : "#272727";
   }};
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
+  @media (max-width: 960px) {
+    top:0px;
+  }
 `;
 const Cover = styled.div`
   position: absolute;
@@ -118,7 +121,7 @@ const Name = styled.div`
 const Description = styled.div`
   font-family: "THICCCBOI-medium";
   font-style: normal;
-  font-size: 18px;
+  font-size: calc(16px + (18 - 16) * ((100vw - 375px) / (1440 - 375)));
   padding-top: 8px;
   text-align: center;
   color: ${({ $isActive }: { $isActive: boolean }) => {
@@ -127,14 +130,14 @@ const Description = styled.div`
 `;
 const Price = styled.div`
   font-family: "DMSans-bold";
-  font-size: 54px;
+  font-size: calc(34px + (54 - 34) * ((100vw - 375px) / (1440 - 375)));
   color: #ffffff;
 `;
 const Head = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 40px;
+  padding-bottom: calc(20px + (40 - 20) * ((100vw - 375px) / (1440 - 375)));
   border-bottom: 1px solid #969696;
 `;
 const Bottom = styled.div`
@@ -152,11 +155,10 @@ const FeatureList = styled.ul`
 `;
 const FeatureItemWrapper = styled.li`
   width: 100%;
-  display: flex;
-  align-items: center;
-  font-family: "THICCCBOI-medium";
-  font-size: 18px;
-  margin-bottom: 22px;
+  display: -webkit-box;
+  font-size: calc(17px + (18 - 17) * ((100vw - 375px) / (1440 - 375)));
+  margin-bottom: calc(14px + (22 - 14) * ((100vw - 375px) / (1440 - 375)));
+  max-width: 250px;
   color: #ffffff;
 `;
 const Button = styled.div`
@@ -173,7 +175,8 @@ const Button = styled.div`
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 6px;
   width: 100%;
-  padding: 26px 0px 26px 0px;
+  padding-top: calc(14px + (26 - 14) * ((100vw - 375px) / (1440 - 375)));
+  padding-bottom: calc(14px + (26 - 14) * ((100vw - 375px) / (1440 - 375)));
   font-family: "THICCCBOI-bold";
   font-size: 18px;
   margin-top: 13px;

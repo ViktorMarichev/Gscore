@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:svg": "svgr --ignore-existing --typescript -d asset/svg asset/svg",
+    "build:svg": "svgr --ignore-existing --typescript -d src/svg src/svg",
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
@@ -33,7 +33,8 @@
     "react-dom": "18.0.0",
     "react-hook-form": "^7.29.0",
     "react-redux": "^8.0.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "use-resize-observer": "^8.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",
