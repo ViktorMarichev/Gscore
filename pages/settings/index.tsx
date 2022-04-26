@@ -37,6 +37,13 @@ const Settings: NextPage = () => {
             onClick={setActiveTabHandler}
           />
         </Tabs>
+        <FormWrapper>
+          {activeTab === "Personal info" ? (
+            <PersonalInfoForm />
+          ) : (
+            <ChangePasswordForm />
+          )}
+        </FormWrapper>
       </MainLayout>
     </Container>
   );

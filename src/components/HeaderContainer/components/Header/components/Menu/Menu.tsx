@@ -43,7 +43,23 @@ const Item = styled.div`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
 `;
+const ItemLink = styled.a`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 24px 0px 24px 0px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+`;
+
 const Title = styled.div`
   font-family: "THICCCBOI-medium";
   font-style: normal;

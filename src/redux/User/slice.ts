@@ -9,6 +9,10 @@ type UserState = {
 type loginAction = {
   user: UserState;
 };
+type updatePersonalDataAction = {
+  email: string;
+  username: string;
+};
 const login: CaseReducer<UserState, PayloadAction<loginAction>> = (
   state,
   action
@@ -26,6 +30,24 @@ const UserSlice = createSlice({
   } as UserState,
   reducers: {
     login,
+    updatePersonalData: (
+      state,
+      action: { payload: updatePersonalDataAction }
+    ) => {
+      return {
+        ...state,
+        username: action.payload.username,
+        email: action.payload.email,
+      };
+    },
+    logOut: (state, action) => {
+      return {
+        id: null,
+        email: null,
+        username: null,
+        token: null,
+      };
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
