@@ -59,6 +59,7 @@ const CurtainWrapper = styled.div`
   height: 100%;
   width: 100%;
   top: 0px;
+  z-index: 20;
   background: rgba(0, 0, 0, 0.589);
 `;
 

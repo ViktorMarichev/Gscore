@@ -86,6 +86,7 @@ const CurtainContainer = styled.div`
   animation: 1s ${translate} ease-out;
   background: #272727;
   padding: 0 24px 0 24px;
+
 `;
 const CurtainClose = styled.div`
   padding-right: 35px;
