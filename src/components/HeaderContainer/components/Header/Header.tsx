@@ -4,12 +4,14 @@ import Link from "next/link";
 import Logo from "src/svg/Logo";
 import ArrowButton from "src/svg/ArrowButton";
 import Menu from "./components/Menu";
-
+import MenuBurger from "src/svg/MenuBurger";
 type HeaderProps = {
   username?: string;
   isLogin: boolean;
   aMenuIsOpen: boolean;
   toggleMenu: () => void;
+  isSmall: boolean;
+  toggleCurtain: () => void;
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -17,6 +19,8 @@ const Header: React.FC<HeaderProps> = ({
   isLogin,
   aMenuIsOpen,
   toggleMenu,
+  isSmall,
+  toggleCurtain,
 }) => {
   return (
     <Wrapper>
@@ -24,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({
         <Logo />
       </LogoWrapper>
       <HeaderEnd>
-        {isLogin ? (
+        {isLogin && !isSmall ? (
           <>
             <CurrentPage>
               <Link href="/my-subscriptions">
@@ -47,6 +51,11 @@ const Header: React.FC<HeaderProps> = ({
           </>
         ) : null}
       </HeaderEnd>
+      {isSmall && isLogin ? (
+        <MenuBurgerWrapper onClick={toggleCurtain}>
+          <MenuBurger />
+        </MenuBurgerWrapper>
+      ) : null}
     </Wrapper>
   );
 };
@@ -57,6 +66,11 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 32px 0px 32px 0px;
+  @media (max-width: 1400px) {
+    padding: 20px 16px 20px 16px;
+  }
+  @media (max-width: 600px) {
+  }
 `;
 const LogoWrapper = styled.div``;
 const HeaderEnd = styled.div`
@@ -89,6 +103,11 @@ const MenuContainer = styled.div`
   z-index: 5;
   bottom: -175px;
   left: -55px;
+`;
+const MenuBurgerWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const CurrentPage = styled(Username)``;
