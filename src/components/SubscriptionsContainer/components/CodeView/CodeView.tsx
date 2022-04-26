@@ -1,19 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CheckBox from "src/components/CheckBox";
 import Copy from "src/svg/Copy";
 import SecondaryButton from "src/components/SecondaryButton";
 import StatusLabelComponent from "src/components/StatusLabel";
+import { CheckCode, CodesSelectors, updateCodeById } from "src/redux/Codes";
+import { UserSelectors } from "src/redux/User";
+import { useAppSelector, useAppDispatch } from "src/redux/store";
+import { Codes } from "src/redux/api/codes";
+import { AxiosResponse, AxiosError } from "axios";
+
 type CodeViewProps = {
+  id: number;
   checked: boolean;
   ChangeChacked: () => void;
+  status: string;
+  origin: string;
+  code: string;
 };
 
-const CodeView: React.FC<CodeViewProps> = ({ checked, ChangeChacked }) => {
+const CodeView: React.FC<CodeViewProps> = ({
+  id,
+  checked,
+  ChangeChacked,
+  status,
+  origin,
+  code,
+}) => {
+  const user = useAppSelector((state) => UserSelectors.userData(state));
+  const ucFirst = (str: string) => {
+    if (!str) return str;
+
+    return str[0].toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const activateButtonHandler = () => {
+    Codes.activate({ code: code, token: user.token! })
+      .then((res: AxiosResponse) => {
+        dispatch(updateCodeById({ code: res.data }));
+      })
+      .catch((err: AxiosError) => {
+        if (err.response) {
+          alert(err.response.data.message);
+        } else {
+          alert(err.message);
+        }
+      });
+  };
+  const dispatch = useAppDispatch();
+  const [domainInput, setDomainInput] = useState(origin);
+  const isChecked = useAppSelector((state) =>
+    CodesSelectors.checkCodeById(state, id)
+  );
+  const changeChecked = () => {
+    dispatch(CheckCode({ codeId: id }));
+  };
+  useEffect(() => {
+    setDomainInput(origin);
+  }, [origin]);
+
   return (
-    <Wrapper>
+    <Wrapper $status={status}>
       <CheckBoxWrapper>
-        <CheckBox disabled={false} checked={checked} onClick={ChangeChacked} />
+        <CheckBox
+          disabled={status !== "HOLD"}
+          checked={isChecked != -1}
+          onClick={changeChecked}
+        />
       </CheckBoxWrapper>
       <LicenseCodeLabel>License Code</LicenseCodeLabel>
       <CodeInputWrapper>
@@ -21,28 +74,36 @@ const CodeView: React.FC<CodeViewProps> = ({ checked, ChangeChacked }) => {
           <Copy />
         </CopyWrapper>
 
-        <CodeInput />
+        <CodeInput value={code} />
       </CodeInputWrapper>
       <DomainLabel>Domain</DomainLabel>
       <DomainInputWrapper>
-        <Input />
+        <Input value={domainInput} />
       </DomainInputWrapper>
+      {status === "INACTIVE" ? (
+        <ButtonWrapper>
+          <SecondaryButton title="Activate" onClick={activateButtonHandler} />
+        </ButtonWrapper>
+      ) : null}
 
-      <ButtonWrapper>
-        <SecondaryButton title="Activate" />
-      </ButtonWrapper>
       <StatusLabel>Status</StatusLabel>
       <StatusWrapper>
-        <Status status="ACTIVE">Active</Status>
+        <Status $status={status}>{ucFirst(status)}</Status>
       </StatusWrapper>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+type WrapperType = {
+  $status: string;
+};
+
+const Wrapper = styled.div<WrapperType>`
   max-width: 1268px;
   display: grid;
-  grid-template-columns: 1fr 3fr 4fr 1fr 1fr;
+  grid-template-columns: 2fr 5fr 6fr ${({ $status }) => {
+      return $status === "INACTIVE" ? "3fr" : "1fr";
+    }} 2fr;
   grid-template-rows: 20% 80%;
   grid-template-areas:
     ". codelabel domainlabel . statuslabel"
@@ -53,12 +114,14 @@ const Wrapper = styled.div`
   padding: 24px 0px 31px 0px;
 
   @media (max-width: 1100px) {
-    grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr ${({ $status }) => {
+        return $status === "INACTIVE" ? "2fr" : "0.5fr";
+      }} 1fr;
   }
   @media (max-width: 960px) {
     padding: 32px 20px 32px 20px;
     grid-template-columns: 48px 1fr 2fr;
-    grid-template-rows: auto auto 1fr auto 1fr;
+    grid-template-rows: minmax(52px, auto) auto 1fr auto 1fr;
     grid-template-areas:
       "checkbox status button"
       "codelabel codelabel ."
@@ -137,6 +200,7 @@ const StatusWrapper = styled(ContentWrapper)`
 `;
 const StatusLabel = styled(Label)`
   grid-area: statuslabel;
+  grid-column: 4fr;
 
   @media (max-width: 960px) {
     display: none;
@@ -148,6 +212,11 @@ const Input = styled.input`
   box-shadow: 0px 2px 12px rgba(20, 20, 43, 0.06);
   padding: 25px 24px 25px 24px;
   border-radius: 6px;
+  font-family: "THICCCBOI-regular";
+  font-style: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #969696;
   outline: none;
   &:hover,
   &:active {
@@ -155,13 +224,27 @@ const Input = styled.input`
     outline-offset: 0;
   }
 `;
-const Status = styled(StatusLabelComponent)``;
+const Status = styled(StatusLabelComponent)`
+  color: ${({ $status }: { $status: string }) => {
+    switch ($status) {
+      case "ACTIVE":
+        return "#05C168";
+      case "HOLD":
+        return "#FF9E2C";
+      case "INACTIVE":
+        return "#FF5A65";
+      default:
+        return "#05C168";
+    }
+  }};
+`;
 const CopyWrapper = styled.div`
   position: absolute;
   right: 29px;
 `;
 const CodeInput = styled(Input)`
-  padding-right: 39px;
+  text-overflow: ellipsis;
+  padding-right: 75px;
 `;
 
 export default CodeView;

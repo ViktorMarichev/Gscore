@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import Logo from "src/svg/Logo";
 import ArrowButton from "src/svg/ArrowButton";
 import Menu from "./components/Menu";
@@ -25,7 +26,11 @@ const Header: React.FC<HeaderProps> = ({
       <HeaderEnd>
         {isLogin ? (
           <>
-            <CurrentPage>My subscriptions</CurrentPage>
+            <CurrentPage>
+              <Link href="/my-subscriptions">
+                <a>My subscriptions</a>
+              </Link>
+            </CurrentPage>
             <UserBox>
               <Username>{username}</Username>
               <ArrowWrapper onClick={toggleMenu}>
@@ -51,7 +56,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 86.69px 32px 86.69px;
+  padding: 32px 0px 32px 0px;
 `;
 const LogoWrapper = styled.div``;
 const HeaderEnd = styled.div`
@@ -81,7 +86,7 @@ const Username = styled.div`
 `;
 const MenuContainer = styled.div`
   position: absolute;
-
+  z-index: 5;
   bottom: -175px;
   left: -55px;
 `;

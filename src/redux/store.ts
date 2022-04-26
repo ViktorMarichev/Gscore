@@ -8,11 +8,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import UserReducer from "./User";
 import SubscribesReducer from "./Subscribes";
 import ProductsReducer from "./Products";
+import CodesReducer from "./Codes";
 
 const rootReducer = combineReducers({
   user: UserReducer,
   subscribes: SubscribesReducer,
   products: ProductsReducer,
+  codes: CodesReducer,
 });
 export type RootState = ReturnType<typeof rootReducer>;
 

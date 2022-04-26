@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import ArrowLeft from "@svg/ArrowLeft";
-import ArrowRight from "@svg/ArrowRight";
+import ArrowLeft from "src/svg/ArrowLeft";
+import ArrowRight from "src/svg/ArrowRight";
 
 type ArrowButtonProps = {
   direction: "left" | "right";
