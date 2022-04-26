@@ -14,5 +14,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 2px solid #393939;
+
 `;
 export default Tabs;

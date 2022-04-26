@@ -20,6 +20,9 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   padding: 0px 8px 0px 8px;
   min-width: 195px;
+  @media (max-width: 640px) {
+    min-width: 100px;
+  }
 `;
 const Title = styled.div`
   font-family: "THICCCBOI-semiBold";
@@ -29,6 +32,10 @@ const Title = styled.div`
   font-size: 20px;
   line-height: 22px;
   padding: 20px 0px 20px 0px;
+  @media (max-width: 640px) {
+    font-size: 18px;
+    padding: 20px 0px 15px 0px;
+  }
 `;
 const ActiveMarker = styled.div`
   background: ${({ isActive }: { isActive: boolean }) => {

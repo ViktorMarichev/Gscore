@@ -66,6 +66,13 @@ const Wrapper = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   padding-top: 24px;
+  max-width: 120px;
+  @media (max-width: 640px) {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 `;
 const Title = styled.div`
   font-family: "THICCCBOI-bold";
@@ -74,18 +81,31 @@ const Title = styled.div`
   color: #ffffff;
   padding-bottom: 32px;
   margin-top: 64px;
+
+  @media (max-width: 640px) {
+    font-size: 30px;
+    line-height: 30px;
+    text-align: center;
+  }
 `;
 const TotalCostWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 24px;
+  @media (max-width: 640px) {
+    padding: 20px 10px 0px 10px;
+  }
 `;
 const TotalCostTitle = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 28px;
   line-height: 40px;
   color: #ffffff;
+  @media (max-width: 640px) {
+    font-size: 22px;
+    line-height: 20px;
+  }
 `;
 const TotalCost = styled(TotalCostTitle)``;
 
