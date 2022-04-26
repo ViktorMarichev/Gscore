@@ -9,5 +9,6 @@ export { default as LinkedIn } from "./LinkedIn";
 export { default as Loader } from "./Loader";
 export { default as Logo } from "./Logo";
 export { default as LogOut } from "./LogOut";
+export { default as MenuBurger } from "./MenuBurger";
 export { default as Settings } from "./Settings";
 export { default as Twitter } from "./Twitter";

@@ -101,33 +101,27 @@ const MySubscribes: NextPage<MySubscribes> = ({
   };
 
   if (serverSubscribes.length <= 0) {
-    return (
-      <Container>
-        <MainLayout>Loading...</MainLayout>
-      </Container>
-    );
+    return <MainLayout>Loading...</MainLayout>;
   }
   return (
-    <Container>
-      <MainLayout>
-        <Grid>
-          <SliderWrapper>
-            <SubscriptionsContainer subscribes={serverSubscribes} />
-          </SliderWrapper>
-          {isWithHeld ? (
-            <>
-              <Hint>Select the domains you want to keep</Hint>
-              <ButtonWrapper>
-                <PrimaryButton
-                  title="Confirm"
-                  onClick={() => releaseHoldHandler(selectedSubscribe!.id)}
-                />
-              </ButtonWrapper>
-            </>
-          ) : null}
-        </Grid>
-      </MainLayout>
-    </Container>
+    <MainLayout>
+      <Grid>
+        <SliderWrapper>
+          <SubscriptionsContainer subscribes={serverSubscribes} />
+        </SliderWrapper>
+        {isWithHeld ? (
+          <>
+            <Hint>Select the domains you want to keep</Hint>
+            <ButtonWrapper>
+              <PrimaryButton
+                title="Confirm"
+                onClick={() => releaseHoldHandler(selectedSubscribe!.id)}
+              />
+            </ButtonWrapper>
+          </>
+        ) : null}
+      </Grid>
+    </MainLayout>
   );
 };
 

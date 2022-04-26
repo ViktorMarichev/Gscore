@@ -25,21 +25,17 @@ const PaymentSuccess: NextPage = () => {
   }, [product]);
   if (!product) {
     return (
-      <Container>
-        <MainLayout>
-          <Wrapper>Loading...</Wrapper>
-        </MainLayout>
-      </Container>
+      <MainLayout>
+        <Wrapper>Loading...</Wrapper>
+      </MainLayout>
     );
   }
   return (
-    <Container>
-      <MainLayout>
-        <Wrapper>
-          <PaymentMessage product={product} />
-        </Wrapper>
-      </MainLayout>
-    </Container>
+    <MainLayout>
+      <Wrapper>
+        <PaymentMessage product={product} />
+      </Wrapper>
+    </MainLayout>
   );
 };
 
