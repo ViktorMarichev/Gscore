@@ -5,6 +5,8 @@ import SecondaryButton from "src/components/SecondaryButton";
 import StatusLabel from "src/components/StatusLabel";
 import { useAppSelector } from "src/redux/store";
 import { SubscribesSelectors } from "src/redux/Subscribes";
+import { useAppDispatch } from "src/redux/store";
+import { setSubscribeView } from "src/redux/Subscribes";
 //subscribe->Code
 
 type CardProps = {
@@ -13,6 +15,7 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
+  const dispatch = useAppDispatch();
   const currentSubscribe = useAppSelector((state) =>
     SubscribesSelectors.getCurrentSubscribe(state)
   );
@@ -49,10 +52,13 @@ const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
               {formatDate(new Date(Number(subscribe.currentPeriodStart)))}
             </ValidUntil>
           </SubscribeDetails>
-          <Price>{subscribe.product.prices[0].price}</Price>
+          <Price>${subscribe.product.prices[0].price}</Price>
         </BodyTop>
         <BodyBottom>
-          <SecondaryButton title="View" onClick={() => {}} />
+          <SecondaryButton
+            title="View"
+            onClick={() => dispatch(setSubscribeView())}
+          />
         </BodyBottom>
       </CardBody>
     </Wrapper>
