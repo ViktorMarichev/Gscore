@@ -5,20 +5,20 @@ import HeaderContainer from "src/components/HeaderContainer";
 import Footer from "src/components/Footer";
 import useResizeObserver from "use-resize-observer";
 import Curtain from "src/components/Curtain";
-import { useRouter } from "next/router";
-import { UserSelectors } from "src/redux/User";
 import { useAppSelector } from "src/redux/store";
+import { UserSelectors } from "src/redux/User";
+import { useRouter } from "next/router";
+
 type MainLayoutProps = {
   children: React.ReactNode;
 };
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const router = useRouter();
+  const user = useAppSelector((state) => UserSelectors.userData(state));
   const [isSmall, setIsSmal] = useState(false);
   const [curtain, setCurtain] = useState(false);
-  const user = useAppSelector((state) => UserSelectors.userData(state));
   const availablePaths = ["/", "/subscribing/[id]"];
-
-  const router = useRouter();
   useEffect(() => {
     if (user.token === null && !availablePaths.includes(router.pathname)) {
       router.replace("/");
@@ -37,6 +37,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const toggleCurtainHandler = () => {
     setCurtain((prev) => !prev);
   };
+  useEffect(() => {
+    if (!user.token && !availablePaths.includes(router.pathname)) {
+      router.replace("/");
+    }
+  }, [user]);
 
   return (
     <MainLayoutWrapper>
