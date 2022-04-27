@@ -8,6 +8,7 @@ import Logo from "src/svg/Logo";
 import { UserSelectors } from "src/redux/User";
 import { useAppSelector, useAppDispatch } from "src/redux/store";
 import { logOut } from "src/redux/User";
+import Link from "next/link";
 type CurtainProps = {
   toggleCurtain: () => void;
 };
@@ -31,7 +32,6 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
   const logOutHandler = () => {
     toggleCurtain();
     dispatch(logOut({}));
-
   };
 
   return (
@@ -65,12 +65,14 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
             </TitleWrapper>
             {aMenuIsOpen ? (
               <CurtainMenu>
-                <MenuItem>
-                  <ImageWrapper>
-                    <Settings color={"#969696"} />
-                  </ImageWrapper>
-                  <MenuTitle>Settings</MenuTitle>
-                </MenuItem>
+                <Link href={"/settings"}>
+                  <MenuLink>
+                    <ImageWrapper>
+                      <Settings color={"#969696"} />
+                    </ImageWrapper>
+                    <MenuTitle>Settings</MenuTitle>
+                  </MenuLink>
+                </Link>
                 <MenuItem onClick={logOutHandler}>
                   <ImageWrapper>
                     <LogOut color={"#969696"} />
@@ -129,6 +131,19 @@ const CurtainMenu = styled.div`
   padding-top: 31px;
 `;
 const MenuItem = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 24px 0px 24px 0px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`;
+const MenuLink = styled.a`
   width: 100%;
   display: flex;
   align-items: center;
