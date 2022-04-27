@@ -6,7 +6,8 @@ import ArrowButton from "src/svg/ArrowButton";
 import Close from "src/svg/Close";
 import Logo from "src/svg/Logo";
 import { UserSelectors } from "src/redux/User";
-import { useAppSelector } from "src/redux/store";
+import { useAppSelector, useAppDispatch } from "src/redux/store";
+import { logOut } from "src/redux/User";
 type CurtainProps = {
   toggleCurtain: () => void;
 };
@@ -25,6 +26,12 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
 
   const toggleMenu = () => {
     setAmenu((prev) => !prev);
+  };
+  const dispatch = useAppDispatch();
+  const logOutHandler = () => {
+    toggleCurtain();
+    dispatch(logOut({}));
+
   };
 
   return (
@@ -64,7 +71,7 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
                   </ImageWrapper>
                   <MenuTitle>Settings</MenuTitle>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={logOutHandler}>
                   <ImageWrapper>
                     <LogOut color={"#969696"} />
                   </ImageWrapper>
@@ -86,7 +93,6 @@ const CurtainContainer = styled.div`
   animation: 1s ${translate} ease-out;
   background: #272727;
   padding: 0 24px 0 24px;
-
 `;
 const CurtainClose = styled.div`
   padding-right: 35px;
