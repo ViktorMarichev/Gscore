@@ -9,6 +9,8 @@ import TabItem from "src/components/TabItem";
 import { wrapper } from "src/redux/store";
 import PersonalInfoForm from "src/components/PersonalInfoForm";
 import ChangePasswordForm from "src/components/ChangePasswordForm";
+
+
 const Settings: NextPage = () => {
   const [activeTab, setActiveTab] = useState("Personal info");
 

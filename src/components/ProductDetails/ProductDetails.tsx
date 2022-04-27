@@ -34,6 +34,11 @@ const DetailsTitles = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid #969696;
   padding: 42px 72px 32px 32px;
+
+  @media(max-width:640px){
+    padding: 32px 52px 25px 25px;
+
+  }
 `;
 const DetailsPackage = styled(DetailsTitles)`
   border: 0;
