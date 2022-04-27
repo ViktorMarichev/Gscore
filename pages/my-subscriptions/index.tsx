@@ -56,7 +56,7 @@ const MySubscribes: NextPage<MySubscribes> = ({
 
   
 
-  if (serverSubscribes.length <= 0) {
+  if (serverSubscribes.length === 0) {
     return <MainLayout>Loading...</MainLayout>;
   }
   return (

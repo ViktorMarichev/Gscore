@@ -22,6 +22,7 @@ const AuthorizationForm: React.FC<{
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInputs>({
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -159,6 +160,11 @@ const InputWrapper = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   padding-top: 24px;
+  width: 200px;
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
 `;
 const Title = styled.div`
   font-family: "THICCCBOI-bold";
