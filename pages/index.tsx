@@ -26,10 +26,14 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
   const dispatch = useAppDispatch();
   const [products, setProductsState] = useState<Array<Product>>(serverProducts);
   const router = useRouter();
-
   const [refCallback, slider] = useKeenSlider(
     {
       initial: 0,
+      created: (slider) => {
+        if (slider.container.offsetWidth <= 960) {
+          slider.options.disabled = false;
+        }
+      },
       loop: false,
       disabled: true,
       mode: "free-snap",
@@ -58,7 +62,44 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         },
       },
     },
-    []
+    [
+      (slider) => {
+        if (typeof window != "undefined") {
+          let timeout: ReturnType<typeof setTimeout>;
+          let mouseOver = false;
+          function clearNextTimeout() {
+            clearTimeout(timeout);
+          }
+          function nextTimeout() {
+            clearTimeout(timeout);
+            if (mouseOver) return;
+
+            timeout = setTimeout(() => {
+              if (slider.track.details.abs === 1) {
+                slider.moveToIdx(-1);
+              } else {
+                slider.next();
+              }
+            }, 2500);
+          }
+          slider.on("created", () => {
+            slider.container.addEventListener("mouseover", () => {
+              mouseOver = true;
+              clearNextTimeout();
+            });
+            slider.container.addEventListener("mouseout", () => {
+              mouseOver = false;
+              nextTimeout();
+            });
+
+            nextTimeout();
+          });
+          slider.on("dragStarted", clearNextTimeout);
+          slider.on("animationEnded", nextTimeout);
+          slider.on("updated", nextTimeout);
+        }
+      },
+    ]
   );
 
   useEffect(() => {
@@ -77,7 +118,11 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
     } else {
       dispatch(setProducts({ products }));
     }
+
+    if (typeof window !== "undefined") {
+    }
   }, []);
+
   if (!products) {
     return (
       <>
@@ -87,7 +132,6 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Container>
-          {" "}
           <Wrapper>
             <Title>Get started with Gscore today!</Title>
             Loading...
