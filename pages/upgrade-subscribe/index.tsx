@@ -127,7 +127,6 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
       token: user.token!,
     })
       .then((res: AxiosResponse) => {
-        alert(JSON.stringify(res.data));
         router.replace("my-subscriptions");
       })
       .catch((err: AxiosError) => {

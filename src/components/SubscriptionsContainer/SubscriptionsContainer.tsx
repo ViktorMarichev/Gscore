@@ -182,14 +182,14 @@ const Hint = styled.div`
   grid-area: hint;
   align-self: center;
   @media (max-width: 640px) {
-  align-self: flex-end;
+    align-self: flex-end;
   }
 `;
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto 1fr;
-
+  grid-row-gap: 48px;
   grid-template-areas:
     "codes codes codes"
     "hint . button";
@@ -197,6 +197,7 @@ const Grid = styled.div`
   @media (max-width: 640px) {
     grid-template-rows: 1fr auto 1fr;
     grid-template-columns: 1fr 128px;
+    grid-row-gap :28px;
     grid-row-gap: 0px;
     grid-template-areas:
       "hint ."
