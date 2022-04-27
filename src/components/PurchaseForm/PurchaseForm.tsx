@@ -9,6 +9,7 @@ import { UserSelectors } from "src/redux/User";
 import { Products } from "src/redux/api/products";
 import { useRouter } from "next/router";
 import Product from "src/types/product";
+import { AxiosError } from "axios";
 
 const PurchaseForm: React.FC<{ productId: number }> = ({ productId }) => {
   const router = useRouter();
@@ -29,7 +30,16 @@ const PurchaseForm: React.FC<{ productId: number }> = ({ productId }) => {
           shallow: true,
         });
       })
-      .catch((err) => alert(err.message));
+      .catch((err: AxiosError) => {
+        if (err.response) {
+          alert(err.response.data.message);
+          if (err.response.data.message === "Unauthorized") {
+            router.replace("/");
+          }
+        } else {
+          alert(err.message);
+        }
+      });
   };
 
   if (!product) {
