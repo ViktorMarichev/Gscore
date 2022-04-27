@@ -3,12 +3,14 @@ import styled from "styled-components";
 import ProductDetails from "src/components/ProductDetails";
 import Product from "src/types/product";
 import PrimaryButton from "src/components/PrimaryButton";
+import { useRouter } from "next/router";
 
 type PaymentMessageProps = {
   product: Product;
 };
 
 const PaymentMessage: React.FC<PaymentMessageProps> = ({ product }) => {
+  const router = useRouter();
   return (
     <Wrapper>
       <Title>Start your subscription</Title>
@@ -21,7 +23,7 @@ const PaymentMessage: React.FC<PaymentMessageProps> = ({ product }) => {
         price={Number(product.prices[0].price)}
       />
       <ButtonWrapper>
-        <PrimaryButton title="Go to my subscriptions" onClick={() => {}} />
+        <PrimaryButton title="Go to my subscriptions" onClick={() => router.push("/my-subscriptions")} />
       </ButtonWrapper>
     </Wrapper>
   );
