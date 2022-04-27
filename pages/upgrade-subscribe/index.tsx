@@ -64,7 +64,44 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         },
       },
     },
-    []
+    [
+      (slider) => {
+        if (typeof window != "undefined") {
+          let timeout: ReturnType<typeof setTimeout>;
+          let mouseOver = false;
+          function clearNextTimeout() {
+            clearTimeout(timeout);
+          }
+          function nextTimeout() {
+            clearTimeout(timeout);
+            if (mouseOver) return;
+
+            timeout = setTimeout(() => {
+              if (slider.track.details.abs === 1) {
+                slider.moveToIdx(-1);
+              } else {
+                slider.next();
+              }
+            }, 2500);
+          }
+          slider.on("created", () => {
+            slider.container.addEventListener("mouseover", () => {
+              mouseOver = true;
+              clearNextTimeout();
+            });
+            slider.container.addEventListener("mouseout", () => {
+              mouseOver = false;
+              nextTimeout();
+            });
+
+            nextTimeout();
+          });
+          slider.on("dragStarted", clearNextTimeout);
+          slider.on("animationEnded", nextTimeout);
+          slider.on("updated", nextTimeout);
+        }
+      },
+    ]
   );
 
   useEffect(() => {
@@ -132,42 +169,42 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <MainLayout>
-          <Wrapper>
-            <Title>Upgrade your subscription!</Title>
-            <Products ref={refCallback} className="keen-slider">
-              {products.map((product: ProductType, index) => {
-                return (
-                  <ProductViewWrapper
-                    key={product.id}
-                    className="keen-slider__slide"
-                  >
-                    <ProductView
-                      isActive={index == 1}
-                      price={Number(product.prices[0].price)}
-                      id={product.id}
-                      name={product.name}
-                      sitesCount={product.sitesCount}
-                      disabled={
-                        (currentSubscription
-                          ? currentSubscription!.productId
-                          : null) === product.id
-                      }
-                      selectProduct={() => {
-                        selectProductHandler(product.id);
-                      }}
-                    />
-                  </ProductViewWrapper>
-                );
-              })}
-            </Products>
+      <MainLayout>
+        <Wrapper>
+          <Title>Upgrade your subscription!</Title>
+          <Products ref={refCallback} className="keen-slider">
+            {products.map((product: ProductType, index) => {
+              return (
+                <ProductViewWrapper
+                  key={product.id}
+                  className="keen-slider__slide"
+                >
+                  <ProductView
+                    isActive={index == 1}
+                    price={Number(product.prices[0].price)}
+                    id={product.id}
+                    name={product.name}
+                    sitesCount={product.sitesCount}
+                    disabled={
+                      (currentSubscription
+                        ? currentSubscription!.productId
+                        : null) === product.id
+                    }
+                    selectProduct={() => {
+                      selectProductHandler(product.id);
+                    }}
+                  />
+                </ProductViewWrapper>
+              );
+            })}
+          </Products>
 
-            <Notice>
-              Have more than 10 sites?
-              <Ref>Contact us</Ref>
-            </Notice>
-          </Wrapper>
-        </MainLayout>
+          <Notice>
+            Have more than 10 sites?
+            <Ref>Contact us</Ref>
+          </Notice>
+        </Wrapper>
+      </MainLayout>
     </>
   );
 };
