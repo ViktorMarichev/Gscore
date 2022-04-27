@@ -33,11 +33,15 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
   font-family: "THICCCBOI-bold";
-  font-size: 44px;
+  font-size: calc(24px + (44 - 24) * ((100vw - 375px) / (1440 - 375)));
   line-height: 54px;
   color: #ffffff;
   padding-top: 32px;
   padding-bottom: 16px;
+  @media (max-width: 640px) {
+    line-height: 30px;
+    padding-top: 22px;
+  }
 `;
 const SubTitle = styled.div`
   font-family: "THICCCBOI-medium";
@@ -45,11 +49,14 @@ const SubTitle = styled.div`
   font-size: 14px;
   line-height: 24px;
   color: #ffffff;
-  white-space: nowrap;
   overflow: visible;
   text-overflow: ellipsis;
   padding-bottom: 48px;
   max-width: 620px;
+
+  @media (max-width: 640px) {
+    padding-bottom: 20px;
+  }
 `;
 const ButtonWrapper = styled.div`
   margin-top: 48px;
