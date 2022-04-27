@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
+import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
+
 import MainLayout from "src/components/MainLayout";
 import Container from "src/components/Container";
 import styled from "styled-components";
@@ -14,6 +16,7 @@ import { wrapper } from "src/redux/store";
 import { AxiosResponse } from "axios";
 import { useAppDispatch } from "src/redux/store";
 import { setProducts } from "src/redux/Products";
+import { ResizePlugin } from "src/sliderPlugins";
 import Product from "src/types/product";
 
 type ProductsPageProps = {
@@ -24,6 +27,7 @@ type ProductsPageProps = {
 const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
   const dispatch = useAppDispatch();
   const [products, setProductsState] = useState<Array<Product>>(serverProducts);
+  const [loaded, setLoaded] = useState(false);
   const router = useRouter();
   const [refCallback, slider] = useKeenSlider(
     {
@@ -74,10 +78,12 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
             if (mouseOver) return;
 
             timeout = setTimeout(() => {
-              if (slider.track.details.abs === 1) {
+              if (slider.track.details?.abs === 1) {
                 slider.moveToIdx(-1);
               } else {
-                slider.next();
+                try {
+                  slider.next();
+                } catch {}
               }
             }, 2500);
           }
@@ -98,6 +104,7 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
           slider.on("updated", nextTimeout);
         }
       },
+      ResizePlugin,
     ]
   );
 
@@ -108,6 +115,7 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         const data = res.data;
         setProductsState(data);
         dispatch(setProducts({ products: data }));
+        setLoaded(true);
       } catch {
         loadProducts();
       }
@@ -115,10 +123,8 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
     if (serverProducts.length === 0) {
       loadProducts();
     } else {
+      setLoaded(true);
       dispatch(setProducts({ products }));
-    }
-
-    if (typeof window !== "undefined") {
     }
   }, []);
 
@@ -151,31 +157,32 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         <Wrapper>
           <Title>Get started with Gscore today!</Title>
           <Products ref={refCallback} className="keen-slider">
-            {products.map((product: ProductType, index) => {
-              return (
-                <ProductViewWrapper
-                  key={product.id}
-                  className="keen-slider__slide"
-                >
-                  <ProductView
-                    isActive={index == 1}
-                    price={Number(product.prices[0].price)}
-                    id={product.id}
-                    name={product.name}
-                    sitesCount={product.sitesCount}
-                    selectProduct={() =>
-                      router.push(
-                        "/subscribing/[id]",
-                        "/subscribing/" + product.id,
-                        {
-                          shallow: true,
-                        }
-                      )
-                    }
-                  />
-                </ProductViewWrapper>
-              );
-            })}
+            {loaded &&
+              products.map((product: ProductType, index) => {
+                return (
+                  <ProductViewWrapper
+                    key={product.id}
+                    className="keen-slider__slide"
+                  >
+                    <ProductView
+                      isActive={index == 1}
+                      price={Number(product.prices[0].price)}
+                      id={product.id}
+                      name={product.name}
+                      sitesCount={product.sitesCount}
+                      selectProduct={() =>
+                        router.push(
+                          "/subscribing/[id]",
+                          "/subscribing/" + product.id,
+                          {
+                            shallow: true,
+                          }
+                        )
+                      }
+                    />
+                  </ProductViewWrapper>
+                );
+              })}
           </Products>
 
           <Notice>
@@ -190,13 +197,14 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
 
 ProductsPage.getInitialProps = wrapper.getInitialPageProps(
   (store) => async (stx: NextPageContext) => {
-    if (!stx.req) return { serverProducts: [] };
+    console.log("stx", stx.req);
+    if (!stx.req) {
+      return { serverProducts: [] };
+    }
     // Fetch data from external API
     try {
       const res: AxiosResponse = await ProductsApi.getProducts();
       const data = res.data;
-      //  store.dispatch(setProducts({ products: data }));
-      // Pass data to the page via props
       return { serverProducts: data };
     } catch (error) {
       console.log("error.message");

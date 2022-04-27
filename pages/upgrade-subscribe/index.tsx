@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
+import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import MainLayout from "src/components/MainLayout";
 import Container from "src/components/Container";
@@ -16,6 +17,7 @@ import { wrapper } from "src/redux/store";
 import { useAppDispatch, useAppSelector } from "src/redux/store";
 import { setProducts } from "src/redux/Products";
 import { SubscribesSelectors } from "src/redux/Subscribes";
+import { ResizePlugin } from "src/sliderPlugins";
 import { UserSelectors } from "src/redux/User";
 import Product from "src/types/product";
 
@@ -36,6 +38,11 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
   const [refCallback, slider] = useKeenSlider(
     {
       initial: 0,
+      created: (slider) => {
+        if (slider.container.offsetWidth <= 960) {
+          slider.options.disabled = false;
+        }
+      },
       loop: false,
       disabled: true,
       mode: "free-snap",
@@ -77,10 +84,12 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
             if (mouseOver) return;
 
             timeout = setTimeout(() => {
-              if (slider.track.details.abs === 1) {
+              if (slider.track.details?.abs === 1) {
                 slider.moveToIdx(-1);
               } else {
-                slider.next();
+                try {
+                  slider.next();
+                } catch {}
               }
             }, 2500);
           }
@@ -101,6 +110,7 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
           slider.on("updated", nextTimeout);
         }
       },
+      ResizePlugin,
     ]
   );
 
