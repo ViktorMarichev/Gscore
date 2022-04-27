@@ -5,6 +5,7 @@ type SubscribesState = {
   subscribes: Array<Subscribe>;
   currentSubscribe: Subscribe | null;
   isWithHeld: boolean;
+  subscribeViewId: number | null;
 };
 type setCurrentSubscribeAction = {
   currentSubscribe: Subscribe;
@@ -21,6 +22,7 @@ const SubscribesSlices = createSlice({
     currentSubscribe: null,
     selectedCodes: [],
     isWithHeld: false,
+    subscribeViewId: null,
   } as SubscribesState,
   reducers: {
     setSubscribes: (state, action: { payload: SubscribesState }) => {
@@ -28,6 +30,7 @@ const SubscribesSlices = createSlice({
         subscribes: action.payload.subscribes,
         currentSubscribe: action.payload.currentSubscribe,
         isWithHeld: action.payload.isWithHeld,
+        subscribeViewId: action.payload.subscribeViewId,
       };
     },
     setCurrentSubscribe: (
@@ -42,6 +45,9 @@ const SubscribesSlices = createSlice({
 
     setHold: (state, action: { payload: SetHodAction }) => {
       state.isWithHeld = action.payload.isWithHeld;
+    },
+    setSubscribeView: (state) => {
+      state.subscribeViewId = state.currentSubscribe?.id!;
     },
   },
 });

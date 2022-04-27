@@ -36,16 +36,13 @@ const SubscriptionsContainer: React.FC<SubscriptionsContainerProps> = ({
   const selectedCodes = useAppSelector((state) =>
     CodesSelectors.getSelectedCodes(state)
   );
-  const currentSubscribe: Subscribe | null = useAppSelector((state) =>
-    SubscribesSelectors.getCurrentSubscribe(state)
+  const subscribeViewId: Subscribe | null = useAppSelector((state) =>
+    SubscribesSelectors.getSubscribeViewId(state)
   );
   const user = useAppSelector((state) => UserSelectors.userData(state));
 
   const codes: Array<Code> = useAppSelector((state: RootState) => {
-    return CodesSelectors.getCodesBySubscribeId(
-      state,
-      currentSubscribe ? currentSubscribe!.id : 0
-    );
+    return CodesSelectors.getCodesBySubscribeId(state, subscribeViewId!);
   });
   const isWithHeld = useAppSelector((state) => state.subscribes.isWithHeld);
   const router = useRouter();
@@ -142,7 +139,7 @@ const SubscriptionsContainer: React.FC<SubscriptionsContainerProps> = ({
             <ButtonWrapper>
               <PrimaryButton
                 title="Confirm"
-                onClick={() => releaseHoldHandler(currentSubscribe!.id)}
+                onClick={() => releaseHoldHandler(subscribeViewId!)}
               />
             </ButtonWrapper>
           </>
@@ -197,7 +194,7 @@ const Grid = styled.div`
   @media (max-width: 640px) {
     grid-template-rows: 1fr auto 1fr;
     grid-template-columns: 1fr 128px;
-    grid-row-gap :28px;
+    grid-row-gap: 28px;
     grid-row-gap: 0px;
     grid-template-areas:
       "hint ."

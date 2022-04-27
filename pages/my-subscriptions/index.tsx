@@ -46,6 +46,7 @@ const MySubscribes: NextPage<MySubscribes> = ({
           currentSubscribe: serverSubscribes[0],
           subscribes: serverSubscribes,
           isWithHeld: serverSubscribes[0].codes[0].status === "HOLD",
+          subscribeViewId: serverSubscribes[0].id,
         })
       );
       dispatch(setCodes({ codes: serverCodes }));

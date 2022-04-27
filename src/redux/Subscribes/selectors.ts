@@ -19,7 +19,9 @@ const getCodes = (state: RootState, subscribeId: number) => {
     return subscribe.id === subscribeId;
   });
 };
-
+const getSubscribeViewId = (state: RootState) => {
+  return state.subscribes.subscribeViewId;
+};
 
 const getCodesBySubscribeID = createSelector(
   getCodes,
@@ -40,4 +42,5 @@ export default {
   getCurrentSubscribe,
   getCodesBySubscribeID,
   getSubscribeById,
+  getSubscribeViewId,
 };
