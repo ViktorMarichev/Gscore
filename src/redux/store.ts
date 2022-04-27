@@ -31,7 +31,6 @@ const makeStore = () => {
   });
 };
 
-type MakeStoreType = ReturnType<typeof makeStore>;
 const WrapMakeStore = (makeStore: any) => wrapMakeStore(() => makeStore);
 const store = makeStore();
 export type AppStore = ReturnType<typeof makeStore>;

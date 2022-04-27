@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import type {
   NextPage,
   GetServerSideProps,
   GetServerSidePropsContext,
 } from "next";
 import styled from "styled-components";
-import Container from "src/components/Container";
 import MainLayout from "src/components/MainLayout";
 import SubscriptionsContainer from "src/components/SubscriptionsContainer";
 import NotFoundSubscribes from "src/components/NotFoundSubscribes";
@@ -14,8 +13,7 @@ import { wrapper } from "src/redux/store";
 import { Subscribes } from "src/redux/api/subscribes";
 import { AxiosResponse, AxiosError } from "axios";
 import Subscribe from "src/types/subscribe";
-import PrimaryButton from "src/components/PrimaryButton";
-import { useAppSelector, useAppDispatch } from "src/redux/store";
+import { useAppDispatch } from "src/redux/store";
 
 import Code from "src/types/code";
 
@@ -50,7 +48,7 @@ const MySubscribes: NextPage<MySubscribes> = ({
           isWithHeld: serverSubscribes[0].codes[0].status === "HOLD",
         })
       );
-      dispatch(setCodes({ codes: serverCodes, selectedCodes: [] }));
+      dispatch(setCodes({ codes: serverCodes }));
     }
   }, []);
 

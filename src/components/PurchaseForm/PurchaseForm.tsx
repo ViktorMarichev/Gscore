@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";
 import { ProductsSelectors } from "src/redux/Products";
 import { useAppSelector } from "src/redux/store";

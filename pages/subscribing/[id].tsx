@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { NextPage, NextPageContext } from "next";
 import styled from "styled-components";
-import Container from "src/components/Container";
 import MainLayout from "src/components/MainLayout";
 import StageItem from "src/components/StageItem";
 import RegistrationForm from "src/components/RegistrationForm";
