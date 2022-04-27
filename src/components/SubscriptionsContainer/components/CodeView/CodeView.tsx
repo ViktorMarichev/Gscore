@@ -161,11 +161,6 @@ const CheckBoxWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Inputs = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 const ButtonWrapper = styled.div`
   grid-area: button;
   height: 100%;

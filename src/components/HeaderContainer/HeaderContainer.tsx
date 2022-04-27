@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
-import { useAppSelector, useAppDispatch } from "src/redux/store";
+import { useAppSelector } from "src/redux/store";
 import { UserSelectors } from "src/redux/User";
 import { useRouter } from "next/router";
 

@@ -15,7 +15,6 @@ import { AxiosResponse } from "axios";
 import { useAppDispatch } from "src/redux/store";
 import { setProducts } from "src/redux/Products";
 import Product from "src/types/product";
-import { ResizePlugin } from "src/sliderPlugins";
 
 type ProductsPageProps = {
   serverProducts: Array<ProductType>;

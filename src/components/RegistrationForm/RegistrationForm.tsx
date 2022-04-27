@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";

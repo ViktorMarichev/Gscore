@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Subscribe from "../../types/subscribe";
-import Code from "src/types/code";
-import { HYDRATE } from "next-redux-wrapper";
 const _ = require("lodash");
 type SubscribesState = {
   subscribes: Array<Subscribe>;
