@@ -24,9 +24,11 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <Wrapper>
-      <LogoWrapper>
-        <Logo />
-      </LogoWrapper>
+      <Link href="/" as="/">
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+      </Link>
       <HeaderEnd>
         {isLogin && !isSmall ? (
           <>
@@ -72,7 +74,7 @@ const Wrapper = styled.div`
   @media (max-width: 600px) {
   }
 `;
-const LogoWrapper = styled.div``;
+const LogoWrapper = styled.a``;
 const HeaderEnd = styled.div`
   display: flex;
   align-items: center;
