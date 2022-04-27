@@ -70,7 +70,7 @@ const CodeView: React.FC<CodeViewProps> = ({
       </CheckBoxWrapper>
       <LicenseCodeLabel>License Code</LicenseCodeLabel>
       <CodeInputWrapper>
-        <CopyWrapper>
+        <CopyWrapper onClick={() => navigator.clipboard.writeText(code)}>
           <Copy />
         </CopyWrapper>
 
@@ -236,6 +236,9 @@ const Status = styled(StatusLabelComponent)`
 const CopyWrapper = styled.div`
   position: absolute;
   right: 29px;
+  &:active {
+    opacity: 0.5;
+  }
 `;
 const CodeInput = styled(Input)`
   text-overflow: ellipsis;
