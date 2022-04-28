@@ -41,9 +41,10 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
       },
       mode: "free-snap",
       breakpoints: {
-        "(max-width:640px)": {
+        "(max-width:740px)": {
           slides: {
-            perView: 1.05,
+            perView: 1,
+            spacing: 28,
           },
         },
       },
