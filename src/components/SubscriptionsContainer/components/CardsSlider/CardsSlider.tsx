@@ -41,17 +41,9 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
       },
       mode: "free-snap",
       breakpoints: {
-        "(max-width: 1340px)": {
-          disabled: subscribes.length === 1 ? true : false,
-          slides: {
-            perView: 1.5,
-            spacing: 15,
-          },
-        },
         "(max-width:640px)": {
           slides: {
             perView: 1.05,
-            spacing: 10,
           },
         },
       },
@@ -59,17 +51,18 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
         setIsDisabled(slider.options.disabled!);
       },
       slides: {
-        spacing: 15,
-        origin: "center",
-        perView: 2.3,
+        spacing: 28,
+        origin: 0,
+        perView: 2.1,
       },
       range: {
         min: 0,
         max: subscribes.length - 1,
       },
 
-      created: () => {
+      created: (slider) => {
         setLoaded(true);
+        slider.track.init();
       },
     },
     [ResizePlugin]
@@ -119,6 +112,7 @@ const CardsSlider: React.FC<CardsSliderProps> = ({ subscribes }) => {
     </SliderWrapper>
   );
 };
+
 const SliderWrapper = styled.div`
   width: 100%;
   z-index: 5;
@@ -127,7 +121,7 @@ const PagesView = styled.div`
   margin-top: 24px;
   width: 100%;
   display: flex;
-  @media(max-width:640px){
+  @media (max-width: 640px) {
     justify-content: center;
   }
 `;
