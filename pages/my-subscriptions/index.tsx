@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import type {
   NextPage,
   GetServerSideProps,
   GetServerSidePropsContext,
 } from "next";
 import styled from "styled-components";
-import Container from "src/components/Container";
 import MainLayout from "src/components/MainLayout";
 import SubscriptionsContainer from "src/components/SubscriptionsContainer";
+import NotFoundSubscribes from "src/components/NotFoundSubscribes";
 import { useRouter } from "next/router";
 import { wrapper } from "src/redux/store";
 import { Subscribes } from "src/redux/api/subscribes";
 import { AxiosResponse, AxiosError } from "axios";
 import Subscribe from "src/types/subscribe";
-import PrimaryButton from "src/components/PrimaryButton";
-import { useAppSelector, useAppDispatch } from "src/redux/store";
+import { useAppDispatch } from "src/redux/store";
+
 import Code from "src/types/code";
 
 import { setCodes } from "src/redux/Codes";
@@ -24,7 +24,6 @@ import {
   SubscribesSelectors,
   setHold,
 } from "src/redux/Subscribes";
-
 
 const _ = require("lodash");
 
@@ -39,7 +38,6 @@ const MySubscribes: NextPage<MySubscribes> = ({
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
- 
 
   useEffect(() => {
     if (serverSubscribes.length > 0) {
@@ -48,33 +46,48 @@ const MySubscribes: NextPage<MySubscribes> = ({
           currentSubscribe: serverSubscribes[0],
           subscribes: serverSubscribes,
           isWithHeld: serverSubscribes[0].codes[0].status === "HOLD",
+          subscribeViewId: serverSubscribes[0].id,
         })
       );
-      dispatch(setCodes({ codes: serverCodes, selectedCodes: [] }));
+      dispatch(setCodes({ codes: serverCodes }));
     }
   }, []);
 
   if (serverSubscribes.length === 0) {
-
-    return <MainLayout>Loading...</MainLayout>;
+    return (
+      <MainLayout>
+        <TitleWrapper>
+          <Title>My subscriptions</Title>
+        </TitleWrapper>
+        <NotFoundSubscribes />
+      </MainLayout>
+    );
   }
   return (
     <MainLayout>
-
-        <SliderWrapper>
-          <SubscriptionsContainer subscribes={serverSubscribes} />
-        </SliderWrapper>
-
+      <SliderWrapper>
+        <SubscriptionsContainer subscribes={serverSubscribes} />
+      </SliderWrapper>
     </MainLayout>
   );
 };
-
 
 const SliderWrapper = styled.div`
   width: 100%;
   grid-area: slider;
 `;
-
+const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+`;
+const Title = styled.div`
+  font-family: "THICCCBOI-bold";
+  font-style: normal;
+  font-size: calc(28px + (54 - 28) * ((100vw - 375px) / (1440 - 375)));
+  line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1440 - 375)));
+  color: #ffffff;
+`;
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps(
     (store) => async (context: GetServerSidePropsContext) => {

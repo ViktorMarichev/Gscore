@@ -1,4 +1,3 @@
-import Product from "src/types/product";
 import { RootState } from "./../store";
 import { createSelector } from "@reduxjs/toolkit";
 import Code from "src/types/code";

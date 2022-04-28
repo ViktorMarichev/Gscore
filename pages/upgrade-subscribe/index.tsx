@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
+import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import MainLayout from "src/components/MainLayout";
 import Container from "src/components/Container";
@@ -16,6 +17,7 @@ import { wrapper } from "src/redux/store";
 import { useAppDispatch, useAppSelector } from "src/redux/store";
 import { setProducts } from "src/redux/Products";
 import { SubscribesSelectors } from "src/redux/Subscribes";
+import { ResizePlugin } from "src/sliderPlugins";
 import { UserSelectors } from "src/redux/User";
 import Product from "src/types/product";
 
@@ -36,6 +38,11 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
   const [refCallback, slider] = useKeenSlider(
     {
       initial: 0,
+      created: (slider) => {
+        if (slider.container.offsetWidth <= 960) {
+          slider.options.disabled = false;
+        }
+      },
       loop: false,
       disabled: true,
       mode: "free-snap",
@@ -64,7 +71,47 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         },
       },
     },
-    []
+    [
+      (slider) => {
+        if (typeof window != "undefined") {
+          let timeout: ReturnType<typeof setTimeout>;
+          let mouseOver = false;
+          function clearNextTimeout() {
+            clearTimeout(timeout);
+          }
+          function nextTimeout() {
+            clearTimeout(timeout);
+            if (mouseOver) return;
+
+            timeout = setTimeout(() => {
+              if (slider.track.details?.abs === 1) {
+                slider.moveToIdx(-1);
+              } else {
+                try {
+                  slider.next();
+                } catch {}
+              }
+            }, 2500);
+          }
+          slider.on("created", () => {
+            slider.container.addEventListener("mouseover", () => {
+              mouseOver = true;
+              clearNextTimeout();
+            });
+            slider.container.addEventListener("mouseout", () => {
+              mouseOver = false;
+              nextTimeout();
+            });
+
+            nextTimeout();
+          });
+          slider.on("dragStarted", clearNextTimeout);
+          slider.on("animationEnded", nextTimeout);
+          slider.on("updated", nextTimeout);
+        }
+      },
+      ResizePlugin,
+    ]
   );
 
   useEffect(() => {
@@ -95,7 +142,6 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
       token: user.token!,
     })
       .then((res: AxiosResponse) => {
-        alert(JSON.stringify(res.data));
         router.replace("my-subscriptions");
       })
       .catch((err: AxiosError) => {
@@ -132,42 +178,42 @@ const ProductsPage: NextPage<ProductsPageProps> = ({ serverProducts }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <MainLayout>
-          <Wrapper>
-            <Title>Upgrade your subscription!</Title>
-            <Products ref={refCallback} className="keen-slider">
-              {products.map((product: ProductType, index) => {
-                return (
-                  <ProductViewWrapper
-                    key={product.id}
-                    className="keen-slider__slide"
-                  >
-                    <ProductView
-                      isActive={index == 1}
-                      price={Number(product.prices[0].price)}
-                      id={product.id}
-                      name={product.name}
-                      sitesCount={product.sitesCount}
-                      disabled={
-                        (currentSubscription
-                          ? currentSubscription!.productId
-                          : null) === product.id
-                      }
-                      selectProduct={() => {
-                        selectProductHandler(product.id);
-                      }}
-                    />
-                  </ProductViewWrapper>
-                );
-              })}
-            </Products>
+      <MainLayout>
+        <Wrapper>
+          <Title>Upgrade your subscription!</Title>
+          <Products ref={refCallback} className="keen-slider">
+            {products.map((product: ProductType, index) => {
+              return (
+                <ProductViewWrapper
+                  key={product.id}
+                  className="keen-slider__slide"
+                >
+                  <ProductView
+                    isActive={index == 1}
+                    price={Number(product.prices[0].price)}
+                    id={product.id}
+                    name={product.name}
+                    sitesCount={product.sitesCount}
+                    disabled={
+                      (currentSubscription
+                        ? currentSubscription!.productId
+                        : null) === product.id
+                    }
+                    selectProduct={() => {
+                      selectProductHandler(product.id);
+                    }}
+                  />
+                </ProductViewWrapper>
+              );
+            })}
+          </Products>
 
-            <Notice>
-              Have more than 10 sites?
-              <Ref>Contact us</Ref>
-            </Notice>
-          </Wrapper>
-        </MainLayout>
+          <Notice>
+            Have more than 10 sites?
+            <Ref>Contact us</Ref>
+          </Notice>
+        </Wrapper>
+      </MainLayout>
     </>
   );
 };

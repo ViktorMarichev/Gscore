@@ -99,8 +99,13 @@ const Wrapper = styled.div`
   }};
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
+
+  @media (max-width: 1100px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   @media (max-width: 960px) {
-    top:0px;
+    top: 0px;
   }
 `;
 const Cover = styled.div`
@@ -160,6 +165,13 @@ const FeatureItemWrapper = styled.li`
   margin-bottom: calc(14px + (22 - 14) * ((100vw - 375px) / (1440 - 375)));
   max-width: 250px;
   color: #ffffff;
+  word-wrap: break-word;
+  @media (max-width: 1100px) {
+    padding-right: 10px;
+  }
+    @media (max-width: 960px) {
+    padding-right: 0px;
+  }
 `;
 const Button = styled.div`
   -webkit-touch-callout: none;

@@ -50,9 +50,11 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
           </LogoWrapper>
         </CurtainHeader>
         <CurtainDetails>
-          <DetailsItem>
-            <Title>My subscribtions</Title>
-          </DetailsItem>
+          <Link href={"/my-subscriptions"}>
+            <DetailsItemLink>
+              <Title>My subscribtions</Title>
+            </DetailsItemLink>
+          </Link>
           <DetailsItem>
             <TitleWrapper>
               <Title>{user.username}</Title>
@@ -111,6 +113,21 @@ const CurtainDetails = styled.div`
   width: 100%;
 `;
 const DetailsItem = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 48px 20px 24px 0px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-bottom: 1px solid #393939;
+`;
+const DetailsItemLink = styled.a`
   width: 100%;
   display: flex;
   align-items: flex-start;

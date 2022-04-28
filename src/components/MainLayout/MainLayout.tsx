@@ -1,18 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "src/components/Container";
 import styled from "styled-components";
 import HeaderContainer from "src/components/HeaderContainer";
 import Footer from "src/components/Footer";
 import useResizeObserver from "use-resize-observer";
 import Curtain from "src/components/Curtain";
+import { useAppSelector } from "src/redux/store";
+import { UserSelectors } from "src/redux/User";
+import { useRouter } from "next/router";
 
 type MainLayoutProps = {
   children: React.ReactNode;
 };
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const router = useRouter();
+  const user = useAppSelector((state) => UserSelectors.userData(state));
   const [isSmall, setIsSmal] = useState(false);
   const [curtain, setCurtain] = useState(false);
+  const allowedPages = ["/", "/subscribing/[id]"];
   const { ref, width } = useResizeObserver({
     onResize: ({ width, height }) => {
       if (width! <= 640) {
@@ -25,6 +31,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const toggleCurtainHandler = () => {
     setCurtain((prev) => !prev);
   };
+  useEffect(() => {
+    if (!user.token && !allowedPages.includes(router.pathname)) {
+      router.replace("/");
+    }
+  }, [user]);
 
   return (
     <MainLayoutWrapper>
