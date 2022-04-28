@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Logo from "src/svg/Logo";
@@ -22,6 +22,7 @@ const Header: React.FC<HeaderProps> = ({
   isSmall,
   toggleCurtain,
 }) => {
+  const arrowRef = useRef<null | HTMLDivElement>(null);
   return (
     <Wrapper>
       <Link href="/" as="/">
@@ -39,14 +40,18 @@ const Header: React.FC<HeaderProps> = ({
             </CurrentPage>
             <UserBox>
               <Username>{username}</Username>
-              <ArrowWrapper onClick={toggleMenu}>
+              <ArrowWrapper onClick={toggleMenu} ref={arrowRef}>
                 <ArrowButton
                   style={aMenuIsOpen ? { transform: "rotate(180deg)" } : {}}
                 />
               </ArrowWrapper>
               {aMenuIsOpen ? (
                 <MenuContainer>
-                  <Menu />
+                  <Menu
+                    closeHandler={toggleMenu}
+                    isOpen={aMenuIsOpen}
+                    arrowRef={arrowRef}
+                  />
                 </MenuContainer>
               ) : null}
             </UserBox>

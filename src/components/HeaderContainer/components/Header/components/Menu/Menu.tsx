@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Settings from "src/svg/Settings";
 import LogOut from "src/svg/LogOut";
 import { useAppDispatch } from "src/redux/store";
 import { logOut } from "src/redux/User";
-const Menu: React.FC = () => {
+
+type MenuProps = {
+  closeHandler: () => void;
+  isOpen: boolean;
+  arrowRef: React.RefObject<HTMLDivElement>;
+};
+
+const Menu: React.FC<MenuProps> = ({ closeHandler, isOpen, arrowRef }) => {
   const dispatch = useAppDispatch();
   const logOutHandler = () => {
     dispatch(logOut({}));
   };
 
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const onClick = (e: React.MouseEvent<any>) =>
+      menuRef.current?.contains(e.target) ||
+      arrowRef.current?.contains(e.target)
+        ? null
+        : closeHandler();
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper ref={menuRef}>
       <Link href="/settings">
         <ItemLink>
           <ImageWrapper>
