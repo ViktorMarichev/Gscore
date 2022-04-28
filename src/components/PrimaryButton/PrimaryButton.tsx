@@ -37,6 +37,7 @@ type WrapperProps = {
 const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
   tabIndex: tabindex,
 }))`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
