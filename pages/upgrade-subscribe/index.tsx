@@ -255,7 +255,13 @@ const Products = styled.div`
   justify-content: center;
 `;
 const ProductViewWrapper = styled.div`
-  margin-right: 28.5px;
+  padding-right: calc(10px + (12.5 - 10) * ((100vw - 375px) / (1440 - 375)));
+  padding-left: calc(10px + (12.5 - 10) * ((100vw - 375px) / (1440 - 375)));
+  @media (max-width: 960px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const Notice = styled.div`
   display: flex;
@@ -264,6 +270,9 @@ const Notice = styled.div`
   font-family: "THICCCBOI-medium";
   font-size: 18px;
   color: #ffffff;
+  @media (max-width: 960px) {
+    padding-top: 15px;
+  }
 `;
 const Ref = styled.div`
   text-decoration-line: underline;
