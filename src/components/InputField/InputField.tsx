@@ -119,6 +119,10 @@ const SvgWrapper = styled.div`
   margin-top: -0.625em;
 `;
 const Message = styled.div`
-  color: red;
+  font-family: "THICCCBOI-medium";
+  font-size: 14px;
+  line-height: 16px;
+  color: #ff5a65;
+  padding-top: 2px;
 `;
 export default Input;
