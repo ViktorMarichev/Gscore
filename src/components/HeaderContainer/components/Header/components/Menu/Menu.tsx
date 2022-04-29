@@ -21,9 +21,9 @@ const Menu: React.FC<MenuProps> = ({ closeHandler, isOpen, arrowRef }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const onClick = (e: React.MouseEvent<any>) =>
-      menuRef.current?.contains(e.target) ||
-      arrowRef.current?.contains(e.target)
+    const onClick = (e: MouseEvent) =>
+      menuRef.current?.contains(e.target as Node) ||
+      arrowRef.current?.contains(e.target as Node)
         ? null
         : closeHandler();
     document.addEventListener("click", onClick);
