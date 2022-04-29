@@ -8,7 +8,7 @@ const HeaderContainer: React.FC<{
   isSmall: boolean;
   toggleCurtain: () => void;
 }> = ({ isSmall, toggleCurtain }) => {
-  const [aMenuIsOpen, setAmenuIsOpen] = useState<boolean>(false);
+  const [isTheMenuOpen, setMenu] = useState<boolean>(false);
   const user = useAppSelector((state) => UserSelectors.userData(state));
   const router = useRouter();
 
@@ -19,8 +19,8 @@ const HeaderContainer: React.FC<{
       isSmall={isSmall}
       username={user.username!}
       isLogin={!!user.token}
-      aMenuIsOpen={aMenuIsOpen}
-      toggleMenu={() => setAmenuIsOpen((prev) => !prev)}
+      isTheMenuOpen={isTheMenuOpen}
+      toggleMenu={() => setMenu((prev) => !prev)}
       toggleCurtain={toggleCurtain}
     />
   );

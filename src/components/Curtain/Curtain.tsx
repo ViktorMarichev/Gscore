@@ -23,7 +23,7 @@ const translate = keyframes`
 
 const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
   const user = useAppSelector((state) => UserSelectors.userData(state));
-  const [aMenuIsOpen, setAmenu] = useState(false);
+  const [isTheMenuOpen, setAmenu] = useState(false);
 
   const toggleMenu = () => {
     setAmenu((prev) => !prev);
@@ -61,11 +61,11 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
 
               <ArrowWrapper onClick={toggleMenu}>
                 <ArrowButton
-                  style={aMenuIsOpen ? { transform: "rotate(180deg)" } : {}}
+                  style={isTheMenuOpen ? { transform: "rotate(180deg)" } : {}}
                 />
               </ArrowWrapper>
             </TitleWrapper>
-            {aMenuIsOpen ? (
+            {isTheMenuOpen ? (
               <CurtainMenu>
                 <Link href={"/settings"}>
                   <MenuLink>

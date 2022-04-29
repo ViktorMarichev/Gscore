@@ -8,7 +8,7 @@ import MenuBurger from "src/svg/MenuBurger";
 type HeaderProps = {
   username?: string;
   isLogin: boolean;
-  aMenuIsOpen: boolean;
+  isTheMenuOpen: boolean;
   toggleMenu: () => void;
   isSmall: boolean;
   toggleCurtain: () => void;
@@ -17,7 +17,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({
   username,
   isLogin,
-  aMenuIsOpen,
+  isTheMenuOpen,
   toggleMenu,
   isSmall,
   toggleCurtain,
@@ -42,14 +42,14 @@ const Header: React.FC<HeaderProps> = ({
               <Username>{username}</Username>
               <ArrowWrapper onClick={toggleMenu} ref={arrowRef}>
                 <ArrowButton
-                  style={aMenuIsOpen ? { transform: "rotate(180deg)" } : {}}
+                  style={isTheMenuOpen ? { transform: "rotate(180deg)" } : {}}
                 />
               </ArrowWrapper>
-              {aMenuIsOpen ? (
+              {isTheMenuOpen ? (
                 <MenuContainer>
                   <Menu
                     closeHandler={toggleMenu}
-                    isOpen={aMenuIsOpen}
+                    isOpen={isTheMenuOpen}
                     arrowRef={arrowRef}
                   />
                 </MenuContainer>
