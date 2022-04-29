@@ -88,7 +88,7 @@ const CodeView: React.FC<CodeViewProps> = ({
 
       <StatusLabel>Status</StatusLabel>
       <StatusWrapper>
-        <Status $status={status}>{ucFirst(status)}</Status>
+        <Status status={status}>{ucFirst(status)}</Status>
       </StatusWrapper>
     </Wrapper>
   );
@@ -220,8 +220,8 @@ const Input = styled.input`
   }
 `;
 const Status = styled(StatusLabelComponent)`
-  color: ${({ $status }: { $status: string }) => {
-    switch ($status) {
+  color: ${({ status }: { status: string }) => {
+    switch (status) {
       case "ACTIVE":
         return "#05C168";
       case "HOLD":
