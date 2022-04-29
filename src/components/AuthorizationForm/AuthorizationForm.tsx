@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  SubmitHandler,
+  ErrorOption,
+} from "react-hook-form";
 import { UserEndpoints } from "src/redux/api/user";
 import { login } from "src/redux/User";
 import { AxiosError, AxiosResponse } from "axios";
@@ -29,6 +34,38 @@ const AuthorizationForm: React.FC<{
       password: "",
     },
   });
+  const PasswordInputValidate = {
+    required: true,
+    minLength: 5,
+  };
+  const EmailInputValidate = {
+    required: true,
+    pattern: /^\S+@\S+$/i,
+  };
+  const EmailInputErrorRender = (error: ErrorOption) => {
+    switch (errors.email!.type) {
+      case "required":
+        return "This field is required";
+      case "customError":
+        return error.message!;
+      case "pattern":
+        return "Doesn't look like an email";
+      default:
+        return "some error";
+    }
+  };
+  const PasswordInputErrorRender = (error: ErrorOption) => {
+    switch (errors.password!.type) {
+      case "required":
+        return "This field is required";
+      case "minLength":
+        return "Too short";
+      case "customError":
+        return error.message!;
+      default:
+        return "some error";
+    }
+  };
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     const { email, password } = data;
@@ -73,10 +110,7 @@ const AuthorizationForm: React.FC<{
           <Controller
             name="email"
             control={control}
-            rules={{
-              required: true,
-              pattern: /^\S+@\S+$/i,
-            }}
+            rules={Constants.EmailInputValidate}
             render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <InputField
@@ -87,18 +121,7 @@ const AuthorizationForm: React.FC<{
                   onBlur={onBlur}
                   errors={errors}
                   success={!errors.email && value != ""}
-                  errorRender={(error) => {
-                    switch (errors.email!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "customError":
-                        return error.message!;
-                      case "pattern":
-                        return "Doesn't look like an email";
-                      default:
-                        return "some error";
-                    }
-                  }}
+                  errorRender={EmailInputErrorRender}
                   value={value}
                 />
               );
@@ -109,10 +132,7 @@ const AuthorizationForm: React.FC<{
           <Controller
             name="password"
             control={control}
-            rules={{
-              required: true,
-              minLength: 5,
-            }}
+            rules={Constants.PasswordInputValidate}
             render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <InputField
@@ -123,18 +143,7 @@ const AuthorizationForm: React.FC<{
                   onBlur={onBlur}
                   errors={errors}
                   success={!errors.password && value != ""}
-                  errorRender={(error) => {
-                    switch (errors.password!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "minLength":
-                        return "Too short";
-                      case "customError":
-                        return error.message!;
-                      default:
-                        return "some error";
-                    }
-                  }}
+                  errorRender={PasswordInputErrorRender}
                   value={value}
                 />
               );

@@ -2,11 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  SubmitHandler,
+  ErrorOption,
+} from "react-hook-form";
 import { UserEndpoints } from "src/redux/api/user";
 import { useAppDispatch, useAppSelector } from "src/redux/store";
 import { UserSelectors, updatePersonalData } from "src/redux/User";
 import { AxiosError, AxiosResponse } from "axios";
+import Constants from "src/constants";
 
 type IFormInputs = {
   username: string;
@@ -29,6 +35,33 @@ const PersonalInfoForm: React.FC = () => {
       email: "",
     },
   });
+
+  const UsernameInputErrorRender = (error: ErrorOption) => {
+    switch (errors.username!.type) {
+      case "required":
+        return "This field is required";
+      case "minLength":
+        return "Too short";
+      case "maxLength":
+        return "Too short";
+      case "customError":
+        return error.message!;
+      default:
+        return "some error";
+    }
+  };
+  const EmailInputErrorRender = (error: ErrorOption) => {
+    switch (errors.email!.type) {
+      case "required":
+        return "This field is required";
+      case "customError":
+        return error.message!;
+      case "pattern":
+        return "Doesn't look like an email";
+      default:
+        return "some error";
+    }
+  };
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     UserEndpoints.updatePersonalData({
       token: user.token!,
@@ -60,11 +93,7 @@ const PersonalInfoForm: React.FC = () => {
           <Controller
             name="username"
             control={control}
-            rules={{
-              required: true,
-              minLength: 5,
-              maxLength: 15,
-            }}
+            rules={Constants.UserNameInputValidate}
             render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <InputField
@@ -75,20 +104,7 @@ const PersonalInfoForm: React.FC = () => {
                   onBlur={onBlur}
                   errors={errors}
                   success={!errors.username && value != ""}
-                  errorRender={(error) => {
-                    switch (errors.username!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "minLength":
-                        return "Too short";
-                      case "maxLength":
-                        return "Too short";
-                      case "customError":
-                        return error.message!;
-                      default:
-                        return "some error";
-                    }
-                  }}
+                  errorRender={UsernameInputErrorRender}
                   value={value}
                 />
               );
@@ -99,10 +115,7 @@ const PersonalInfoForm: React.FC = () => {
           <Controller
             name="email"
             control={control}
-            rules={{
-              required: true,
-              pattern: /^\S+@\S+$/i,
-            }}
+            rules={Constants.EmailInputValidate}
             render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <InputField
@@ -113,18 +126,7 @@ const PersonalInfoForm: React.FC = () => {
                   onBlur={onBlur}
                   errors={errors}
                   success={!errors.email && value != ""}
-                  errorRender={(error) => {
-                    switch (errors.email!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "customError":
-                        return error.message!;
-                      case "pattern":
-                        return "Doesn't look like an email";
-                      default:
-                        return "some error";
-                    }
-                  }}
+                  errorRender={EmailInputErrorRender}
                   value={value}
                 />
               );

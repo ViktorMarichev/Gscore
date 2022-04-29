@@ -2,11 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import InputField from "src/components/InputField";
 import PrimaryButton from "src/components/PrimaryButton";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  SubmitHandler,
+  ErrorOption,
+} from "react-hook-form";
 import { UserEndpoints } from "src/redux/api/user";
 import { useAppSelector } from "src/redux/store";
 import { UserSelectors } from "src/redux/User";
 import { AxiosError, AxiosResponse } from "axios";
+import Constants from "src/constants";
 
 type IFormInputs = {
   currentPassword: string;
@@ -20,12 +26,35 @@ const ChangePasswordForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInputs>({
+    mode: "onChange",
     defaultValues: {
       currentPassword: "",
       newPassword: "",
     },
   });
   const user = useAppSelector((state) => UserSelectors.userData(state));
+
+  const PasswordErrorRender = (error: ErrorOption) => {
+    switch (errors.currentPassword!.type) {
+      case "required":
+        return "This field is required";
+      case "minLength":
+        return "Too short";
+      default:
+        return "some error";
+    }
+  };
+  const NewPasswordErrorRender = (error: ErrorOption) => {
+    switch (errors.newPassword!.type) {
+      case "required":
+        return "This field is required";
+      case "minLength":
+        return "Too short";
+      default:
+        return "some error";
+    }
+  };
+
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     if (data.currentPassword != data.newPassword) {
       const { currentPassword, newPassword } = data;
@@ -61,10 +90,7 @@ const ChangePasswordForm: React.FC = () => {
           <Controller
             name="currentPassword"
             control={control}
-            rules={{
-              required: true,
-              minLength: 5,
-            }}
+            rules={Constants.PasswordInputValidate}
             render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <InputField
@@ -75,18 +101,7 @@ const ChangePasswordForm: React.FC = () => {
                   onBlur={onBlur}
                   errors={errors}
                   success={!errors.currentPassword && value != ""}
-                  errorRender={(error) => {
-                    switch (errors.currentPassword!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "minLength":
-                        return "Too short";
-                      case "customError":
-                        return error.message!;
-                      default:
-                        return "some error";
-                    }
-                  }}
+                  errorRender={PasswordErrorRender}
                   value={value}
                 />
               );
@@ -97,9 +112,7 @@ const ChangePasswordForm: React.FC = () => {
           <Controller
             name="newPassword"
             control={control}
-            rules={{
-              required: true,
-            }}
+            rules={Constants.PasswordInputValidate}
             render={({ field: { onChange, onBlur, value } }) => {
               return (
                 <InputField
@@ -110,18 +123,7 @@ const ChangePasswordForm: React.FC = () => {
                   onBlur={onBlur}
                   errors={errors}
                   success={!errors.newPassword && value != ""}
-                  errorRender={(error) => {
-                    switch (errors.newPassword!.type) {
-                      case "required":
-                        return "This field is required";
-                      case "customError":
-                        return error.message!;
-                      case "pattern":
-                        return "Doesn't look like an email";
-                      default:
-                        return "some error";
-                    }
-                  }}
+                  errorRender={NewPasswordErrorRender}
                   value={value}
                 />
               );
@@ -148,7 +150,7 @@ const InputWrapper = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   padding-top: 24px;
-    width: 200px;
+  width: 200px;
   @media (max-width: 640px) {
     width: 100%;
   }
