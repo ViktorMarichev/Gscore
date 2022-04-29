@@ -36,7 +36,7 @@ const SubscriptionsContainer: React.FC<SubscriptionsContainerProps> = ({
   const selectedCodes = useAppSelector((state) =>
     CodesSelectors.getSelectedCodes(state)
   );
-  const subscribeViewId: Subscribe | null = useAppSelector((state) =>
+  const subscribeViewId: number | null = useAppSelector((state) =>
     SubscribesSelectors.getSubscribeViewId(state)
   );
   const user = useAppSelector((state) => UserSelectors.userData(state));
