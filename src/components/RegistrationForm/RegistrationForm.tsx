@@ -5,6 +5,8 @@ import PrimaryButton from "src/components/PrimaryButton";
 import { UserEndpoints } from "src/redux/api/user";
 import { AxiosResponse, AxiosError } from "axios";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import Constants from "src/constants";
+
 interface IFormInputs {
   username: string;
   email: string;
@@ -32,7 +34,7 @@ const RegistrationForm: React.FC<{ skipMethod: (stage: string) => void }> = ({
     const { email, username, password } = data;
     UserEndpoints.createAccount({ email, username, password })
       .then((res: AxiosResponse) => {
-        skipMethod("Log in");
+        skipMethod(Constants.LOG_IN);
       })
       .catch((error: AxiosError) => {
         if (error.response) {

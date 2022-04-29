@@ -10,8 +10,10 @@ import { wrapper } from "src/redux/store";
 import PersonalInfoForm from "src/components/PersonalInfoForm";
 import ChangePasswordForm from "src/components/ChangePasswordForm";
 
-
 const Settings: NextPage = () => {
+  const PERSONAL_INFO = "Personal_info";
+  const CHANGE_PASSWORD = "Change password";
+
   const [activeTab, setActiveTab] = useState("Personal info");
 
   const setActiveTabHandler = (activeTab: string) => {
@@ -29,18 +31,18 @@ const Settings: NextPage = () => {
         </TopContainer>
         <Tabs>
           <TabItem
-            title="Personal info"
+            title={PERSONAL_INFO}
             activeTab={activeTab}
             onClick={setActiveTabHandler}
           />
           <TabItem
-            title="Change password"
+            title={CHANGE_PASSWORD}
             activeTab={activeTab}
             onClick={setActiveTabHandler}
           />
         </Tabs>
         <FormWrapper>
-          {activeTab === "Personal info" ? (
+          {activeTab === PERSONAL_INFO ? (
             <PersonalInfoForm />
           ) : (
             <ChangePasswordForm />

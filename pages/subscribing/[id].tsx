@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { UserSelectors } from "src/redux/User";
 import { useAppSelector } from "src/redux/store";
 import { ProductsSelectors } from "src/redux/Products";
-
+import Constants from "src/constants";
 const Subscribing: NextPage = () => {
   const router = useRouter();
   const user = useAppSelector((state) => UserSelectors.userData(state));
@@ -18,7 +18,9 @@ const Subscribing: NextPage = () => {
     ProductsSelectors.getProductById(state, Number(router.query.id))
   );
   const [stages, setStages] = useState<Array<string>>(
-    user.token ? ["Create account", "Log in", "Checkout"] : ["Create account"]
+    user.token
+      ? [Constants.CREATE_ACCOUNT, Constants.LOG_IN, Constants.CHECK_OUT]
+      : [Constants.CREATE_ACCOUNT]
   );
 
   const skipHandler = (stage: string) => {
@@ -34,17 +36,17 @@ const Subscribing: NextPage = () => {
     <MainLayout>
       <Wrapper>
         <Stages>
-          <StageItem stages={stages} title="Create account" />
-          <StageItem stages={stages} title="Log in" />
-          <StageItem stages={stages} title="Checkout" />
+          <StageItem stages={stages} title={Constants.CREATE_ACCOUNT} />
+          <StageItem stages={stages} title={Constants.LOG_IN} />
+          <StageItem stages={stages} title={Constants.CHECK_OUT} />
         </Stages>
-        {stages[stages.length - 1] === "Create account" ? (
+        {stages[stages.length - 1] === Constants.CREATE_ACCOUNT ? (
           <RegistrationForm skipMethod={skipHandler} />
         ) : null}
-        {stages[stages.length - 1] === "Log in" ? (
+        {stages[stages.length - 1] === Constants.LOG_IN ? (
           <AuthorizationForm skipMethod={skipHandler} />
         ) : null}
-        {stages[stages.length - 1] === "Checkout" ? (
+        {stages[stages.length - 1] === Constants.CHECK_OUT ? (
           <PurchaseForm productId={Number(router.query.id)} />
         ) : null}
       </Wrapper>

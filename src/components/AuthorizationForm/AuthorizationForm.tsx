@@ -7,6 +7,8 @@ import { UserEndpoints } from "src/redux/api/user";
 import { login } from "src/redux/User";
 import { AxiosError, AxiosResponse } from "axios";
 import { useAppDispatch } from "src/redux/store";
+import Constants from "src/constants";
+
 interface IFormInputs {
   email: string;
   password: string;
@@ -32,7 +34,7 @@ const AuthorizationForm: React.FC<{
     const { email, password } = data;
     UserEndpoints.login({ email, password })
       .then((res: AxiosResponse) => {
-        skipMethod("Checkout");
+        skipMethod(Constants.CHECK_OUT);
         dispatch(
           login({
             user: {
