@@ -37,7 +37,7 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
   return (
     <>
       <CurtainContainer
-        onClick={(e: React.MouseEventHandler<HTMLDivElement>) => {
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => {
           e.stopPropagation();
         }}
       >
