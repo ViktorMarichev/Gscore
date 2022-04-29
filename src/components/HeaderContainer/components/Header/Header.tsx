@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({
   isSmall,
   toggleCurtain,
 }) => {
-  const arrowRef = useRef<null | HTMLDivElement>(null);
+  const usernameWrapperRef = useRef<null | HTMLDivElement>(null);
   return (
     <Wrapper>
       <Link href="/" as="/">
@@ -39,21 +39,22 @@ const Header: React.FC<HeaderProps> = ({
               </Link>
             </CurrentPage>
             <UserBox>
-              <Username>{username}</Username>
-              <ArrowWrapper onClick={toggleMenu} ref={arrowRef}>
-                <ArrowButton
-                  style={isTheMenuOpen ? { transform: "rotate(180deg)" } : {}}
-                />
-              </ArrowWrapper>
-              {isTheMenuOpen ? (
-                <MenuContainer>
-                  <Menu
-                    closeHandler={toggleMenu}
-                    isOpen={isTheMenuOpen}
-                    arrowRef={arrowRef}
+              <UsernameWrapper ref={usernameWrapperRef} onClick={toggleMenu}>
+                <Username>{username}</Username>
+                <ArrowWrapper>
+                  <ArrowButton
+                    style={isTheMenuOpen ? { transform: "rotate(180deg)" } : {}}
                   />
-                </MenuContainer>
-              ) : null}
+                </ArrowWrapper>
+                {isTheMenuOpen ? (
+                  <MenuContainer>
+                    <Menu
+                      closeHandler={toggleMenu}
+                      usernameWrapperRef={usernameWrapperRef}
+                    />
+                  </MenuContainer>
+                ) : null}
+              </UsernameWrapper>
             </UserBox>
           </>
         ) : null}
@@ -93,11 +94,18 @@ const ArrowWrapper = styled.div`
 `;
 const UserBox = styled.div`
   position: relative;
-  display: flex;
   padding-left: 32px;
+  cursor: default;
+`;
+const UsernameWrapper = styled.div`
+  display: flex;
   align-items: center;
   height: 100%;
+  &:active {
+    opacity: 0.5;
+  }
 `;
+
 const Username = styled.div`
   font-family: "THICCCBOI-medium";
   align-self: flex-end;

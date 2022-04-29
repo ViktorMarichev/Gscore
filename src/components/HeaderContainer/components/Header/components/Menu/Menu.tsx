@@ -8,11 +8,13 @@ import { logOut } from "src/redux/User";
 
 type MenuProps = {
   closeHandler: () => void;
-  isOpen: boolean;
-  arrowRef: React.RefObject<HTMLDivElement>;
+  usernameWrapperRef: React.RefObject<HTMLDivElement>;
 };
 
-const Menu: React.FC<MenuProps> = ({ closeHandler, isOpen, arrowRef }) => {
+const Menu: React.FC<MenuProps> = ({
+  closeHandler,
+  usernameWrapperRef,
+}) => {
   const dispatch = useAppDispatch();
   const logOutHandler = () => {
     dispatch(logOut({}));
@@ -23,7 +25,7 @@ const Menu: React.FC<MenuProps> = ({ closeHandler, isOpen, arrowRef }) => {
   useEffect(() => {
     const onClick = (e: MouseEvent) =>
       menuRef.current?.contains(e.target as Node) ||
-      arrowRef.current?.contains(e.target as Node)
+      usernameWrapperRef.current?.contains(e.target as Node)
         ? null
         : closeHandler();
     document.addEventListener("click", onClick);
