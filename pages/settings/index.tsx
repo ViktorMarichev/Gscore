@@ -14,7 +14,7 @@ const Settings: NextPage = () => {
   const PERSONAL_INFO = "Personal_info";
   const CHANGE_PASSWORD = "Change password";
 
-  const [activeTab, setActiveTab] = useState("Personal info");
+  const [activeTab, setActiveTab] = useState(PERSONAL_INFO);
 
   const setActiveTabHandler = (activeTab: string) => {
     setActiveTab(activeTab);
