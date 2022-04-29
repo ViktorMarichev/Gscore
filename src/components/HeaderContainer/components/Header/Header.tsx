@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
                   />
                 </ArrowWrapper>
                 {isTheMenuOpen ? (
-                  <MenuContainer>
+                  <MenuContainer onClick={(e) => e.stopPropagation()}>
                     <Menu
                       closeHandler={toggleMenu}
                       usernameWrapperRef={usernameWrapperRef}
@@ -101,9 +101,6 @@ const UsernameWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  &:active {
-    opacity: 0.5;
-  }
 `;
 
 const Username = styled.div`

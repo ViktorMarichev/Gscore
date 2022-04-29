@@ -11,10 +11,7 @@ type MenuProps = {
   usernameWrapperRef: React.RefObject<HTMLDivElement>;
 };
 
-const Menu: React.FC<MenuProps> = ({
-  closeHandler,
-  usernameWrapperRef,
-}) => {
+const Menu: React.FC<MenuProps> = ({ closeHandler, usernameWrapperRef }) => {
   const dispatch = useAppDispatch();
   const logOutHandler = () => {
     dispatch(logOut({}));
@@ -33,7 +30,7 @@ const Menu: React.FC<MenuProps> = ({
   }, []);
 
   return (
-    <Wrapper ref={menuRef}>
+    <Wrapper ref={menuRef} onClick={(e) => e.stopPropagation()}>
       <Link href="/settings">
         <ItemLink>
           <ImageWrapper>
