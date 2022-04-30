@@ -58,7 +58,7 @@ const FooterTop = styled.div`
 const Request = styled.div`
   font-family: "Inter-medium";
   font-size: 18px;
-  color: ${({ theme }) => theme.color.silver};
+  color: ${({ theme }) => theme.colors.silver};
   max-width: 322px;
   padding-top: 33.59px;
 
@@ -83,7 +83,7 @@ const FooterBottom = styled.div`
 const CopyRight = styled.div`
   font-family: "Inter-medium";
   font-size: 18px;
-  color: ${({ theme }) => theme.color.silver};
+  color: ${({ theme }) => theme.colors.silver};
 
   @media (max-width: 640px) {
     font-family: "THICCCBOI-regular";
