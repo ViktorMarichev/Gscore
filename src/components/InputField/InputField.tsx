@@ -4,6 +4,8 @@ import Check from "src/svg/Check";
 import Close from "src/svg/Close";
 import { ErrorMessage } from "@hookform/error-message";
 import { ErrorOption } from "react-hook-form";
+import { theme } from "src/Theme";
+
 type InputProps = {
   disabled: boolean;
   placeholder: string;
@@ -35,12 +37,12 @@ const Input: React.FC<InputProps> = ({
         {disabled ? <InputCover /> : null}
         {success ? (
           <SvgWrapper>
-            <Check width={18} height={18} color={"#05C168"} />
+            <Check width={18} height={18} color={theme.colors.jade} />
           </SvgWrapper>
         ) : null}
         {errors[name] && !success ? (
           <SvgWrapper>
-            <Close color={"#FF5A65"} />
+            <Close color={theme.colors.orangeDawn} />
           </SvgWrapper>
         ) : null}
         <Field
@@ -59,6 +61,12 @@ const Input: React.FC<InputProps> = ({
     </Container>
   );
 };
+
+type FieldProps = {
+  success: boolean | undefined;
+  error: string | undefined;
+};
+
 const Container = styled.div``;
 const InputWrapper = styled.div`
   position: relative;
@@ -71,23 +79,17 @@ const InputCover = styled.div`
   border-radius: 6px;
   z-index: 5;
 `;
-const Field = styled.input`
+const Field = styled.input<FieldProps>`
   width: 100%;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   color: black;
-  border: ${({
-    success,
-    error,
-  }: {
-    success: boolean | undefined;
-    error: string | undefined;
-  }) => {
+  border: ${({ success, error, theme }) => {
     if (success) {
-      return "1px solid #05C168";
+      return "1px solid " + theme.colors.jade;
     } else if (error) {
-      return "1px solid #FF5A65";
+      return "1px solid " + theme.colors.orangeDawn;
     } else {
-      return "1px solid #d7d7d7";
+      return "1px solid " + theme.colors.lightGray;
     }
   }};
   box-sizing: border-box;
@@ -103,7 +105,7 @@ const Field = styled.input`
     outline-offset: 0;
   }
   &::placeholder {
-    color: #969696;
+    color: ${({ theme }) => theme.colors.pearlLightGray};
     font-family: "THICCCBOI-regular";
     font-size: 16px;
   }
@@ -122,7 +124,7 @@ const Message = styled.div`
   font-family: "THICCCBOI-medium";
   font-size: 14px;
   line-height: 16px;
-  color: #ff5a65;
+  color: ${({ theme }) => theme.colors.orangeDawn};
   padding-top: 2px;
 `;
 export default Input;

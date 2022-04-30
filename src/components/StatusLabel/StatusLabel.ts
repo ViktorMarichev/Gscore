@@ -1,19 +1,21 @@
 import styled from "styled-components";
 
-const StatusLabel = styled.div`
+type StatusLabelProps = { status: string };
+
+const StatusLabel = styled.div<StatusLabelProps>`
   font-family: "THICCCBOI-bold";
   font-style: normal;
   font-size: 22px;
-  color: ${({ status }: { status: string }) => {
+  color: ${({ status, theme }) => {
     switch (status) {
       case "ACTIVE":
-        return "#05c168";
+        return theme.colors.jade;
       case "INACTIVE":
-        return "#FF5A65;";
+        return theme.colors.orangeDawn;
       case "HOLD":
-        return "#FF9E2C";
+        return theme.colors.luminousBrightOrange;
       default:
-        return "#05c168";
+        return theme.colors.jade;
     }
   }};
 `;

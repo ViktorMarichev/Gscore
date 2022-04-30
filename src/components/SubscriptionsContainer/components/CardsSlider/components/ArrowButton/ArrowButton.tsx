@@ -51,7 +51,7 @@ const Wrapper = styled.div.attrs(({ tabindex }: ArrowButtonProps) => ({
   display: flex;
   flex-direction: center;
   align-items: center;
-  border: 1px solid #969696;
+  border: 1px solid ${({ theme }) => theme.colors.pearlLightGray};
   border-radius: 12px;
   position: relative;
   &::after {

@@ -77,7 +77,7 @@ const Title = styled.div`
   font-style: normal;
   font-size: 54px;
   line-height: 64px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const TopContainer = styled.div`
   display: flex;

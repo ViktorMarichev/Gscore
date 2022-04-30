@@ -36,7 +36,7 @@ const ButtonWrapper = styled.div`
 const CrossWrapper = styled.div`
   width: 96px;
   height: 96px;
-  background: #393939;
+  background: ${({ theme }) => theme.colors.grayBrown};
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -53,7 +53,7 @@ const Title = styled.div`
   line-height: 40px;
   text-align: center;
   margin-top: 24px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 
   @media (max-width: 640px) {
     font-size: 24px;
@@ -65,7 +65,7 @@ const Hint = styled.div`
   font-size: 18px;
   line-height: 30px;
   text-align: center;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export default NotFoundSubscribes;

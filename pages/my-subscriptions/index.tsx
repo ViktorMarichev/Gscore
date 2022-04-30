@@ -53,7 +53,6 @@ const MySubscribes: NextPage<MySubscribes> = ({
     }
   }, []);
 
-
   if (serverSubscribes.length === 0) {
     return (
       <MainLayout>
@@ -87,7 +86,7 @@ const Title = styled.div`
   font-style: normal;
   font-size: calc(28px + (54 - 28) * ((100vw - 375px) / (1440 - 375)));
   line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1440 - 375)));
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps(

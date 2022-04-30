@@ -37,7 +37,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: calc(24px + (44 - 24) * ((100vw - 375px) / (1440 - 375)));
   line-height: 54px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   padding-top: 32px;
   padding-bottom: 16px;
   @media (max-width: 640px) {
@@ -50,7 +50,7 @@ const SubTitle = styled.div`
   font-style: normal;
   font-size: 14px;
   line-height: 24px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   overflow: visible;
   text-overflow: ellipsis;
   padding-bottom: 48px;

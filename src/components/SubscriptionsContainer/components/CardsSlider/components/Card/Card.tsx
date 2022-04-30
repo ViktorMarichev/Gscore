@@ -67,7 +67,7 @@ const Card: React.FC<CardProps> = ({ subscribe, isSlide }) => {
 
 const Wrapper = styled.div`
   position: relative;
-  background: #393939;
+  background: ${({ theme }) => theme.colors.grayBrown};
   box-shadow: 0px 24px 65px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   min-width: 620px;
@@ -84,7 +84,7 @@ const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 48px 64px 32px 32px;
-  border-bottom: 1px solid #969696;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.pearlLightGray};
 `;
 const CardBody = styled.div`
   padding: 32px 0px 48px 32px;
@@ -95,14 +95,14 @@ const SubscribeName = styled.div`
 
   font-size: 24px;
 
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const CardTitle = styled.div`
   font-family: "THICCCBOI-bold";
   font-style: normal;
   font-size: 22px;
   width: 80%;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const SubscribeStatus = styled(StatusLabel)`
   width: 20%;
@@ -119,7 +119,7 @@ const Price = styled.div`
   font-family: "THICCCBOI-medium";
   font-style: normal;
   font-size: 24px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const BodyTop = styled.div`
   width: 100%;
@@ -132,7 +132,7 @@ const ValidUntil = styled.div`
   font-family: "THICCCBOI-medium";
   font-style: normal;
   font-size: 16px;
-  color: #969696;
+  color: ${({ theme }) => theme.colors.pearlLightGray};
 `;
 const BodyBottom = styled.div`
   width: 100%;

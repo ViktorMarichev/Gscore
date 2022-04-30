@@ -15,22 +15,27 @@ const TabItem: React.FC<TabItemProps> = ({ title, activeTab, onClick }) => {
     </Wrapper>
   );
 };
+
+type TitleProps = {
+  isActive: boolean;
+};
+
 const Wrapper = styled.div`
   position: relative;
   padding: 12px 24px 12px 24px;
   cursor: default;
 `;
-const Title = styled.div`
+const Title = styled.div<TitleProps>`
   font-family: "THICCCBOI-bold";
   font-style: normal;
   font-weight: 700;
-  color: ${({ isActive }: { isActive: boolean }) => {
-    return isActive ? "#fc5842" : "#393939";
+  color: ${({ isActive, theme }) => {
+    return isActive ? theme.colors.redOrange : theme.colors.grayBrown;
   }};
 `;
 const ActiveMarker = styled.div`
   position: absolute;
-  border-bottom: 2px solid #fc5842;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.redOrange};
   width: 100%;
   bottom: -2px;
   right: 0px;

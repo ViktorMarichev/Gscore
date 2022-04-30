@@ -87,7 +87,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 44px;
   line-height: 54px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   padding-bottom: 32px;
   margin-top: 64px;
 
@@ -110,7 +110,7 @@ const TotalCostTitle = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 28px;
   line-height: 40px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   @media (max-width: 640px) {
     font-size: 22px;
     line-height: 20px;

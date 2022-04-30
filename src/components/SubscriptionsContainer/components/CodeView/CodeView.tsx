@@ -108,7 +108,7 @@ const Wrapper = styled.div<WrapperType>`
   grid-template-areas:
     ". codelabel domainlabel . statuslabel"
     "checkbox codeinput domaininput button status ";
-  background: #272727;
+  background: ${({ theme }) => theme.colors.signalBlack};
   border-radius: 12px;
   width: 100%;
   padding: 24px 0px 31px 0px;
@@ -133,7 +133,7 @@ const Wrapper = styled.div<WrapperType>`
 const Label = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 16px;
-  color: #969696;
+  color: ${({ theme }) => theme.colors.pearlLightGray};
   margin-bottom: 12px;
 `;
 const LicenseCodeLabel = styled(Label)`
@@ -203,7 +203,7 @@ const StatusLabel = styled(Label)`
 `;
 const Input = styled.input`
   border: none;
-  background: #393939;
+  background: ${({ theme }) => theme.colors.grayBrown};
   box-shadow: 0px 2px 12px rgba(20, 20, 43, 0.06);
   padding: 25px 24px 25px 24px;
   border-radius: 6px;
@@ -211,7 +211,7 @@ const Input = styled.input`
   font-style: normal;
   font-size: 16px;
   line-height: 18px;
-  color: #969696;
+  color: ${({ theme }) => theme.colors.pearlLightGray};
   outline: none;
   &:hover,
   &:active {
@@ -219,17 +219,17 @@ const Input = styled.input`
     outline-offset: 0;
   }
 `;
-const Status = styled(StatusLabelComponent)`
-  color: ${({ status }: { status: string }) => {
+const Status = styled(StatusLabelComponent)<{ status: string }>`
+  color: ${({ status, theme }) => {
     switch (status) {
       case "ACTIVE":
-        return "#05C168";
+        return theme.colors.jade;
       case "HOLD":
-        return "#FF9E2C";
+        return theme.colors.luminousBrightOrange;
       case "INACTIVE":
-        return "#FF5A65";
+        return theme.colors.orangeDawn;
       default:
-        return "#05C168";
+        return theme.colors.jade;
     }
   }};
 `;

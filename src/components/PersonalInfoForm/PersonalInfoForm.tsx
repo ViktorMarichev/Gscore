@@ -162,7 +162,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 28px;
   line-height: 40px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   padding-bottom: 24px;
 `;
 const NoticeBox = styled.div`

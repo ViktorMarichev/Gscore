@@ -191,7 +191,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 44px;
   line-height: 54px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   padding-bottom: 16px;
   margin-top: 64px;
 `;
@@ -200,7 +200,7 @@ const Hint = styled.div`
   font-size: 14px;
   line-height: 24px;
   padding-bottom: 32px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const NoticeBox = styled.div`
   margin-top: 48px;
@@ -211,10 +211,10 @@ const Notice = styled.div`
   font-style: normal;
   font-size: 16px;
   line-height: 18px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const Ref = styled(Notice)`
-  color: #fc5842;
+  color: ${({ theme }) => theme.colors.redOrange};
   margin-left: 8px;
   cursor: default;
 `;

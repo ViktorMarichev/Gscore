@@ -38,12 +38,12 @@ type wrapperProps = {
   checked: boolean;
   tabindex?: number;
 };
-const Wrapper = styled.div.attrs(({ tabindex }: wrapperProps) => ({
+const Wrapper = styled.div.attrs<wrapperProps>(({ tabindex }) => ({
   tabIndex: tabindex,
 }))`
   position: relative;
-  background: ${({ checked }: wrapperProps) => {
-    return checked ? "#FC5842" : "#ffffff";
+  background: ${({ checked, theme }) => {
+    return checked ? theme.colors.redOrange : theme.colors.white;
   }};
   border: none;
   box-sizing: border-box;
@@ -58,7 +58,7 @@ const Wrapper = styled.div.attrs(({ tabindex }: wrapperProps) => ({
     return disabled ? "none" : "auto";
   }};
   &:hover {
-    background: #dc2b2b;
+    background: ${({theme})=>theme.colors.strawberryRed};
     border-radius: 7px;
   }
 

@@ -42,7 +42,7 @@ const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
   justify-content: center;
   align-items: center;
   position: relative;
-  background: #fc5842;
+  background: ${({ theme }) => theme.colors.redOrange};
   padding: 20px 24px 20px 24px;
   box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   border-radius: 4px;
@@ -58,15 +58,15 @@ const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
   }};
   cursor: default;
   &:hover {
-    background: #dc2b2b;
+    background: ${({ theme }) => theme.colors.strawberryRed};
     box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   }
   &:focus {
-    background: #fc5842;
+    background: ${({ theme }) => theme.colors.redOrange};
     box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   }
   &:active {
-    background: #fc5842;
+    background: ${({ theme }) => theme.colors.redOrange};
     box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   }
 `;

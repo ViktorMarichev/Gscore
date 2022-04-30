@@ -243,7 +243,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-bold";
   font-style: normal;
   font-size: 44px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   width: 100%;
   text-align: center;
   padding-bottom: 98.23px;
@@ -269,7 +269,7 @@ const Notice = styled.div`
   align-items: center;
   font-family: "THICCCBOI-medium";
   font-size: 18px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   @media (max-width: 960px) {
     padding-top: 15px;
   }
@@ -277,7 +277,7 @@ const Notice = styled.div`
 const Ref = styled.div`
   text-decoration-line: underline;
   margin-top: 1px;
-  color: #fc5842;
+  color: ${({ theme }) => theme.colors.redOrange};
   line-height: 30px;
 `;
 

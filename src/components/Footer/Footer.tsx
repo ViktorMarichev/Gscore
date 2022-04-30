@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
 
 const Wrapper = styled.footer`
   width: 100%;
-  border-top: 1px solid #393939;
+  border-top: 1px solid ${({ theme }) => theme.colors.grayBrown};
   margin-top: 120px;
 
   @media (max-width: 640px) {
@@ -51,14 +51,14 @@ const FooterTop = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid #393939;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grayBrown};
   padding-top: 69.54px;
   padding-bottom: 60px;
 `;
 const Request = styled.div`
   font-family: "Inter-medium";
   font-size: 18px;
-  color: #c7c7c7;
+  color: ${({ theme }) => theme.color.silver};
   max-width: 322px;
   padding-top: 33.59px;
 
@@ -83,7 +83,7 @@ const FooterBottom = styled.div`
 const CopyRight = styled.div`
   font-family: "Inter-medium";
   font-size: 18px;
-  color: #c7c7c7;
+  color: ${({ theme }) => theme.color.silver};
 
   @media (max-width: 640px) {
     font-family: "THICCCBOI-regular";

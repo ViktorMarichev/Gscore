@@ -10,10 +10,15 @@ const StageItem: React.FC<StageItemProps> = ({ title, stages }) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
-      <ActiveMarker isActive={stages.includes(title)} />
+      <ActiveMarker $isActive={stages.includes(title)} />
     </Wrapper>
   );
 };
+
+type ActiveMarkerProps = {
+  $isActive: boolean;
+};
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,9 +42,9 @@ const Title = styled.div`
     padding: 20px 0px 15px 0px;
   }
 `;
-const ActiveMarker = styled.div`
-  background: ${({ isActive }: { isActive: boolean }) => {
-    return isActive ? "#fc5842" : "#393939";
+const ActiveMarker = styled.div<ActiveMarkerProps>`
+  background: ${({ $isActive, theme }) => {
+    return $isActive ? theme.colors.redOrange : theme.colors.grayBrown;
   }};
   border-radius: 15px;
   height: 8px;

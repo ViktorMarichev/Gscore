@@ -145,6 +145,6 @@ const CurrentSlide = styled.span`
   color: white;
 `;
 const LastSlide = styled.span`
-  color: #393939;
+  color: ${({ theme }) => theme.colors.grayBrown};
 `;
 export default CardsSlider;

@@ -160,14 +160,14 @@ const Title = styled.div`
   font-style: normal;
   font-size: calc(28px + (54 - 28) * ((100vw - 375px) / (1440 - 375)));
   line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1440 - 375)));
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const UpgradeLabel = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 16px;
   line-height: 18px;
   text-align: center;
-  color: #fc5842;
+  color: ${({ theme }) => theme.colors.redOrange};
   cursor: pointer;
 `;
 const Hint = styled.div`
@@ -175,7 +175,7 @@ const Hint = styled.div`
   font-style: normal;
   font-size: 20px;
   line-height: 22px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   grid-area: hint;
   align-self: center;
   @media (max-width: 640px) {

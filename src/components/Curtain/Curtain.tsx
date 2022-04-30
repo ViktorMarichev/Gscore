@@ -9,6 +9,8 @@ import { UserSelectors } from "src/redux/User";
 import { useAppSelector, useAppDispatch } from "src/redux/store";
 import { logOut } from "src/redux/User";
 import Link from "next/link";
+import { theme } from "src/Theme";
+
 type CurtainProps = {
   toggleCurtain: () => void;
 };
@@ -70,14 +72,14 @@ const Curtain: React.FC<CurtainProps> = ({ toggleCurtain }) => {
                 <Link href={"/settings"}>
                   <MenuLink>
                     <ImageWrapper>
-                      <Settings color={"#969696"} />
+                      <Settings color={theme.colors.pearlLightGray} />
                     </ImageWrapper>
                     <MenuTitle>Settings</MenuTitle>
                   </MenuLink>
                 </Link>
                 <MenuItem onClick={logOutHandler}>
                   <ImageWrapper>
-                    <LogOut color={"#969696"} />
+                    <LogOut color={theme.colors.pearlLightGray} />
                   </ImageWrapper>
                   <MenuTitle>Logout</MenuTitle>
                 </MenuItem>
@@ -95,7 +97,7 @@ const CurtainContainer = styled.div`
   height: 100%;
   transform: translateX(0%);
   animation: 1s ${translate} ease-out;
-  background: #272727;
+  background: ${({ theme }) => theme.colors.signalBlack};
   padding: 0 24px 0 24px;
 `;
 const CurtainClose = styled.div`
@@ -108,7 +110,7 @@ const CurtainHeader = styled.div`
   padding-top: 28px;
 `;
 const CurtainDetails = styled.div`
-  background: #272727;
+  background: ${({ theme }) => theme.colors.signalBlack};
   border-radius: 12px;
   width: 100%;
 `;
@@ -125,7 +127,7 @@ const DetailsItem = styled.div`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-bottom: 1px solid #393939;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grayBrown};
 `;
 const DetailsItemLink = styled.a`
   width: 100%;
@@ -140,7 +142,7 @@ const DetailsItemLink = styled.a`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-bottom: 1px solid #393939;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grayBrown};
 `;
 
 const CurtainMenu = styled.div`
@@ -177,7 +179,7 @@ const MenuTitle = styled.div`
   font-family: "THICCCBOI-regular";
   font-size: 16px;
   line-height: 18px;
-  color: #969696;
+  color: ${({ theme }) => theme.colors.pearlLightGray};
 `;
 const ImageWrapper = styled.div`
   padding-right: 12px;
@@ -190,7 +192,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-medium";
   font-size: 16px;
   line-height: 18px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const ArrowWrapper = styled.div`
   align-items: center;

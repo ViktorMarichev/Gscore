@@ -51,7 +51,7 @@ const Menu: React.FC<MenuProps> = ({ closeHandler, usernameWrapperRef }) => {
 };
 
 const Wrapper = styled.div`
-  background: #272727;
+  background: ${({ theme }) => theme.colors.signalBlack};
   border-radius: 12px;
   width: 188px;
   padding: 4px 24px 4px 24px;
@@ -89,7 +89,7 @@ const Title = styled.div`
   font-family: "THICCCBOI-medium";
   font-style: normal;
   font-size: 20px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
 const ImageWrapper = styled.div`
   padding-right: 12px;

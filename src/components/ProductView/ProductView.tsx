@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Checked from "src/svg/Check";
+import { theme } from "src/Theme";
+
 type ProductViewProps = {
   isActive: boolean;
   price: number;
@@ -19,7 +21,7 @@ const FeatureItem: React.FC<{ isActive: boolean; text: string }> = ({
     <FeatureItemWrapper>
       <CheckCircle>
         <Checked
-          color={isActive ? " #fc5842" : "#272727"}
+          color={isActive ? theme.colors.redOrange : theme.colors.signalBlack}
           viewBox={"0 0 26 26"}
           transform="translate(4 6)"
           preserveAspectRatio="xMidYMid meet"
@@ -77,16 +79,27 @@ const ProductView: React.FC<ProductViewProps> = ({
     </Wrapper>
   );
 };
+
+type WrapperProps = {
+  $isActive: boolean;
+};
+type ButtonProps = {
+  $isActive: boolean;
+};
+type DescriptionProps = {
+  $isActive: boolean;
+};
+
 const CheckCircle = styled.div`
   border-radius: 100%;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   width: 26px;
   height: 26px;
   margin-right: 14px;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled.div<WrapperProps>`
   position: relative;
-  top: ${({ $isActive }: { $isActive: boolean }) => {
+  top: ${({ $isActive }) => {
     return $isActive ? "-49.8px" : "0px";
   }};
   display: flex;
@@ -94,8 +107,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 42px 48px 42px 48px;
   max-width: 404px;
-  background: ${({ $isActive }: { $isActive: boolean }) => {
-    return $isActive ? " #fc5842" : "#272727";
+  background: ${({ $isActive, theme }) => {
+    return $isActive ? theme.colors.redOrange : theme.colors.signalBlack;
   }};
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
@@ -121,19 +134,19 @@ const Cover = styled.div`
 const Name = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 24px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
 `;
-const Description = styled.div`
-width: 308px;
-height: 90px;
+const Description = styled.div<DescriptionProps>`
+  width: 308px;
+  height: 90px;
   font-family: "THICCCBOI-medium";
   font-style: normal;
   font-size: 18px;
   padding-top: 8px;
   line-height: 30px;
   text-align: center;
-  color: ${({ $isActive }: { $isActive: boolean }) => {
-    return $isActive ? " #FFFFFF" : "#c7c7c7";
+  color: ${({ $isActive, theme }) => {
+    return $isActive ? theme.colors.white : theme.colors.silver;
   }};
   @media (max-width: 1400px) {
     font-size: calc(16px + (18 - 16) * ((100vw - 375px) / (1440 - 375)));
@@ -143,7 +156,7 @@ height: 90px;
 const Price = styled.div`
   font-family: "DMSans-bold";
   font-size: 54px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   @media (max-width: 1400px) {
     font-size: calc(34px + (54 - 34) * ((100vw - 375px) / (1440 - 375)));
   }
@@ -153,7 +166,7 @@ const Head = styled.div`
   align-items: center;
   flex-direction: column;
   padding-bottom: 40px;
-  border-bottom: 1px solid #969696;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.pearlLightGray};
   @media (max-width: 1400px) {
     padding-bottom: calc(20px + (40 - 20) * ((100vw - 375px) / (1440 - 375)));
   }
@@ -177,7 +190,7 @@ const FeatureItemWrapper = styled.li`
   font-size: 18px;
   margin-bottom: 22px;
   max-width: 250px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   word-wrap: break-word;
   @media (max-width: 1400px) {
     font-size: calc(17px + (18 - 17) * ((100vw - 375px) / (1440 - 375)));
@@ -191,7 +204,7 @@ const FeatureItemWrapper = styled.li`
     padding-right: 0px;
   }
 `;
-const Button = styled.div`
+const Button = styled.div<ButtonProps>`
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -201,7 +214,7 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 8px 28px rgba(0, 0, 0, 0.06);
   border-radius: 6px;
   width: 100%;
@@ -210,8 +223,8 @@ const Button = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 18px;
   margin-top: 13px;
-  color: ${({ $isActive }: { $isActive: boolean }) => {
-    return $isActive ? " #FC5842" : "#181818";
+  color: ${({ $isActive, theme }) => {
+    return $isActive ? theme.colors.redOrange : theme.colors.graphiteBlack;
   }};
   &:active {
     transform: scale(0.98);

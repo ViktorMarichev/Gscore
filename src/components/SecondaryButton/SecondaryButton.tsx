@@ -38,21 +38,21 @@ const Title = styled.div`
   font-family: "THICCCBOI-bold";
   font-size: 16px;
   line-height: 18px;
-  color: #fc5842;
+  color: ${({ theme }) => theme.colors.redOrange};
 `;
 type WrapperProps = {
   disabled?: boolean;
   tabindex?: number;
 };
 
-const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
+const Wrapper = styled.div.attrs<WrapperProps>(({ tabindex }) => ({
   tabIndex: tabindex,
-}))`
+}))<WrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   padding: 20px 24px 20px 24px;
   box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   border-radius: 4px;
@@ -63,17 +63,17 @@ const Wrapper = styled.div.attrs(({ tabindex }: WrapperProps) => ({
   -ms-user-select: none;
   user-select: none;
   min-width: 105px;
-  pointer-events: ${({ disabled }: WrapperProps) => {
+  pointer-events: ${({ disabled }) => {
     return disabled ? "none" : "auto";
   }};
   cursor: default;
   &:hover {
-    background: #fbfbfb;
+    background: ${({ theme }) => theme.colors.white2};
     box-shadow: 0px 15px 25px -5px rgba(darken(dodgerblue, 40%));
     transform: scale(1.03);
   }
   &:hover ${Title} {
-    color: #dc2b2b;
+    color: ${({ theme }) => theme.colors.strawberryRed};
   }
   &:active {
     box-shadow: 0px 4px 8px rgba(darken(dodgerblue, 30%));

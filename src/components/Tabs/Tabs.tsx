@@ -13,7 +13,6 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #393939;
-
+  border-bottom: 2px solid ${({ theme }) => theme.colors.grayBrown};
 `;
 export default Tabs;
